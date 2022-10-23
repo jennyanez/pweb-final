@@ -4,7 +4,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
 
-    <div class="layout-sidebar">
+    <div class="layout-sidebar" align="center">
     	<!-- <div class="layout-sidebar-filter ui-fluid ui-input-filled">
             <h:form>
                     <p:autoComplete placeholder="Search by name..." minQueryLength="3" effect="fade" 
@@ -14,47 +14,47 @@
             </h:form>
         </div> -->
     
-        <div class="layout-menu">
-                <div class="menu-category">Administración</div>
+        <div class="layout-menu" align="center">
+                <div class="menu-category">DATA MANAGEMENT</div>
                 <div class="menu-items">
                     <h:link outcome="/pages/security/users/user-list.xhtml">
-                        Gestionar usuarios
+                        Manage Users
                     </h:link>
                 </div>
-                <div class="menu-category">Menú</div>
+                <div class="menu-category">MENU</div>
                 <div class="menu-items">
-                    <p:outputPanel >
+                    <p:outputPanel>
                         <a tabindex="0" class="submenu-link">
-                            Menu_Item_1
+                            Books
                         </a>
                         <div class="submenu">
                             <ul>
                                 <li><h:link >
-                                    Submenu_item_1_1
+                                    Available Books
                                 </h:link></li>
                                 <li><h:link>
-                                    Submenu_item_1_2
+                                    Borrowed Books
                                 </h:link></li>
-                                <li><h:link>
-                                    Submenu_item_1_3
+                               <li><h:link>
+                                    Manage Books
                                 </h:link></li>
                             </ul>
                         </div>
                     </p:outputPanel>
                     <p:outputPanel >
                         <a tabindex="0" class="submenu-link">
-                            Menu_Item_2
+                            Book Loans
                         </a>
                         <div class="submenu">
                             <ul>
                                 <li><h:link >
-                                    Submenu_item_2_1
+                                    Requested Book Loans
                                 </h:link></li>
                                 <li><h:link>
-                                    Submenu_item_2_2
+                                    Confirmed Book Loans
                                 </h:link></li>
-                                <li><h:link>
-                                    Submenu_item_2_2
+                               <li><h:link>
+                                    Manage Book Loans
                                 </h:link></li>
                             </ul>
                         </div>
