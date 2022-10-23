@@ -1,5 +1,7 @@
 package dto;
+import javax.faces.bean.ManagedBean;
 
+@ManagedBean
 public class XUserDto {
 	String username;
 	String password;
