@@ -67,16 +67,16 @@
 					<p:column headerText="Usuario" sortBy="#{xUser.username}" filterBy="#{xUser.username}">
 						<h:outputText value="#{xUser.username}" />
 					</p:column>
-					<p:column headerText="Ci" sortBy="#{xUser.identification}"
-						filterBy="#{xUser.identification}">
-						<h:outputText value="#{xUser.identification}" />
+					<p:column headerText="Ci" sortBy="#{user.identification}"
+						filterBy="#{user.identification}">
+						<h:outputText value="#{user.identification}" />
 					</p:column>
-					<p:column headerText="Nombre" sortBy="#{xUser.fullName}">
-						<h:outputText value="#{xUser.fullName}" />
+					<p:column headerText="Nombre" sortBy="#{user.fullName}">
+						<h:outputText value="#{user.fullName}" />
 					</p:column>
-					<p:column headerText="Correo" sortBy="#{xUser.email}"
-						filterBy="#{xUser.email}">
-						<h:outputText value="#{xUser.email}" />
+					<p:column headerText="Correo" sortBy="#{user.email}"
+						filterBy="#{user.email}">
+						<h:outputText value="#{user.email}" />
 					</p:column>
 					<p:column exportable="false">
 						<p:commandButton icon="pi pi-pencil" action="#{manageXUserBean.openForEdit}"
