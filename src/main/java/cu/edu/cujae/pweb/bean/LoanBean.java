@@ -1,38 +1,29 @@
-package cu.edu.cujae.pweb.dto;
+package cu.edu.cujae.pweb.bean;
 
+import java.io.IOException;
 import java.sql.Date;
 
-public class LoanDto {
-	private String id;
-	private String book;
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+
+@ManagedBean
+public class LoanBean{
+    private String book;
 	private int copy;
 	private String user;
 	private Date returnDate;
 	private Date loanDate;
-	
-	public LoanDto(String loanId, String book, int copy, String user, Date returnDate, Date loanDate) {
-		super();
-		this.id = loanId;
-		this.book = book;
-		this.copy = copy;
-		this.user = user;
-		this.setReturnDate(returnDate);
-		this.setLoanDate(loanDate);		
+
+    protected HttpServletRequest getRequest() {
+	    return (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
 	}
 	
-	public LoanDto() {
-		// TODO Auto-generated constructor stub
+	protected FacesContext getFacesContext() {
+	    return FacesContext.getCurrentInstance();
 	}
 
-	public void setLoanId(String loanId){
-		this.id = loanId;
-	}
-
-	public String getLoanId(){
-		return this.id;
-	}
-
-	public String getBook() {
+    	public String getBook() {
 		return book;
 	}
 
