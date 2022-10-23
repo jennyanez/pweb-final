@@ -4,6 +4,12 @@ public class XRoleDto {
 	String rol;
 	String description;
 	
+	public XRoleDto(String rol, String description) {
+		setRol(rol);
+		setDescription(description);
+		
+	}
+	
 	
 	public String getRol() {
 		return rol;
