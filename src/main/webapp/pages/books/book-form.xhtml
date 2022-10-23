@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Book" showEffect="fade" modal="true"
+		widgetVar="manageLoanDialog" responsive="true">
+		<p:outputPanel id="manage-book-content" class="ui-fluid">
+	  	<p:outputPanel rendered="#{not empty manageBookBean.selectedBook}"> 	
+				<p:panelGrid layout="grid" columns="1">
+					<h:panelGroup>
+												
+                    <div class="p-field">
+							<p:outputLabel for="@next">ISBN Code</p:outputLabel>
+							<p:inputText id="code" required="true" 
+								value="#{manageBookBean.selectedBook.code}" />
+							<p:message for="@previous" ></p:message>
+						</div>
+						
+                        <div class="p-field">
+							<p:outputLabel for="@next">Title</p:outputLabel>
+							<p:inputText id="title" required="true"
+								value="#{manageBookBean.selectedBook.title}" />
+							<p:message for="@previous"></p:message>
+						</div>
+					
+                        <div class="p-field">
+							<p:outputLabel for="@next">Author</p:outputLabel>
+							<p:inputText id="author" required="true"
+								value="#{manageBookBean.selectedBook.authors}" />
+							<p:message for="@previous"></p:message>
+						</div>
+						
+                        <div class="p-field">
+							<p:outputLabel for="@next">Matter</p:outputLabel>
+							<p:inputText id="matter" required="true"
+								value="#{manageBookBean.selectedBook.matter}" />
+							<p:message for="@previous"></p:message>
+						</div>
+
+					</h:panelGroup>
+				</p:panelGrid>
+		 	</p:outputPanel> 
+		</p:outputPanel>
+
+		<f:facet name="footer">
+			<p:commandButton value="Salvar" icon="pi pi-check"
+				actionListener="#{manageBookBean.saveBook}"
+				update="manage-book-content" process="manage-book-content @this" />
+			<p:commandButton value="Cancelar" icon="pi pi-times"
+				onclick="PF('manageLoanDialog').hide()" class="ui-button-secondary" />
+		</f:facet>
+	</p:dialog>
+</ui:composition>

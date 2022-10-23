@@ -3,8 +3,8 @@ package cu.edu.cujae.pweb.dto;
 public class CopyDto extends BookDto {
 private int copyNumber;
 	
-	public CopyDto(String title, int yearEdition, String editorial, String countryOrigin, String summary, int amountPages, MatterDto matter, int copyNumber, String code){
-		super(code, title, yearEdition, editorial, countryOrigin, summary, amountPages, matter);
+	public CopyDto(String title, String matter, String code, String author){
+		super(code, title, author, matter);
 		setCopyNumber(copyNumber);
 	}
 
