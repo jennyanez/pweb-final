@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cu.edu.cujae.pweb.dto.LoanDto;
@@ -15,17 +14,14 @@ import cu.edu.cujae.pweb.dto.LoanDto;
  */
 @Service
 public class LoanServiceImpl implements LoanService{
-	
-	@Autowired 
-	private LoanService loanService;
 
 	@Override
 	public List<LoanDto> getLoans() {
 		
 		List<LoanDto> loans = new ArrayList<>();
 		loans.add(new LoanDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "El gatito", 12, "Jennifer Yanez", new Date(), new Date()));
-		loans.add(new LoanDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Tuyo", 12, "Cloe Yanez", new Date(), new Date()));
-        loans.add(new LoanDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Te perdio", 12, "Bad Bunny", new Date(), new Date()));
+		loans.add(new LoanDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Tuyo", 17, "Cloe Yanez", new Date(), new Date()));
+        loans.add(new LoanDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Te perdio", 6, "Bad Bunny", new Date(), new Date()));
 
 		return loans;
 	}
@@ -53,12 +49,4 @@ public class LoanServiceImpl implements LoanService{
 		
 	}
 
-	public LoanService getLoanService() {
-		return loanService;
-	}
-
-	public void setLoanService(LoanService loanService) {
-		this.loanService = loanService;
-	}
-	
 }

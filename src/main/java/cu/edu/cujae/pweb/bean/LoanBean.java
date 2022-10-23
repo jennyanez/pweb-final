@@ -1,6 +1,6 @@
 package cu.edu.cujae.pweb.bean;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;

@@ -7,27 +7,27 @@
 	<p:dialog header="Loan" showEffect="fade" modal="true"
 		widgetVar="manageLoanDialog" responsive="true">
 		<p:outputPanel id="manage-loan-content" class="ui-fluid">
-	  	<p:outputPanel rendered="#{not empty ManageLoanBean.selectedLoan}"> 	
+	  	<p:outputPanel rendered="#{not empty manageLoanBean.selectedLoan}"> 	
 				<p:panelGrid layout="grid" columns="2">
 					<h:panelGroup>
 						
                     <div class="p-field">
 							<p:outputLabel for="@next">Book</p:outputLabel>
 							<p:inputText id="book" required="true" 
-								value="#{ManageLoanBean.selectedLoan.book}" />
+								value="#{manageLoanBean.selectedLoan.book}" />
 							<p:message for="@previous" ></p:message>
 						</div>
 						
                         <div class="p-field">
 							<p:outputLabel for="@next">Usuario</p:outputLabel>
 							<p:inputText id="username" required="true"
-								value="#{ManageLoanBean.selectedLoan.user}" />
+								value="#{manageLoanBean.selectedLoan.user}" />
 							<p:message for="@previous"></p:message>
 						</div>
 						
                         <div class="p-field">
 							<p:outputLabel for="@next">Fecha de devolucion</p:outputLabel>
-							<p:calendar id="date" value="#{ManageLoanBean.selectedLoan.returnDate}"/>
+							<p:calendar id="date" value="#{manageLoanBean.selectedLoan.returnDate}"/>
 							<p:message for="@previous"></p:message>
 						</div>
 										
@@ -38,7 +38,7 @@
 
 		<f:facet name="footer">
 			<p:commandButton value="Salvar" icon="pi pi-check"
-				actionListener="#{ManageLoanBean.saveLoan}"
+				actionListener="#{manageLoanBean.saveLoan}"
 				update="manage-loan-content" process="manage-loan-content @this" />
 			<p:commandButton value="Cancelar" icon="pi pi-times"
 				onclick="PF('manageLoanDialog').hide()" class="ui-button-secondary" />

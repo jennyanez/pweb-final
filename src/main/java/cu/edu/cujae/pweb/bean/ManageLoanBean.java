@@ -19,54 +19,80 @@ import cu.edu.cujae.pweb.utils.JsfUtils;
 @Component //Le indica a spring es un componete registrado
 @ManagedBean
 @ViewScoped //Este es el alcance utilizado para trabajar con Ajax
-public class ManageLoanBean{
-   
+public class ManageLoanBean {
+	
 	private LoanDto loanDto;
-    private LoanDto selectedLoan;
-    public List<LoanDto> loansList;
-
-    /* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
+	private LoanDto selectedLoan;
+	private List<LoanDto> loans;
+	
+	/* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
 	 * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
 	 */
 	@Autowired
 	private LoanService loanService;
 	
-	public ManageLoanBean(){
-
-    }
-
-    //Esta anotacion permite que se ejecute code luego de haberse ejecuta el constructor de la clase. 
+	
+	public ManageLoanBean() {
+		
+	}
+	
+	//Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase. 
 	@PostConstruct
     public void init() {
-	    loansList = loansList == null ? loanService.getLoans() : loansList;
-	    JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_debbug");
-		//roles = roleService.getRoles();
+	    loans = loans == null ? loanService.getLoans() : loans;
     }
-
-    //Se ejecuta al dar clic en el button Nuevo
+	
+	//Se ejecuta al dar clic en el button Nuevo
 	public void openNew() {
         this.selectedLoan = new LoanDto();
     }
-
-    //Se ejecuta al dar clic en el button con el lapicito
+	
+	//Se ejecuta al dar clic en el button con el lapicito
 	public void openForEdit() {
-
+		
+	}
+	
+	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
+	public void saveLoan() {
+   
 	}
 
-    //Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar el prestamo
-	public void saveLoan() {
-    
-    }
-
-	//Permite eliminar un prestamo
+	//Permite eliminar un usuario
     public void deleteLoan() {
     	try {
-    		this.loansList.remove(this.selectedLoan);
+    		this.loans.remove(this.selectedLoan);
             this.selectedLoan = null;
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loan_removed");
-            PrimeFaces.current().ajax().update("form:dt-loan");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+            PrimeFaces.current().ajax().update("form:dt-loans");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
 		} catch (Exception e) {
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
-		} 
+		}
+        
     }
+
+	public LoanDto getLoanDto() {
+		return this.loanDto;
+	}
+
+	public void setLoanDto(LoanDto loanDto) {
+		this.loanDto = loanDto;
+	}
+
+	public LoanDto getSelectedLoan() {
+		return this.selectedLoan;
+	}
+
+	public void setSelectedLoan(LoanDto selectedLoan) {
+		this.selectedLoan = selectedLoan;
+	}
+
+	public List<LoanDto> getLoans() {
+		return this.loans;
+	}
+
+	public void setLoans(List<LoanDto> loans) {
+		this.loans = loans;
+	}
+
+
 }

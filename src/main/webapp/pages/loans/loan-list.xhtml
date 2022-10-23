@@ -53,7 +53,7 @@
 					id="dt-loan" 
 					widgetVar="dtLoan" 
 					var="loan"
-					value="#{ManageLoanBean.loansList}" 
+					value="#{manageLoanBean.loans}" 
 					reflow="true" paginator="true"
 					rows="10" 
 					paginatorPosition="bottom">
@@ -84,13 +84,13 @@
 					</p:column>
 					
 					<p:column exportable="false">
-						<p:commandButton icon="pi pi-pencil" action="#{ManageLoanBean.openForEdit}"
+						<p:commandButton icon="pi pi-pencil" action="#{manageLoanBean.openForEdit}"
 							update=":form:manage-loan-content"
 							oncomplete="PF('manageLoanDialog').show()"
 							styleClass="edit-button rounded-button ui-button-success"
 							process="@this">
 							<f:setPropertyActionListener value="#{loan}"
-								target="#{ManageLoanBean.selectedLoan}" />
+								target="#{manageLoanBean.selectedLoan}" />
 							<p:resetInput target=":form:manage-loan-content" />
 						</p:commandButton>
 						<p:commandButton class="ui-button-warning rounded-button"
