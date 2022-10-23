@@ -22,7 +22,7 @@
 					      code en Javascript desde el bean de Jsf
 					    -->
 						<p:commandButton value="New" icon="pi pi-plus"
-							actionListener="#{manageLoanBean.openNew}"
+							actionListener="#{ManageLoanBean.openNew}"
 							update=":form:manage-loan-content"
 							oncomplete="PF('manageLoanDialog').show()"
 							styleClass="ui-button-success" style="margin-right: .5rem">
@@ -53,7 +53,7 @@
 					id="dt-loan" 
 					widgetVar="dtLoan" 
 					var="loan"
-					value="#{manageLoanBean.loansList}" 
+					value="#{ManageLoanBean.loansList}" 
 					reflow="true" paginator="true"
 					rows="10" 
 					paginatorPosition="bottom">
@@ -85,19 +85,19 @@
 					
 					<p:column exportable="false">
 						<p:commandButton icon="pi pi-pencil" action="#{manageLoanBean.openForEdit}"
-							update=":form:manage-user-content"
+							update=":form:manage-loan-content"
 							oncomplete="PF('manageLoanDialog').show()"
 							styleClass="edit-button rounded-button ui-button-success"
 							process="@this">
 							<f:setPropertyActionListener value="#{loan}"
-								target="#{manageLoanBean.selectedLoan}" />
+								target="#{ManageLoanBean.selectedLoan}" />
 							<p:resetInput target=":form:manage-loan-content" />
 						</p:commandButton>
 						<p:commandButton class="ui-button-warning rounded-button"
 							icon="pi pi-trash" process="@this" 
-							action="#{manageLoanBean.deleteLoan}" >
+							action="#{ManageLoanBean.deleteLoan}" >
 							<f:setPropertyActionListener value="#{loan}"
-								target="#{manageLoanBean.selectedLoan}" />
+								target="#{ManageLoanBean.selectedLoan}" />
 							<p:confirm header="Confirmar" message="Está seguro de eliminar el prestamo?" icon="pi pi-exclamation-triangle"/>
 						</p:commandButton>
 					</p:column>

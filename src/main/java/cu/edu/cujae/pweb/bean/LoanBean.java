@@ -1,6 +1,5 @@
 package cu.edu.cujae.pweb.bean;
 
-import java.io.IOException;
 import java.sql.Date;
 
 import javax.faces.bean.ManagedBean;

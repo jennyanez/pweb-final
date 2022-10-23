@@ -23,7 +23,7 @@ public class ManageLoanBean{
    
 	private LoanDto loanDto;
     private LoanDto selectedLoan;
-    private List<LoanDto> loansList;
+    public List<LoanDto> loansList;
 
     /* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
 	 * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
@@ -64,7 +64,7 @@ public class ManageLoanBean{
     		this.loansList.remove(this.selectedLoan);
             this.selectedLoan = null;
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loan_removed");
-            PrimeFaces.current().ajax().update("form:dt-loans");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+            PrimeFaces.current().ajax().update("form:dt-loan");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
 		} catch (Exception e) {
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
 		} 
