@@ -49,7 +49,7 @@
                 	* El facet header define un encabezado y agrega un button para filtrar. Por defecto esto lo hace el solo, si quieren algo
                 	  con mayor detalle ver el showcase.  
                  -->
-				<p:dataTable id="dt-users" widgetVar="dtUsers" var="user"
+				<p:dataTable id="dt-users" widgetVar="dtUsers" var="xUser"
 					value="#{manageXUserBean.users}" reflow="true" paginator="true"
 					rows="10" paginatorPosition="bottom">
 					<f:facet name="header">
@@ -65,7 +65,7 @@
 					
 
 					<p:column headerText="Usuario" sortBy="#{xUser.username}" filterBy="#{xUser.username}">
-						<h:outputText value="#{user.username}" />
+						<h:outputText value="#{xUser.username}" />
 					</p:column>
 					<p:column headerText="Ci" sortBy="#{xUser.identification}"
 						filterBy="#{xUser.identification}">
