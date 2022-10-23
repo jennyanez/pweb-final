@@ -22,7 +22,7 @@
 					      code en Javascript desde el bean de Jsf
 					    -->
 						<p:commandButton value="New" icon="pi pi-plus"
-							actionListener="#{ManageLoanBean.openNew}"
+							actionListener="#{manageLoanBean.openNew}"
 							update=":form:manage-loan-content"
 							oncomplete="PF('manageLoanDialog').show()"
 							styleClass="ui-button-success" style="margin-right: .5rem">
@@ -84,7 +84,7 @@
 					</p:column>
 					
 					<p:column exportable="false">
-						<p:commandButton icon="pi pi-pencil" action="#{manageLoanBean.openForEdit}"
+						<p:commandButton icon="pi pi-pencil" action="#{ManageLoanBean.openForEdit}"
 							update=":form:manage-loan-content"
 							oncomplete="PF('manageLoanDialog').show()"
 							styleClass="edit-button rounded-button ui-button-success"
@@ -95,9 +95,9 @@
 						</p:commandButton>
 						<p:commandButton class="ui-button-warning rounded-button"
 							icon="pi pi-trash" process="@this" 
-							action="#{ManageLoanBean.deleteLoan}" >
+							action="#{manageLoanBean.deleteLoan}" >
 							<f:setPropertyActionListener value="#{loan}"
-								target="#{ManageLoanBean.selectedLoan}" />
+								target="#{manageLoanBean.selectedLoan}" />
 							<p:confirm header="Confirmar" message="Está seguro de eliminar el prestamo?" icon="pi pi-exclamation-triangle"/>
 						</p:commandButton>
 					</p:column>

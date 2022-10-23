@@ -1,6 +1,6 @@
 package cu.edu.cujae.pweb.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class LoanDto {
 	private String id;

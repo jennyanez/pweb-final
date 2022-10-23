@@ -39,13 +39,13 @@ public class ManageLoanBean{
 	@PostConstruct
     public void init() {
 	    loansList = loansList == null ? loanService.getLoans() : loansList;
+	    JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_debbug");
 		//roles = roleService.getRoles();
     }
 
     //Se ejecuta al dar clic en el button Nuevo
 	public void openNew() {
         this.selectedLoan = new LoanDto();
-        this.selectedLoan = null;
     }
 
     //Se ejecuta al dar clic en el button con el lapicito
