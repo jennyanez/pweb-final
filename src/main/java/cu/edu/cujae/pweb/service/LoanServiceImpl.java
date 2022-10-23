@@ -19,9 +19,9 @@ public class LoanServiceImpl implements LoanService{
 	public List<LoanDto> getLoans() {
 		
 		List<LoanDto> loans = new ArrayList<>();
-		loans.add(new LoanDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "El gatito", 12, "Jennifer Yanez", new Date(), new Date()));
-		loans.add(new LoanDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Tuyo", 17, "Cloe Yanez", new Date(), new Date()));
-        loans.add(new LoanDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Te perdio", 6, "Bad Bunny", new Date(), new Date()));
+		loans.add(new LoanDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "El gatito", 12, "Jennifer Yanez", new Date(), new Date(), true));
+		loans.add(new LoanDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Tuyo", 17, "Cloe Yanez", new Date(), new Date(), true));
+        loans.add(new LoanDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Te perdio", 6, "Bad Bunny", new Date(), new Date(), true));
 
 		return loans;
 	}
