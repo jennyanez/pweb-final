@@ -84,14 +84,14 @@
 							oncomplete="PF('manageUserDialog').show()"
 							styleClass="edit-button rounded-button ui-button-success"
 							process="@this">
-							<f:setPropertyActionListener value="#{user}"
+							<f:setPropertyActionListener value="#{xUser}"
 								target="#{manageXUserBean.selectedUser}" />
 							<p:resetInput target=":form:manage-user-content" />
 						</p:commandButton>
 						<p:commandButton class="ui-button-warning rounded-button"
 							icon="pi pi-trash" process="@this" 
 							action="#{manageXUserBean.deleteUser}" >
-							<f:setPropertyActionListener value="#{user}"
+							<f:setPropertyActionListener value="#{xUser}"
 								target="#{manageXUserBean.selectedUser}" />
 							<p:confirm header="Confirmar" message="Está seguro de eliminar al usuario?" icon="pi pi-exclamation-triangle"/>
 						</p:commandButton>
