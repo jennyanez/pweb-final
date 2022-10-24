@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<p:dialog header="Book" showEffect="fade" modal="true"
-		widgetVar="manageLoanDialog" responsive="true">
+		widgetVar="manageBookDialog" responsive="true">
 		<p:outputPanel id="manage-book-content" class="ui-fluid">
 	  	<p:outputPanel rendered="#{not empty manageBookBean.selectedBook}"> 	
 				<p:panelGrid layout="grid" columns="1">
@@ -49,7 +49,7 @@
 				actionListener="#{manageBookBean.saveBook}"
 				update="manage-book-content" process="manage-book-content @this" />
 			<p:commandButton value="Cancelar" icon="pi pi-times"
-				onclick="PF('manageLoanDialog').hide()" class="ui-button-secondary" />
+				onclick="PF('manageBookDialog').hide()" class="ui-button-secondary" />
 		</f:facet>
 	</p:dialog>
 </ui:composition>

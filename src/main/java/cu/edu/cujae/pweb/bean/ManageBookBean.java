@@ -2,6 +2,7 @@ package cu.edu.cujae.pweb.bean;
 
 import java.util.List;
 
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -43,14 +44,29 @@ public class ManageBookBean {
         this.selectedBook = new BookDto();
     }
 	
+	boolean existe = false; //variable que verifica si el libro ya exsiste para no añadirlo doble cuadno se edita
 	//Se ejecuta al dar clic en el button con el lapicito
 	public void openForEdit() {
+		existe = true;
 		
 	}
 	
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
 	public void saveBook() {
-		
+		if (this.selectedBook.getCode() != null) {
+            if(!existe) {
+            	this.selectedBook.setNewRecord(true);
+            	this.books.add(this.selectedBook);
+            	JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_book_added");
+            }
+        }
+        else {
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_book_edited");
+        }
+
+        PrimeFaces.current().executeScript("PF('manageBookDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
+        PrimeFaces.current().ajax().update("form:dt-book");
+        existe = false;
 	}
 
 	//Permite eliminar un usuario
@@ -59,7 +75,7 @@ public class ManageBookBean {
     		this.books.remove(this.selectedBook);
             this.selectedBook = null;
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_book_removed");
-            PrimeFaces.current().ajax().update("form:dt-books");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+            PrimeFaces.current().ajax().update("form:dt-book");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
 		} catch (Exception e) {
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
 		}

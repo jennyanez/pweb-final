@@ -2,6 +2,7 @@ package cu.edu.cujae.pweb.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,9 @@ public class BookServiceImpl implements BookService{
 	public List<BookDto> getBooks() {
 		
 		List<BookDto> books = new ArrayList<>();
-		books.add(new BookDto("010234622234", "The Great Gatsby", "F.Scott Fitzgerald", "Literature"));
-		books.add(new BookDto("033346675890", "Pride and Perjuice", "Jane Austen", "Classic"));
-        books.add(new BookDto("045627782883", "The Picture of Dorian Gray", "Oscar Wilde", "Literature"));
+		books.add(new BookDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "The Great Gatsby", "F.Scott Fitzgerald", "Literature", false));
+		books.add(new BookDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Pride and Perjuice", "Jane Austen", "Classic",false));
+        books.add(new BookDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "The Picture of Dorian Gray", "Oscar Wilde", "Literature",false));
 
 		return books;
 	}
