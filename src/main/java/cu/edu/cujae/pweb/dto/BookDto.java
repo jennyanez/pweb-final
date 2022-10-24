@@ -1,7 +1,7 @@
 package cu.edu.cujae.pweb.dto;
 
 public class BookDto {
-	private String BookId;
+	private String bookId;
 	private String code;
 	private String title;
 	private int yearEdition;
@@ -13,7 +13,16 @@ public class BookDto {
 	private String authors;
 	private boolean newRecord;
 	
-	public BookDto(String code, String title, String authors, String matter, boolean newRecord){
+	public BookDto(String bookId, String title, String authors, String matter, boolean newRecord){
+		setBookId(bookId);
+		setTitle(title);
+		setAuthors(authors);
+		setMatter(matter);
+		setNewRecord(newRecord);
+	}
+	
+	public BookDto(String bookId, String code, String title, String authors, String matter, boolean newRecord){
+		setBookId(bookId);
 		setCode(code);
 		setTitle(title);
 		setAuthors(authors);
@@ -36,11 +45,11 @@ public class BookDto {
 	}
 	
 	public String getBookId() {
-		return BookId;
+		return bookId;
 	}
 
 	public void setBookId(String bookId) {
-		BookId = bookId;
+		this.bookId = bookId;
 	}
 
 	public BookDto() {

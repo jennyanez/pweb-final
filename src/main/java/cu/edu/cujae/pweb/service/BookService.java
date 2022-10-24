@@ -6,7 +6,7 @@ import cu.edu.cujae.pweb.dto.BookDto;
 
 public interface BookService {
 	List<BookDto> getBooks();
-	BookDto getBookByCode(String code);
+	BookDto getBookById(String bookId);
 	void createBook(BookDto book);
 	void updateBook(BookDto book);
 	void deleteBook(String code);
