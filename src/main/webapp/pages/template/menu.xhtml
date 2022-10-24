@@ -15,16 +15,7 @@
         </div> -->
     
         <div class="layout-menu" align="center">
-                <div class="menu-category">DATA MANAGEMENT</div>
-                <div class="menu-items">
-                    <h:link outcome="/pages/security/users/user-list.xhtml">
-                        Manage Users
-                    </h:link>
-                    <h:link outcome="/pages/loans/loan-list.xhtml">
-                        Gestionar préstamos
-                    </h:link>
-                </div>
-                <div class="menu-category">MENU</div>
+                <div class="menu-category">PRINCIPAL MENU</div>
                 <div class="menu-items">
                     <p:outputPanel>
                         <a tabindex="0" class="submenu-link">
@@ -37,9 +28,6 @@
                                 </h:link></li>
                                 <li><h:link>
                                     Borrowed Books
-                                </h:link></li>
-                               <li><h:link>
-                                    Manage Books
                                 </h:link></li>
                             </ul>
                         </div>
@@ -56,11 +44,20 @@
                                 <li><h:link>
                                     Confirmed Book Loans
                                 </h:link></li>
-                               <li><h:link>
-                                    Manage Book Loans
-                                </h:link></li>
                             </ul>
                         </div>
+                <div class="menu-category">DATA MANAGEMENT</div>
+                <div class="menu-items">
+                    <h:link outcome="/pages/security/users/user-list.xhtml">
+                        Manage Users
+                    </h:link>
+                    <h:link outcome="/pages/books/book-list.xhtml">
+                        Manage Books
+                    </h:link>
+                    <h:link outcome="/pages/loans/loan-list.xhtml">
+                        Manage Loans
+                    </h:link>
+                </div>
                     </p:outputPanel>
                 </div>
         </div>
