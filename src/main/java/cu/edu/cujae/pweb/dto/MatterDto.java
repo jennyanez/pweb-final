@@ -7,10 +7,15 @@ import java.util.List;
 public class MatterDto {
 	private String name;
 	private List<BookDto> books;
+	public boolean newRecord;
 	
 	public MatterDto(String name){
 		setName(name);
 		books = new ArrayList<BookDto>();
+	}
+
+	public MatterDto() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getName() {
