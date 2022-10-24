@@ -24,7 +24,7 @@
 						<p:commandButton value="New" icon="pi pi-plus"
 							actionListener="#{manageBookBean.openNew}"
 							update=":form:manage-book-content"
-							oncomplete="PF('manageLoanDialog').show()"
+							oncomplete="PF('manageBookDialog').show()"
 							styleClass="ui-button-success" style="margin-right: .5rem">
 							<p:resetInput target=":form:manage-book-content" />
 						</p:commandButton>
@@ -52,14 +52,9 @@
                 	* El facet header define un encabezado y agrega un button para filtrar. Por defecto esto lo hace el solo, si quieren algo
                 	  con mayor detalle ver el showcase.  
                  -->
-				<p:dataTable 
-					id="dt-book" 
-					widgetVar="dtBook" 
-					var="book"
-					value="#{manageBookBean.books}" 
-					reflow="true" paginator="true"
-					rows="10" 
-					paginatorPosition="bottom">
+				<p:dataTable id="dt-book" widgetVar="dtBook" var="book"
+					value="#{manageBookBean.books}" reflow="true" paginator="true"
+					rows="10" paginatorPosition="bottom">
 					<f:facet name="header">
 						<div class="products-table-header">
 							<span style="font-weight: bold">Books</span> <span
@@ -96,6 +91,7 @@
 								target="#{manageBookBean.selectedBook}" />
 							<p:resetInput target=":form:manage-book-content" />
 						</p:commandButton>
+						
 						<p:commandButton class="ui-button-warning rounded-button"
 							icon="pi pi-trash" process="@this" 
 							action="#{manageBookBean.deleteBook}" >

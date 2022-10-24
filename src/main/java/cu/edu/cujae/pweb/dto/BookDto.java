@@ -10,14 +10,30 @@ public class BookDto {
 	private int amountPages;
 	private String matter;
 	private String authors;
+	private boolean newRecord;
 	
-	public BookDto(String code, String title, String authors, String matter){
+	public BookDto(String code, String title, String authors, String matter, boolean newRecord){
 		setCode(code);
 		setTitle(title);
 		setAuthors(authors);
 		setMatter(matter);
+		setNewRecord(newRecord);
 	}
 	
+	/**
+	 * @return the newRecord
+	 */
+	public boolean isNewRecord() {
+		return newRecord;
+	}
+
+	/**
+	 * @param newRecord the newRecord to set
+	 */
+	public void setNewRecord(boolean newRecord) {
+		this.newRecord = newRecord;
+	}
+
 	public BookDto() {
 		
 	}
