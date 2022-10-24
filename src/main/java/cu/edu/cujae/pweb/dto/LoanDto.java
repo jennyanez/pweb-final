@@ -9,15 +9,17 @@ public class LoanDto {
 	private String user;
 	private Date returnDate;
 	private Date loanDate;
+	private boolean newRecord;
 	
-	public LoanDto(String loanId, String book, int copy, String user, Date returnDate, Date loanDate) {
+	public LoanDto(String loanId, String book, int copy, String user, Date returnDate, Date loanDate, boolean newRecord) {
 		super();
 		this.id = loanId;
 		this.book = book;
 		this.copy = copy;
 		this.user = user;
 		this.setReturnDate(returnDate);
-		this.setLoanDate(loanDate);		
+		this.setLoanDate(loanDate);	
+		this.newRecord = newRecord;
 	}
 	
 	public LoanDto() {
@@ -70,5 +72,13 @@ public class LoanDto {
 
 	public void setLoanDate(Date loanDate) {
 		this.loanDate = loanDate;
+	}
+
+	public boolean isNewRecord() {
+		return newRecord;
+	}
+
+	public void setNewRecord(boolean newRecord) {
+		this.newRecord = newRecord;
 	}	
 }
