@@ -1,20 +1,28 @@
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/dto/LoanRequest.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/dto/XUserDto.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/config/SpringConfig.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/service/UserServiceImpl.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/dto/LoanDto.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/utils/JsfUtils.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/bean/ManageXUserBean.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/bean/XUserBean.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/dto/CopyDto.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/dto/XRoleDto.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/dto/UserDto.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/service/RoleService.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/dto/SanctionedUserDto.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/config/MainWebAppInitializer.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/dto/BookDto.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/dto/AuthorDto.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/dto/MatterDto.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/service/UserService.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/service/RoleServiceImpl.java
-/Users/ann/Documents/🗓 3RO SCHOOL/2DO SEMESTRE/PW/CORTE/src/main/java/cu/edu/cujae/pweb/dto/DefaulterUserDto.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\service\LoanServiceImpl.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\dto\LoanRequest.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\dto\XUserDto.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\dto\BookDto.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\bean\ManageBookBean.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\bean\ManageLoanBean.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\dto\SanctionedUserDto.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\service\RoleService.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\service\BookService.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\bean\XUserBean.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\dto\CopyDto.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\bean\ManageXUserBean.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\config\SpringConfig.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\dto\DefaulterUserDto.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\dto\LoanDto.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\dto\MatterDto.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\utils\JsfUtils.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\bean\BookBean.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\service\UserService.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\dto\UserDto.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\dto\XRoleDto.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\service\RoleServiceImpl.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\config\MainWebAppInitializer.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\service\LoanService.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\dto\AuthorDto.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\service\BookServiceImpl.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\service\UserServiceImpl.java
+E:\apps\workspace\proyecto-final\src\main\java\cu\edu\cujae\pweb\bean\LoanBean.java
