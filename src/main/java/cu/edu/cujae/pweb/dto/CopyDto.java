@@ -8,6 +8,10 @@ private int copyNumber;
 		setCopyNumber(copyNumber);
 	}
 
+	public CopyDto() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getCopyNumber() {
 		return copyNumber;
 	}

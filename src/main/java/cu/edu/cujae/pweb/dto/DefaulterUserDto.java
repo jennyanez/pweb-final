@@ -4,12 +4,10 @@ public class DefaulterUserDto extends UserDto {
 	private String bookTitlePossession;
 	private int amountDaysBreach;
 	
-	public DefaulterUserDto(String DNI, String area, String name, String firstSurname, String lastSurname, String bookTitlePossession,
-			                int amountDaysBreach) {
+	public DefaulterUserDto(String DNI, String area, String name, String firstSurname, String lastSurname) {
 		super(DNI, area, name, firstSurname, lastSurname);
-		setBookTitlePossession(bookTitlePossession);
-		setAmountDaysBreach(amountDaysBreach);
-	}
+		// TODO Auto-generated constructor stub
+	}	
 
 	public String getBookTitlePossession() {
 		return bookTitlePossession;
