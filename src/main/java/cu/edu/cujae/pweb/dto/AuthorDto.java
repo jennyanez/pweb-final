@@ -9,13 +9,19 @@ public class AuthorDto {
 	private String secondSurname;
 	private String fullName;
 	private List<BookDto> books;
+	public boolean newRecord;
 	
-	public AuthorDto(String name, String firstSurname, String secondSurname){
+	public AuthorDto(String name, String firstSurname, String secondSurname, boolean newRecord){
 		setName(name);
 		setFirstSurname(firstSurname);
 		setSecondSurname(secondSurname);
 		setFullName();
 		setBooks(new ArrayList<BookDto>());
+		this.newRecord = newRecord;
+	}
+
+	public AuthorDto() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getName() {
