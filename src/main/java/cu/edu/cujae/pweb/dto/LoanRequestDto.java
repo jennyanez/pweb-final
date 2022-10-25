@@ -1,20 +1,22 @@
 package cu.edu.cujae.pweb.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class LoanRequestDto {
+	private String id;
 	private String user;
 	private String book;
 	private int copy;
-	private Date loanRequest;
+	private Date loanRequestDate;
 	private boolean newRecord;
 	
-	public LoanRequestDto(String user, String book, int copy, Date loanRequest, boolean newRecord) {
+	public LoanRequestDto(String id, String user, String book, int copy, Date loanRequest, boolean newRecord) {
 		super();
+		this.id = id;
 		this.user = user;
 		this.book = book;
 		this.copy = copy;
-		this.loanRequest = loanRequest;
+		this.loanRequestDate = loanRequest;
 		this.setNewRecord(newRecord);
 	}
 	
@@ -40,11 +42,11 @@ public class LoanRequestDto {
 	public void setCopy(int copy) {
 		this.copy = copy;
 	}
-	public Date getLoanRequest() {
-		return loanRequest;
+	public Date getLoanRequestDate() {
+		return loanRequestDate;
 	}
-	public void setLoanRequest(Date loanRequest) {
-		this.loanRequest = loanRequest;
+	public void setLoanRequestDate(Date loanRequest) {
+		this.loanRequestDate = loanRequest;
 	}
 
 	public boolean getNewRecord() {
@@ -53,5 +55,13 @@ public class LoanRequestDto {
 
 	public void setNewRecord(boolean newRecord) {
 		this.newRecord = newRecord;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }
