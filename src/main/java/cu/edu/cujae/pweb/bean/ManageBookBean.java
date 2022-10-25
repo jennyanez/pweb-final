@@ -46,7 +46,7 @@ public class ManageBookBean {
 	
 	//Se ejecuta al dar clic en el button con el lapicito
 	public void openForEdit() {
-		
+		//codigo aqui
 	}
 	
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
