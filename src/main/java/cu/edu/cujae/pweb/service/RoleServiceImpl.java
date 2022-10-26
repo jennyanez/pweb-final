@@ -14,11 +14,11 @@ public class RoleServiceImpl implements RoleService{
 	@Override
 	public List<XRoleDto> getRoles() {
 		List<XRoleDto> roles = new ArrayList<>();
-		roles.add(new XRoleDto(1L, "admin", "Administrador del sistema"));
-		roles.add(new XRoleDto(2L, "employee", "Empleado de la empresa"));
-		roles.add(new XRoleDto(3L, "asesor", "Asesor de la empresa"));
-		roles.add(new XRoleDto(4L, "manager", "Manager de la empresa"));
-		roles.add(new XRoleDto(5L, "reporter", "Visualizador de reportes"));
+		roles.add(new XRoleDto(1L, "admin", "Bookstore Manager"));
+		roles.add(new XRoleDto(2L, "librarian", "Librarian"));
+		roles.add(new XRoleDto(3L, "user", "Standard User"));
+/*		roles.add(new XRoleDto(4L, "manager", "Manager de la empresa"));
+		roles.add(new XRoleDto(5L, "reporter", "Visualizador de reportes")); */
 		return roles;
 	}
 

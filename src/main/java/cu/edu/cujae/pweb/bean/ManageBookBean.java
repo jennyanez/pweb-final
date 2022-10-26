@@ -70,7 +70,7 @@ public class ManageBookBean {
     	try {
     		this.books.remove(this.selectedBook);
             this.selectedBook = null;
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_book_removed");
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_book_deleted");
             PrimeFaces.current().ajax().update("form:dt-book");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
 		} catch (Exception e) {
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
