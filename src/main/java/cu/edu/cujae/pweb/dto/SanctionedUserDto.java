@@ -2,7 +2,7 @@ package cu.edu.cujae.pweb.dto;
 
 import java.util.Calendar;
 
-public class SanctionedUserDto extends UserDto {
+public class SanctionedUserDto extends ClientDto {
 	private int typeOfSanction;
 	private Calendar dateStartSanction;
 	private Calendar dateEndSanction;

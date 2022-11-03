@@ -3,7 +3,7 @@ package cu.edu.cujae.pweb.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDto {
+public class ClientDto {
 	private String DNI;
 	private String area;
 	private String name;
@@ -11,8 +11,9 @@ public class UserDto {
 	private String lastSurname;
 	private String fullName;
 	private List<CopyDto> copies;
+	private boolean newRecord;
 	
-	public UserDto(String DNI, String area, String name, String firstSurname, String lastSurname){
+	public ClientDto(String DNI, String area, String name, String firstSurname, String lastSurname){
 		setArea(area);
 		setDNI(DNI);
 		setName(name);
@@ -72,5 +73,13 @@ public class UserDto {
 
 	public void setArea(String area) {
 		this.area = area;
+	}
+
+	public boolean isNewRecord() {
+		return newRecord;
+	}
+
+	public void setNewRecord(boolean newRecord) {
+		this.newRecord = newRecord;
 	}
 }

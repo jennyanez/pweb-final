@@ -1,6 +1,6 @@
 package cu.edu.cujae.pweb.dto;
 
-public class DefaulterUserDto extends UserDto {
+public class DefaulterUserDto extends ClientDto {
 	private String bookTitlePossession;
 	private int amountDaysBreach;
 	
