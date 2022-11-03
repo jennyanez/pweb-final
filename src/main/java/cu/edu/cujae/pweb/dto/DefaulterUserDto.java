@@ -7,7 +7,14 @@ public class DefaulterUserDto extends ClientDto {
 	public DefaulterUserDto(String DNI, String area, String name, String firstSurname, String lastSurname) {
 		super(DNI, area, name, firstSurname, lastSurname);
 		// TODO Auto-generated constructor stub
+		setBookTitlePossession(bookTitlePossession);
+		setAmountDaysBreach(amountDaysBreach);
 	}	
+
+	public DefaulterUserDto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public String getBookTitlePossession() {
 		return bookTitlePossession;

@@ -1,11 +1,11 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-    <div class="layout-sidebar" align="center">
-    	<!-- <div class="layout-sidebar-filter ui-fluid ui-input-filled">
+	<div class="layout-sidebar" align="center">
+		<!-- <div class="layout-sidebar-filter ui-fluid ui-input-filled">
             <h:form>
                     <p:autoComplete placeholder="Search by name..." minQueryLength="3" effect="fade" 
                                 panelStyleClass="layout-sidebar-filter-panel" scrollHeight="300" emptyMessage="No results found!">
@@ -13,57 +13,68 @@
                 </p:autoComplete>
             </h:form>
         </div> -->
-    
-        <div class="layout-menu" align="center">
-                <div class="menu-category">PRINCIPAL MENU</div>
-                <div class="menu-items">
-                    <p:outputPanel>
-                        <a tabindex="0" class="submenu-link">
-                            Books
-                        </a>
-                        <div class="submenu">
-                            <ul>
-                                <li><h:link >
+
+		<div class="layout-menu" align="center">
+			<div class="menu-category">PRINCIPAL MENU</div>
+			<div class="menu-items">
+				<p:outputPanel>
+					<a tabindex="0" class="submenu-link"> Books </a>
+					<div class="submenu">
+						<ul>
+							<li><h:link>
                                     Available Books
                                 </h:link></li>
-                                <li><h:link>
+							<li><h:link>
                                     Borrowed Books
                                 </h:link></li>
-                            </ul>
-                        </div>
-                    </p:outputPanel>
-                    <p:outputPanel >
-                        <a tabindex="0" class="submenu-link">
-                            Book Loans
-                        </a>
-                        <div class="submenu">
-                            <ul>
-                                <li><h:link >
+						</ul>
+					</div>
+				</p:outputPanel>
+				<p:outputPanel>
+					<a tabindex="0" class="submenu-link"> Book Loans </a>
+					<div class="submenu">
+						<ul>
+							<li><h:link>
                                     Requested Book Loans
                                 </h:link></li>
-                                <li><h:link>
+							<li><h:link>
                                     Confirmed Book Loans
                                 </h:link></li>
-                            </ul>
-                        </div>
-                <div class="menu-category">DATA MANAGEMENT</div>
-                <div class="menu-items">
-                    <h:link outcome="/pages/security/users/user-list.xhtml">
+						</ul>
+					</div>
+					<div class="menu-category">DATA MANAGEMENT</div>
+					<div class="menu-items">
+						<h:link outcome="/pages/security/users/user-list.xhtml">
                         Manage Users
                     </h:link>
-                    <h:link outcome="/pages/books/book-list.xhtml">
+						<h:link outcome="/pages/books/book-list.xhtml">
                         Manage Books
                     </h:link>
-                    <h:link outcome="/pages/loans/loan-list.xhtml">
+						<h:link outcome="/pages/loans/loan-list.xhtml">
                         Manage Loans
                     </h:link>
-                    <h:link outcome="/pages/loansRequest/loanRequest-list.xhtml">
+						<h:link outcome="/pages/loansRequest/loanRequest-list.xhtml">
                         Manage Loans Request
                     </h:link>
-                </div>
-                    </p:outputPanel>
-                </div>
-        </div>
-    </div>
+						<a tabindex="0" class="submenu-link"> Manage Clients </a>
+						<div class="submenu">
+							<ul>
+								<li><h:link outcome="/pages/client/defaulter-list.xhtml">
+                                    Defaulter Clients
+                                </h:link></li>
+								<li><h:link outcome="/pages/client/sanctioned-list.xhtml">
+                                    Sanctioned Clients
+                                </h:link></li>
+								<li><h:link>
+                                    All the clients
+                                </h:link></li>
+							</ul>
+						</div>
+
+					</div>
+				</p:outputPanel>
+			</div>
+		</div>
+	</div>
 
 </ui:composition>

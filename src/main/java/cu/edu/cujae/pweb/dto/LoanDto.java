@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class LoanDto {
 	private String id;
-	private String book;
-	private int copy;
-	private String user;
+	private BookDto book;
+	private CopyDto copy;
+	private ClientDto user;
 	private Date returnDate;
 	private Date loanDate;
 	private boolean newRecord;
 	
-	public LoanDto(String loanId, String book, int copy, String user, Date returnDate, Date loanDate, boolean newRecord) {
+	public LoanDto(String loanId, BookDto book, CopyDto copy, ClientDto user, Date returnDate, Date loanDate, boolean newRecord) {
 		super();
 		this.id = loanId;
 		this.book = book;
@@ -34,27 +34,27 @@ public class LoanDto {
 		return this.id;
 	}
 
-	public String getBook() {
+	public BookDto getBook() {
 		return book;
 	}
 
-	public void setBook(String book) {
+	public void setBook(BookDto book) {
 		this.book = book;
 	}
 
-	public int getCopy() {
+	public CopyDto getCopy() {
 		return copy;
 	}
 
-	public void setCopy(int copy) {
+	public void setCopy(CopyDto copy) {
 		this.copy = copy;
 	}
 
-	public String getUser() {
+	public ClientDto getUser() {
 		return user;
 	}
 
-	public void setUser(String user) {
+	public void setUser(ClientDto user) {
 		this.user = user;
 	}
 

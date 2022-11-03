@@ -8,12 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean
 public class SanctionedUserBean{
+	private String clientName;
 	private int typeOfSanction;
 	private Calendar dateStartSanction;
 	private Calendar dateEndSanction;
-	private String userFullName;
-	private String userDni;
-
+	
     protected HttpServletRequest getRequest() {
 	    return (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
 	}
@@ -46,20 +45,14 @@ public class SanctionedUserBean{
 		this.dateEndSanction = dateEndSanction;
 	}
 
-	public String getUserFullName() {
-		return userFullName;
+	public String getClientName() {
+		return clientName;
 	}
 
-	public void setUserFullName(String userFullName) {
-		this.userFullName = userFullName;
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
 	}
 
-	public String getUserDni() {
-		return userDni;
-	}
-
-	public void setUserDni(String userDni) {
-		this.userDni = userDni;
-	}
+	
 
 }

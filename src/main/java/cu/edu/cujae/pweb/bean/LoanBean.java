@@ -17,6 +17,7 @@ public class LoanBean{
 	private ClientDto user;
 	private Date returnDate;
 	private Date loanDate;
+	private boolean isDefaulter;
 
     protected HttpServletRequest getRequest() {
 	    return (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
@@ -64,5 +65,13 @@ public class LoanBean{
 
 	public void setLoanDate(Date loanDate) {
 		this.loanDate = loanDate;
+	}
+
+	public boolean isDefaulter() {
+		return isDefaulter;
+	}
+
+	public void setDefaulter(boolean isDefaulter) {
+		this.isDefaulter = isDefaulter;
 	}	
 }

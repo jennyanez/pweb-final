@@ -1,0 +1,92 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/pages/template/layout.xhtml">
+	<ui:define name="title">
+		    Defaulter Clients
+	</ui:define>
+	<ui:define name="layout">
+		<h:form id="form">
+			<div class="card crud-demo">
+				<p:toolbar>
+					
+					<p:toolbarGroup align="right">
+					    <!-- Este es un button que tiene como objetivo exportar el contenido de la tabla que apunta a propiedad target
+					         del componente dataExporter. En este caso dt-users es el identificador del componente datatable -->
+						<p:commandButton value="Export" icon="pi pi-upload"
+							styleClass="ui-button-help" ajax="false">
+							<p:dataExporter type="pdf" target="dt-defaulter" fileName="defaulter-clients" />
+						</p:commandButton>
+					</p:toolbarGroup>
+				</p:toolbar>
+                
+                <!-- Componente usado para mostrar tablas con datos y ejecutar operaciones
+                	* La propiedad value: apunta a una lista de objetos de tipo UserDto que está en el bean de jsf
+                	* La propiedad var: es una instancia de esta lista para poder extaer los objetos, es como iterador
+                	  que luego permite poder decir user.<propiedad del objeto>.
+                	* La propiedad paginator: define si se quiere paginar o no y es posible definir la position del mismo usando
+                	  la propiedad pagePosition.
+                    * La propiedad rows: define la cantidad de filas
+                	* El facet header define un encabezado y agrega un button para filtrar. Por defecto esto lo hace el solo, si quieren algo
+                	  con mayor detalle ver el showcase.  
+                 -->
+				<p:dataTable 
+					id="dt-defaulter" 
+					widgetVar="dtDefaulter" 
+					var="defaulterUser"
+					value="#{manageDefaulterUserBean.defUsers}" 
+					reflow="true" paginator="true"
+					rows="10" 
+					paginatorPosition="bottom">
+					<f:facet name="header">
+						<div class="products-table-header">
+							<span style="font-weight: bold">Defaulter Users</span> <span
+								class="filter-container ui-input-icon-left"> <i
+								class="pi pi-search"></i> <p:inputText id="globalFilter"
+									onkeyup="PF('dtDefaulter').filter()" placeholder="Search" />
+							</span>
+
+						</div>
+					</f:facet>
+					
+					<p:column headerText="Client" sortBy="#{defaulterUser.clientName}"
+                        filterBy="#{defaulterUser.clientName}">
+						<h:outputText value="#{defaulterUser.clientName}"/>
+					</p:column>
+					<p:column headerText="Book in possession" sortBy="#{defaulterUser.bookTitlePossession}"
+						filterBy="#{defaulterUser.bookTitlePossession}">
+						<h:outputText value="#{defaulterUser.bookTitlePossession}"/>
+					</p:column>
+                    <p:column headerText="Amount of Days" sortBy="#{defaulterUser.amountDaysBreach}" filterBy="#{defaulterUser.amountDaysBreach}">
+						<h:outputText value="#{defaulterUser.amountDaysBreach}" />
+					</p:column>
+					
+					<p:column exportable="false">
+						<p:commandButton class="ui-button-warning rounded-button"
+							icon="pi pi-trash" process="@this" 
+							action="#{manageDefaulterUserBean.deleteUser}" >
+							<f:setPropertyActionListener value="#{defaulter}"
+								target="#{manageDefaulterUserBean.selectedUser}" />
+							<p:confirm header="Confirmar" message="Está seguro de que desea eliminar este usuario como incumplidor?" icon="pi pi-exclamation-triangle"/>
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+
+				<!-- Este comoponente se utiliza mucho para el caso de los eliminar, que es donde casi siempre se necesita confirmation,
+				su uso es bien sencillo, cada confirmDialog va atado a un p:confirm que es el que se definie dentro del button -->
+				<p:confirmDialog global="true" showEffect="fade" width="300">
+					<p:commandButton value="Si" type="button"
+						styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+					<p:commandButton value="No" type="button"
+						styleClass="ui-confirmdialog-no ui-button-secondary"
+						icon="pi pi-times" />
+				</p:confirmDialog>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

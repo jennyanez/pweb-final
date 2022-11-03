@@ -4,12 +4,14 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+import cu.edu.cujae.pweb.dto.XUserDto;
+
 @ManagedBean
 public class DefaulterUserBean{
 	private String bookTitlePossession;
 	private int amountDaysBreach;
-	private String userDni;
-	private String userFullName;
+	private String clientName;
+	//private XUserDto userName;
 
     protected HttpServletRequest getRequest() {
 	    return (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
@@ -35,21 +37,21 @@ public class DefaulterUserBean{
 		this.amountDaysBreach = amountDaysBreach;
 	}
 
-	public String getUserDni() {
-		return userDni;
+	public String getClientName() {
+		return clientName;
 	}
 
-	public void setUserDni(String userDni) {
-		this.userDni = userDni;
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
 	}
 
-	public String getUserFullName() {
-		return userFullName;
+/*	public XUserDto getUserName() {
+		return userName;
 	}
 
-	public void setUserFullName(String userFullName) {
-		this.userFullName = userFullName;
+	public void setUserName(XUserDto userName) {
+		this.userName = userName;
 	}
-
+*/
 	
 }

@@ -23,6 +23,10 @@ public class ClientDto {
 		copies = new ArrayList<CopyDto>();
 	}
 
+	public ClientDto() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getDNI() {
 		return DNI;
 	}

@@ -1,9 +1,7 @@
 package cu.edu.cujae.pweb.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -19,10 +17,10 @@ public class LoanServiceImpl implements LoanService{
 	public List<LoanDto> getLoans() {
 		
 		List<LoanDto> loans = new ArrayList<>();
-		loans.add(new LoanDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Origen", 12, "Jennifer Yanez", new Date(), new Date(), true));
+	/*	loans.add(new LoanDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Origen", 12, "Jennifer Yanez", new Date(), new Date(), true));
 		loans.add(new LoanDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Orgullo y prejuicio", 17, "Andy Piloto", new Date(), new Date(), true));
         loans.add(new LoanDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "El hombre que amaba a los perros", 6, "Ana Gonzalez", new Date(), new Date(), true));
-
+	*/
 		return loans;
 	}
 
