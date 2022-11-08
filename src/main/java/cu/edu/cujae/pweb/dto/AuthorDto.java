@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AuthorDto {
+	private String id;
 	private String name;
 	private String firstSurname;
 	private String secondSurname;
@@ -11,13 +12,14 @@ public class AuthorDto {
 	private List<BookDto> books;
 	public boolean newRecord;
 	
-	public AuthorDto(String name, String firstSurname, String secondSurname, boolean newRecord){
+	public AuthorDto(String id,String name, String firstSurname, String secondSurname, boolean newRecord){
+		setId(id);
 		setName(name);
 		setFirstSurname(firstSurname);
 		setSecondSurname(secondSurname);
 		setFullName();
 		setBooks(new ArrayList<BookDto>());
-		this.newRecord = newRecord;
+		setNewRecord(newRecord);
 	}
 
 	public AuthorDto() {
@@ -68,5 +70,21 @@ public class AuthorDto {
 
 	public void setBooks(List<BookDto> books) {
 		this.books = books;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}	
+	
+	public boolean getNewRecord() {
+		return newRecord;
+	}
+
+	public void setNewRecord(boolean newRecord) {
+		this.newRecord = newRecord;
+	}
 }

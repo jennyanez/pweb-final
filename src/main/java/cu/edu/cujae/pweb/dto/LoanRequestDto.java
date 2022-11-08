@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class LoanRequestDto {
 	private String id;
-	private String user;
-	private String book;
-	private int copy;
+	private ClientDto user;
+	private BookDto book;
+	private CopyDto copy;
 	private Date loanRequestDate;
 	private boolean newRecord;
 	
-	public LoanRequestDto(String id, String user, String book, int copy, Date loanRequest, boolean newRecord) {
+	public LoanRequestDto(String id, ClientDto user, BookDto book, CopyDto copy, Date loanRequest, boolean newRecord) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -24,22 +24,22 @@ public class LoanRequestDto {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public String getUser() {
+	public ClientDto getUser() {
 		return user;
 	}
-	public void setUser(String user) {
+	public void setUser(ClientDto user) {
 		this.user = user;
 	}
-	public String getBook() {
+	public BookDto getBook() {
 		return book;
 	}
-	public void setBook(String book) {
+	public void setBook(BookDto book) {
 		this.book = book;
 	}
-	public int getCopy() {
+	public CopyDto getCopy() {
 		return copy;
 	}
-	public void setCopy(int copy) {
+	public void setCopy(CopyDto copy) {
 		this.copy = copy;
 	}
 	public Date getLoanRequestDate() {

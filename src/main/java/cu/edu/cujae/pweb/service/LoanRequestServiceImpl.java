@@ -16,10 +16,10 @@ public class LoanRequestServiceImpl implements LoanRequestService{
 	public List<LoanRequestDto> getLoansRequest(){
 		
 		List<LoanRequestDto> loansRequest = new ArrayList<>();
-		loansRequest.add(new LoanRequestDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Andy", "Harry Potter", 10, new Date(), true));
+		/*loansRequest.add(new LoanRequestDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Andy", "Harry Potter", 10, new Date(), true));
 		loansRequest.add(new LoanRequestDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Jenny", "El Amor en Tiempos de Colera", 20, new Date(), true));
         loansRequest.add(new LoanRequestDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9), "Ana", "Viaje al centro de la Tierra", 30, new Date(), true));
-
+		*/
 		return loansRequest;
 	}
 	
