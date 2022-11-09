@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Copy" showEffect="fade" modal="true"
+		widgetVar="manageCopyDialog" responsive="true">
+		<p:outputPanel id="manage-copy-content" class="ui-fluid">
+	  	<p:outputPanel rendered="#{not empty manageCopyBean.selectedCopy}"> 	
+				<p:panelGrid layout="grid" columns="1">
+					<h:panelGroup>
+						
+                    <div class="p-field">
+							<p:outputLabel for="@next">Copy Number</p:outputLabel>
+							<p:inputText id="copyNumber" required="true" 
+								value="#{manageCopyBean.selectedCopy.copyNumber}" />
+							<p:message for="@previous" ></p:message>
+						</div>
+						
+                        <div class="p-field">
+							<p:outputLabel for="@next">Title</p:outputLabel>
+							<p:inputText id="title" required="true"
+								value="#{manageCopyBean.selectedCopy.title}" />
+							<p:message for="@previous"></p:message>
+						</div>
+						
+										
+					</h:panelGroup>
+				</p:panelGrid>
+		 	</p:outputPanel> 
+		</p:outputPanel>
+
+		<f:facet name="footer">
+			<p:commandButton value="Salvar" icon="pi pi-check"
+				actionListener="#{manageCopyBean.saveCopy}"
+				update="manage-copy-content" process="manage-copy-content @this" />
+			<p:commandButton value="Cancelar" icon="pi pi-times"
+				onclick="PF('manageCopyDialog').hide()" class="ui-button-secondary" />
+		</f:facet>
+	</p:dialog>
+</ui:composition>

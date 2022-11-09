@@ -15,10 +15,11 @@ public class BookServiceImpl implements BookService{
 	public List<BookDto> getBooks() {
 		
 		List<BookDto> books = new ArrayList<>();
+		/*
 		books.add(new BookDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9),"123411a31", "The Great Gatsby", "F.Scott Fitzgerald", "Literature", true));
 		books.add(new BookDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9),"8919d2282", "Pride and Perjuice", "Jane Austen", "Classic",true));
         books.add(new BookDto(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9),"13211233h", "The Picture of Dorian Gray", "Oscar Wilde", "Literature",true));
-
+		*/
 		return books;
 	}
 

@@ -9,19 +9,11 @@ public class BookDto {
 	private String countryOrigin;
 	private String summary;
 	private int amountPages;
-	private String matter;
-	private String authors;
+	private MatterDto matter;
+	private AuthorDto authors;
 	private boolean newRecord;
 	
-	public BookDto(String bookId, String title, String authors, String matter, boolean newRecord){
-		setBookId(bookId);
-		setTitle(title);
-		setAuthors(authors);
-		setMatter(matter);
-		setNewRecord(newRecord);
-	}
-	
-	public BookDto(String bookId, String code, String title, String authors, String matter, boolean newRecord){
+	public BookDto(String bookId, String code, String title, AuthorDto authors, MatterDto matter, boolean newRecord){
 		setBookId(bookId);
 		setCode(code);
 		setTitle(title);
@@ -96,19 +88,19 @@ public class BookDto {
 		this.amountPages = amountPages;
 	}
 
-	public String getMatter() {
+	public MatterDto getMatter() {
 		return matter;
 	}
 
-	public void setMatter(String matter) {
-		this.matter = matter;
+	public void setMatter(MatterDto matter2) {
+		this.matter = matter2;
 	}
 
-	public String getAuthors() {
+	public AuthorDto getAuthors() {
 		return authors;
 	}
 
-	public void setAuthors(String authors) {
+	public void setAuthors(AuthorDto authors) {
 		this.authors = authors;
 	}
 
