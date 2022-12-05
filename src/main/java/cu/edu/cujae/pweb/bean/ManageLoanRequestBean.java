@@ -13,7 +13,6 @@ import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
 import cu.edu.cujae.pweb.dto.LoanRequestDto;
 import cu.edu.cujae.pweb.service.LoanRequestService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
@@ -26,7 +25,7 @@ public class ManageLoanRequestBean {
 	private LoanRequestDto selectedLoanRequest;
 	private List<LoanRequestDto> loansRequest;
 	
-	@Autowired
+    @Autowired
 	private LoanRequestService loanRequestService;
 	
 	public ManageLoanRequestBean() {

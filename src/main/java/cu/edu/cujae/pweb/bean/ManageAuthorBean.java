@@ -1,7 +1,5 @@
 package cu.edu.cujae.pweb.bean;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import cu.edu.cujae.pweb.dto.AuthorDto;
 import cu.edu.cujae.pweb.dto.BookDto;
-import cu.edu.cujae.pweb.dto.XRoleDto;
 import cu.edu.cujae.pweb.service.AuthorService;
 import cu.edu.cujae.pweb.service.BookService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
