@@ -6,8 +6,8 @@ import cu.edu.cujae.pweb.dto.LoanRequestDto;
 
 public interface LoanRequestService {
 	List<LoanRequestDto> getLoansRequest();
-	LoanRequestDto getLoanRequestById(String loanId);
+	LoanRequestDto getLoanRequestById(Long loanId);
 	void createLoanRequest(LoanRequestDto loan);
 	void updateLoanRequest(LoanRequestDto loan);
-	void deleteLoanRequest(String id);
+	void deleteLoanRequest(Long id);
 }

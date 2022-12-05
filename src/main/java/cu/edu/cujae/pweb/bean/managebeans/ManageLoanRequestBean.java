@@ -1,4 +1,4 @@
-package cu.edu.cujae.pweb.bean;
+package cu.edu.cujae.pweb.bean.managebeans;
 
 import java.util.Date;
 import java.util.List;
@@ -51,8 +51,7 @@ public class ManageLoanRequestBean {
 	public void saveLoan() {
 			
 		if (this.selectedLoanRequest.getId() == null) {
-            this.selectedLoanRequest.setId(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
-            this.selectedLoanRequest.setNewRecord(true);
+            this.selectedLoanRequest.setId(Long.valueOf(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9)));
             this.selectedLoanRequest.setLoanRequestDate(new Date());
             this.loansRequest.add(this.selectedLoanRequest);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loanRequest_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added

@@ -1,8 +1,9 @@
-package cu.edu.cujae.pweb.service;
+package cu.edu.cujae.pweb.service.implementation;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cu.edu.cujae.pweb.service.LoanService;
 import org.springframework.stereotype.Service;
 
 import cu.edu.cujae.pweb.dto.LoanDto;
@@ -11,7 +12,7 @@ import cu.edu.cujae.pweb.dto.LoanDto;
  * @Autowired. En estas implementaciones luego se pondraan las llamadas al proyecto backend
  */
 @Service
-public class LoanServiceImpl implements LoanService{
+public class LoanServiceImpl implements LoanService {
 
 	@Override
 	public List<LoanDto> getLoans() {
@@ -25,8 +26,8 @@ public class LoanServiceImpl implements LoanService{
 	}
 
 	@Override
-	public LoanDto getLoanById(String loanId) {
-		return getLoans().stream().filter(r -> r.getLoanId().equals(loanId)).findFirst().get();
+	public LoanDto getLoanById(Long loanId) {
+		return getLoans().stream().filter(r -> r.getId().equals(loanId)).findFirst().get();
 	}
 
 	@Override
@@ -42,7 +43,7 @@ public class LoanServiceImpl implements LoanService{
 	}
 
 	@Override
-	public void deleteLoan(String id) {
+	public void deleteLoan(Long id) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,4 +1,4 @@
-package cu.edu.cujae.pweb.bean;
+package cu.edu.cujae.pweb.bean.managebeans;
 
 import java.util.List;
 

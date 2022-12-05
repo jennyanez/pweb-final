@@ -1,4 +1,4 @@
-package cu.edu.cujae.pweb.bean;
+package cu.edu.cujae.pweb.bean.managebeans;
 
 import java.util.List;
 
@@ -7,31 +7,31 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
+import cu.edu.cujae.pweb.dto.DefaulterClientDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import cu.edu.cujae.pweb.dto.DefaulterUserDto;
-import cu.edu.cujae.pweb.service.DefaulterUserService;
+import cu.edu.cujae.pweb.service.DefaulterClientService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 
 
 @Component //Le indica a spring es un componete registrado
 @ManagedBean
 @ViewScoped //Este es el alcance utilizado para trabajar con Ajax
-public class ManageDefaulterUserBean {
+public class ManageDefaulterClientBean {
 	
-	private DefaulterUserDto defUser;
-	private DefaulterUserDto selectedUser;
-	private List<DefaulterUserDto> defUsers;
+	private DefaulterClientDto defUser;
+	private DefaulterClientDto selectedUser;
+	private List<DefaulterClientDto> defUsers;
 	
 	
 	/* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
 	 * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
 	 */
 	@Autowired
-	private DefaulterUserService defUserService;
+	private DefaulterClientService defUserService;
 	
-	public ManageDefaulterUserBean() {
+	public ManageDefaulterClientBean() {
 		
 	}
 	
@@ -55,27 +55,27 @@ public class ManageDefaulterUserBean {
     
     
 /********************** GETTERS AND SETTERS ***********************/
-	public DefaulterUserDto getDefUser() {
+	public DefaulterClientDto getDefUser() {
 		return defUser;
 	}
 
-	public void setDefUser(DefaulterUserDto defUser) {
+	public void setDefUser(DefaulterClientDto defUser) {
 		this.defUser = defUser;
 	}
 
-	public DefaulterUserDto getSelectedUser() {
+	public DefaulterClientDto getSelectedUser() {
 		return selectedUser;
 	}
 
-	public void setSelectedUser(DefaulterUserDto selectedUser) {
+	public void setSelectedUser(DefaulterClientDto selectedUser) {
 		this.selectedUser = selectedUser;
 	}
 
-	public List<DefaulterUserDto> getDefUsers() {
+	public List<DefaulterClientDto> getDefUsers() {
 		return defUsers;
 	}
 
-	public void setDefUsers(List<DefaulterUserDto> defUsers) {
+	public void setDefUsers(List<DefaulterClientDto> defUsers) {
 		this.defUsers = defUsers;
 	}
 

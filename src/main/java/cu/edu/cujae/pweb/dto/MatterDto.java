@@ -1,32 +1,23 @@
 package cu.edu.cujae.pweb.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class MatterDto {
-	private String name;
-	private List<BookDto> books;
-	public boolean newRecord;
-	
-	public MatterDto(String name){
-		setName(name);
-		books = new ArrayList<BookDto>();
-	}
+    private Long matterId;
+    private String matterName;
 
-	public MatterDto() {
-		// TODO Auto-generated constructor stub
-	}
 
-	public String getName() {
-		return name;
-	}
+    public Long getMatterId() {
+        return matterId;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setMatterId(Long matterId) {
+        this.matterId = matterId;
+    }
 
-	public List<BookDto> getBooks() {
-		return books;
-	}
+    public String getMatterName() {
+        return matterName;
+    }
+
+    public void setMatterName(String matterName) {
+        this.matterName = matterName;
+    }
 }

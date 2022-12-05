@@ -4,10 +4,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-import cu.edu.cujae.pweb.dto.XUserDto;
-
 @ManagedBean
-public class DefaulterUserBean{
+public class DefaulterClientBean {
 	private String bookTitlePossession;
 	private int amountDaysBreach;
 	private String clientName;

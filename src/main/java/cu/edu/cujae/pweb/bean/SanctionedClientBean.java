@@ -1,18 +1,24 @@
-package cu.edu.cujae.pweb.dto;
+package cu.edu.cujae.pweb.bean;
 
 import java.util.Calendar;
 
-public class SanctionedUserDto extends ClientDto {
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+
+@ManagedBean
+public class SanctionedClientBean {
+	private String clientName;
 	private int typeOfSanction;
 	private Calendar dateStartSanction;
 	private Calendar dateEndSanction;
 	
-	public SanctionedUserDto(String DNI, String area, String name, String firstSurname, String lastSurname, int typeOfSanction, Calendar dateStartSanction,
-			                 Calendar dateEndSanction){
-		super(DNI, area, name, firstSurname, lastSurname);
-		setTypeOfSanction(typeOfSanction);
-		setDateStartSanction(dateStartSanction);
-		setDateEndSanction(dateEndSanction);
+    protected HttpServletRequest getRequest() {
+	    return (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
+	}
+	
+	protected FacesContext getFacesContext() {
+	    return FacesContext.getCurrentInstance();
 	}
 
 	public int getTypeOfSanction() {
@@ -38,4 +44,15 @@ public class SanctionedUserDto extends ClientDto {
 	public void setDateEndSanction(Calendar dateEndSanction) {
 		this.dateEndSanction = dateEndSanction;
 	}
+
+	public String getClientName() {
+		return clientName;
+	}
+
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
+
+	
+
 }

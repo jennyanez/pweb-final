@@ -3,43 +3,33 @@ package cu.edu.cujae.pweb.dto;
 import java.util.Date;
 
 public class LoanDto {
-	private String id;
-	private BookDto book;
+	private Long id;
 	private CopyDto copy;
-	private ClientDto user;
+	private ClientDto client;
 	private Date returnDate;
 	private Date loanDate;
-	private boolean newRecord;
 	
-	public LoanDto(String loanId, BookDto book, CopyDto copy, ClientDto user, Date returnDate, Date loanDate, boolean newRecord) {
+	public LoanDto(Long loanId, CopyDto copy, ClientDto client, Date returnDate, Date loanDate) {
 		super();
 		this.id = loanId;
-		this.book = book;
 		this.copy = copy;
-		this.user = user;
+		this.client = client;
 		this.setReturnDate(returnDate);
-		this.setLoanDate(loanDate);	
-		this.newRecord = newRecord;
+		this.setLoanDate(loanDate);
 	}
 	
 	public LoanDto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void setLoanId(String loanId){
-		this.id = loanId;
+	/******************      Getters  And  Setters      ************************/
+
+	public Long getId() {
+		return id;
 	}
 
-	public String getLoanId(){
-		return this.id;
-	}
-
-	public BookDto getBook() {
-		return book;
-	}
-
-	public void setBook(BookDto book) {
-		this.book = book;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public CopyDto getCopy() {
@@ -50,12 +40,12 @@ public class LoanDto {
 		this.copy = copy;
 	}
 
-	public ClientDto getUser() {
-		return user;
+	public ClientDto getClient() {
+		return client;
 	}
 
-	public void setUser(ClientDto user) {
-		this.user = user;
+	public void setClient(ClientDto client) {
+		this.client = client;
 	}
 
 	public Date getReturnDate() {
@@ -73,12 +63,4 @@ public class LoanDto {
 	public void setLoanDate(Date loanDate) {
 		this.loanDate = loanDate;
 	}
-
-	public boolean isNewRecord() {
-		return newRecord;
-	}
-
-	public void setNewRecord(boolean newRecord) {
-		this.newRecord = newRecord;
-	}	
 }

@@ -6,10 +6,10 @@ import cu.edu.cujae.pweb.dto.BookDto;
 
 public interface BookService {
 	List<BookDto> getBooks();
-	BookDto getBookById(String bookId);
+	BookDto getBookById(Long bookId);
 	void createBook(BookDto book);
 	void updateBook(BookDto book);
-	void deleteBook(String code);
+	void deleteBook(Long code);
 	
 	//comentario
 }
