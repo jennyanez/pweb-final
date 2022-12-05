@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="author" showEffect="fade" modal="true"
+		widgetVar="manageAuthorDialog" responsive="true">
+		<p:outputPanel id="manage-author-content" class="ui-fluid">
+	  	<p:outputPanel rendered="#{not empty manageAuthorBean.selectedAuthor}"> 	
+				<p:panelGrid layout="grid" columns="1">
+					<h:panelGroup>
+												
+                    <div class="p-field">
+							<p:outputLabel for="@next">FullName</p:outputLabel>
+							<p:inputText id="code" required="true" 
+								value="#{manageAuthorBean.selectedAuthor.fullName}" />
+							<p:message for="@previous" ></p:message>
+						</div>
+						
+            
+					</h:panelGroup>
+				</p:panelGrid>
+		 	</p:outputPanel> 
+		</p:outputPanel>
+
+		<f:facet name="footer">
+			<p:commandButton value="Salvar" icon="pi pi-check"
+				actionListener="#{manageAuthorBean.saveAuthor}"
+				update="manage-author-content" process="manage-author-content @this" />
+			<p:commandButton value="Cancelar" icon="pi pi-times"
+				onclick="PF('manageAuthorDialog').hide()" class="ui-button-secondary" />
+		</f:facet>
+	</p:dialog>
+</ui:composition>

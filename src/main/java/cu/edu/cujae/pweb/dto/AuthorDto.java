@@ -6,11 +6,9 @@ import java.util.List;
 public class AuthorDto {
 	private Long authorId;
 	private String name;
-//	private List<BookDto> books;
 
-//	public boolean newRecord;
-	
-	public AuthorDto(String name, Long authorId){
+
+	public AuthorDto(String name, Long authorId) {
 		this.authorId = authorId;
 		setName(name);
 //		setBooks(new ArrayList<BookDto>());
@@ -19,9 +17,11 @@ public class AuthorDto {
 	public AuthorDto() {
 		// TODO Auto-generated constructor stub
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -41,4 +41,6 @@ public class AuthorDto {
 	public void setAuthorId(Long authorId) {
 		this.authorId = authorId;
 	}
+
 }
+

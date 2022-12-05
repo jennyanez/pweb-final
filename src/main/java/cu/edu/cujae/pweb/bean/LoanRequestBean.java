@@ -6,11 +6,15 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+import cu.edu.cujae.pweb.dto.BookDto;
+import cu.edu.cujae.pweb.dto.ClientDto;
+import cu.edu.cujae.pweb.dto.CopyDto;
+
 @ManagedBean
 public class LoanRequestBean {
-	 	private String book;
-		private int copy;
-		private String user;
+	 	private BookDto book;
+		private CopyDto copy;
+		private ClientDto user;
 		private Date loanDate;
 
 	    protected HttpServletRequest getRequest() {
@@ -21,27 +25,27 @@ public class LoanRequestBean {
 		    return FacesContext.getCurrentInstance();
 		}
 
-		public String getBook() {
+		public BookDto getBook() {
 			return book;
 		}
 
-		public void setBook(String book) {
+		public void setBook(BookDto book) {
 			this.book = book;
 		}
 
-		public int getCopy() {
+		public CopyDto getCopy() {
 			return copy;
 		}
 
-		public void setCopy(int copy) {
+		public void setCopy(CopyDto copy) {
 			this.copy = copy;
 		}
 
-		public String getUser() {
+		public ClientDto getUser() {
 			return user;
 		}
 
-		public void setUser(String user) {
+		public void setUser(ClientDto user) {
 			this.user = user;
 		}
 
@@ -51,7 +55,5 @@ public class LoanRequestBean {
 
 		public void setLoanDate(Date loanDate) {
 			this.loanDate = loanDate;
-		}
-
-	    	
+		}    	
 }
