@@ -28,9 +28,6 @@ public class AuthorService implements ServiceImplementation {
 			ApiRestMapper<AuthorDto> apiRestMapper = new ApiRestMapper<>();
 			String response = (String)restService.GET("/authors/all", params, String.class).getBody();
 			authorDtoList = apiRestMapper.mapList(response, AuthorDto.class);
-//			for(XUserDto u : users){
-//				u.rolesName();
-//			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -66,7 +63,7 @@ public class AuthorService implements ServiceImplementation {
 	public void update(Object author) {
 		AuthorDto authorDto = (AuthorDto) author;
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		String response = (String) restService.PUT("/authors/update/", params, authorDto, String.class).getBody();
+		String response = (String) restService.PUT("/authors/update", params, authorDto, String.class).getBody();
 		System.out.println(response);
 	}
 

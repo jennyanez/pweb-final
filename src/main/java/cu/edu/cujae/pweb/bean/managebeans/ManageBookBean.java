@@ -8,6 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
+import cu.edu.cujae.pweb.dto.MatterDto;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,9 @@ public class ManageBookBean {
 	
 	private BookDto bookDto;
 	private BookDto selectedBook;
+	private MatterDto selectedMatter;
 	private List<BookDto> books;
+	private List<MatterDto> matters;
 	
 	@Autowired
 	private BookService bookService;
@@ -36,7 +39,7 @@ public class ManageBookBean {
 	//Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase. 
 	@PostConstruct
     public void init() {
-	    books = books == null ? bookService.getBooks() : books;
+		books = books == null ? bookService.getAll() : books;
     }
 	
 	//Se ejecuta al dar clic en el button Nuevo
@@ -102,5 +105,19 @@ public class ManageBookBean {
 		this.books = books;
 	}
 
+	public MatterDto getSelectedMatter() {
+		return selectedMatter;
+	}
 
+	public void setSelectedMatter(MatterDto selectedMatter) {
+		this.selectedMatter = selectedMatter;
+	}
+
+	public List<MatterDto> getMatters() {
+		return matters;
+	}
+
+	public void setMatters(List<MatterDto> matters) {
+		this.matters = matters;
+	}
 }

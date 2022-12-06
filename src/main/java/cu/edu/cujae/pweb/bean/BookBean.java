@@ -13,7 +13,6 @@ public class BookBean {
 	private String code;
 	private String title;
 	private String matter;
-
 	private List<AuthorDto> authors;
 	
 	public BookBean() {

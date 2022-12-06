@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="client" showEffect="fade" modal="true"
+		widgetVar="manageClientDialog" responsive="true">
+		<p:outputPanel id="manage-client-content" class="ui-fluid">
+	  	<p:outputPanel rendered="#{not empty manageClientBean.selectedClient}">
+				<p:panelGrid layout="grid" columns="2">
+					<h:panelGroup>
+												
+                    <div class="p-field">
+							<p:outputLabel for="@next">Name</p:outputLabel>
+							<p:inputText id="name" required="true"
+								value="#{manageClientBean.selectedClient.name}" />
+							<p:message for="@previous" ></p:message>
+					</div>
+						<div class="p-field">
+							<p:outputLabel for="@next">First Surname</p:outputLabel>
+							<p:inputText id="firstSurname" required="true"
+										 value="#{manageClientBean.selectedClient.firstSurname}" />
+							<p:message for="@previous" ></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="@next">Last Surname</p:outputLabel>
+							<p:inputText id="lastSurname" required="true"
+										 value="#{manageClientBean.selectedClient.lastSurname}" />
+							<p:message for="@previous" ></p:message>
+						</div>
+					</h:panelGroup>
+					<h:panelGroup>
+						<div class="p-field">
+							<p:outputLabel for="@next">DNI</p:outputLabel>
+							<p:inputText id="dni" required="true"
+										 value="#{manageClientBean.selectedClient.DNI}" />
+							<p:message for="@previous" ></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="@next">Area</p:outputLabel>
+							<p:inputText id="area" required="true"
+										 value="#{manageClientBean.selectedClient.area}" />
+							<p:message for="@previous" ></p:message>
+						</div>
+					</h:panelGroup>
+				</p:panelGrid>
+		 	</p:outputPanel> 
+		</p:outputPanel>
+
+		<f:facet name="footer">
+			<p:commandButton value="Salvar" icon="pi pi-check"
+				actionListener="#{manageClientBean.saveClient}"
+				update="manage-client-content" process="manage-client-content @this" />
+			<p:commandButton value="Cancelar" icon="pi pi-times"
+				onclick="PF('manageClientDialog').hide()" class="ui-button-secondary" />
+		</f:facet>
+	</p:dialog>
+</ui:composition>

@@ -70,4 +70,9 @@ public class ClientDto {
 		this.area = area;
 	}
 
+	public String getFullName() {
+		return  name  + firstSurname + lastSurname;
+	}
+
+
 }

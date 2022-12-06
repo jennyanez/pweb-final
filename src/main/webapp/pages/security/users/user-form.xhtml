@@ -44,32 +44,36 @@
 					</h:panelGroup>
 					<h:panelGroup>
 					    <div class="p-field">
-							<p:outputLabel for="@next">Roles</p:outputLabel>
-							<p:selectCheckboxMenu id="multiple" required="true"
-								value="#{manageXUserBean.selectedRoles}" label="Seleccione"
-								style="min-width: 15rem" multiple="true" filter="true"
-								filterMatchMode="startsWith" panelStyle="width: 30rem"
-								scrollHeight="250">
-								<f:selectItems value="#{manageXUserBean.roles}" var="role"
-									itemLabel="#{role.description}" itemValue="#{role.id}" />
-							</p:selectCheckboxMenu>
+							<p:outputLabel for="@next">Rol</p:outputLabel>
+							<p:selectOneMenu
+									id="multiple"
+									required="true"
+									value="#{manageXUserBean.selectedUser.rol}"
+									label="Seleccione"
+									style="min-width: 15rem"
+									multiple="true" filter="true"
+									filterMatchMode="startsWith"
+									panelStyle="width: 30rem"
+									scrollHeight="250">
+								<f:selectItem itemLabel="Seleccione un rol" itemValue=""/>
+								<f:selectItems value="#{manageXUserBean.roles}" var="rol"
+									itemLabel="#{rol.description}" itemValue="#{rol.id}" />
+							</p:selectOneMenu>
 						</div>
 						<div class="p-field">
-							<p:outputLabel for="@next" rendered="#{empty manageXUserBean.selectedUser.id}">Contraseña</p:outputLabel>
+							<p:outputLabel for="@next">Contraseña</p:outputLabel>
 							<p:password id="password1" required="true"
-								rendered="#{empty manageXUserBean.selectedUser.id}"
 								value="#{manageXUserBean.selectedUser.password}"
 								match="password2">
 							</p:password>
-							<p:message for="@previous" rendered="#{empty manageXUserBean.selectedUser.id}"></p:message>
+							<p:message for="@previous"></p:message>
 						</div>
 						<div class="p-field">
-							<p:outputLabel for="@next" rendered="#{empty manageXUserBean.selectedUser.id}">Repetir contraseña</p:outputLabel>
+							<p:outputLabel for="@next">Repetir contraseña</p:outputLabel>
 							<p:password id="password2" required="true"
-								value="#{manageXUserBean.selectedUser.password}"
-								rendered="#{empty manageXUserBean.selectedUser.id}">
+								value="#{manageXUserBean.selectedUser.password}">
 							</p:password>
-							<p:message for="@previous" rendered="#{empty manageXUserBean.selectedUser.id}"></p:message>
+							<p:message for="@previous"></p:message>
 						</div>
 						
 					</h:panelGroup>
