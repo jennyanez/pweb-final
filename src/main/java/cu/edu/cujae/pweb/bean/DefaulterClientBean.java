@@ -5,7 +5,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean
-public class DefaulterUserBean{
+public class DefaulterClientBean {
 	private String bookTitlePossession;
 	private int amountDaysBreach;
 	private String clientName;

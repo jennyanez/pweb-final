@@ -1,13 +1,25 @@
 package cu.edu.cujae.pweb.dto;
 
-public class CopyDto extends BookDto {
-	private String copyId;
-	private int copyNumber;
+public class CopyDto {
 
-	public CopyDto(String bookId, String code, String title, AuthorDto authors, MatterDto matter, boolean newRecord, String copyId,int copyNumber){
-		super(bookId,code,title,authors,matter,newRecord);
+
+	private int copyNumber;
+	private int copyId;
+
+	public BookDto getBook() {
+		return book;
+	}
+
+	public void setBook(BookDto book) {
+		this.book = book;
+	}
+
+	private BookDto book;
+
+	public CopyDto(int copyNumber, int copyId, BookDto book){
 		setCopyNumber(copyNumber);
 		setCopyId(copyId);
+		this.book = book;
 	}
 
 	public CopyDto() {
@@ -21,12 +33,11 @@ public class CopyDto extends BookDto {
 	public void setCopyNumber(int copyNumber) {
 		this.copyNumber = copyNumber;
 	}
-
-	public String getCopyId() {
+	public int getCopyId() {
 		return copyId;
 	}
 
-	public void setCopyId(String copyId) {
+	public void setCopyId(int copyId) {
 		this.copyId = copyId;
 	}
 }

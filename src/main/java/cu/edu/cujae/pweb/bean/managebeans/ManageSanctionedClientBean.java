@@ -1,4 +1,4 @@
-package cu.edu.cujae.pweb.bean;
+package cu.edu.cujae.pweb.bean.managebeans;
 
 import java.util.List;
 
@@ -9,29 +9,29 @@ import javax.faces.view.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import cu.edu.cujae.pweb.dto.SanctionedUserDto;
-import cu.edu.cujae.pweb.service.SanctionedUserService;
+import cu.edu.cujae.pweb.dto.SanctionedClientDto;
+import cu.edu.cujae.pweb.service.SanctionedClientService;
 
 
 @Component //Le indica a spring es un componete registrado
 @ManagedBean
 @ViewScoped //Este es el alcance utilizado para trabajar con Ajax
-public class ManageSanctionedUserBean {
+public class ManageSanctionedClientBean {
 
-	private SanctionedUserDto sanctUser;
-	private SanctionedUserDto selectedUser;
-	private List<SanctionedUserDto> sanctUsers;
+	private SanctionedClientDto sanctUser;
+	private SanctionedClientDto selectedUser;
+	private List<SanctionedClientDto> sanctUsers;
 
 
 	/* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
 	 * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
 	 */
 	@Autowired
-	private SanctionedUserService sanctUserService;
+	private SanctionedClientService sanctUserService;
 
 
 
-	public ManageSanctionedUserBean() {
+	public ManageSanctionedClientBean() {
 
 	}
 
@@ -42,27 +42,27 @@ public class ManageSanctionedUserBean {
 	}
 
 	/********************** GETTERS AND SETTERS ***********************/   
-	public SanctionedUserDto getSanctUser() {
+	public SanctionedClientDto getSanctUser() {
 		return sanctUser;
 	}
 
-	public void setSanctUser(SanctionedUserDto sanctUser) {
+	public void setSanctUser(SanctionedClientDto sanctUser) {
 		this.sanctUser = sanctUser;
 	}
 
-	public List<SanctionedUserDto> getSanctUsers() {
+	public List<SanctionedClientDto> getSanctUsers() {
 		return sanctUsers;
 	}
 
-	public void setSanctUsers(List<SanctionedUserDto> sanctUsers) {
+	public void setSanctUsers(List<SanctionedClientDto> sanctUsers) {
 		this.sanctUsers = sanctUsers;
 	}
 
-	public void setSelectedUser(SanctionedUserDto selectedUser) {
+	public void setSelectedUser(SanctionedClientDto selectedUser) {
 		this.selectedUser = selectedUser;
 	}
 
-	public SanctionedUserDto getSelectedUser() {
+	public SanctionedClientDto getSelectedUser() {
 		return selectedUser;
 	}
 }

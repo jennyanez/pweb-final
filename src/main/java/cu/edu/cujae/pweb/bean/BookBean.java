@@ -1,8 +1,11 @@
 package cu.edu.cujae.pweb.bean;
 
+import cu.edu.cujae.pweb.dto.AuthorDto;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @ManagedBean
 public class BookBean {
@@ -10,13 +13,19 @@ public class BookBean {
 	private String code;
 	private String title;
 	private String matter;
-	private String authors;
-	//comentario
+
+	private List<AuthorDto> authors;
 	
 	public BookBean() {
 		// TODO Auto-generated constructor stub
 	}
 
+	public BookBean(String code, String title, String matter, List<AuthorDto> authors) {
+		this.code = code;
+		this.title = title;
+		this.matter = matter;
+		this.authors = authors;
+	}
 
 	/**
 	 * @return the code
@@ -31,6 +40,14 @@ public class BookBean {
 	 */
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public List<AuthorDto> getAuthors() {
+		return authors;
+	}
+
+	public void setAuthors(List<AuthorDto> authors) {
+		this.authors = authors;
 	}
 
 
@@ -54,13 +71,7 @@ public class BookBean {
 		this.matter = matter;
 	}
 	
-	public String getAuthors() {
-		return authors;
-	}
-	
-	public void setAuthors(String authors) {
-		this.authors = authors;
-	}
+
 
 	
 	protected HttpServletRequest getRequest() {

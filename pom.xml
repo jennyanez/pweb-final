@@ -1,6 +1,7 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" 
-xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
   <groupId>cu.edu.cujae</groupId>
   <artifactId>pweb-jsf</artifactId>
@@ -74,8 +75,109 @@ xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/
 	    <artifactId>openpdf</artifactId>
 	    <version>1.3.26</version>
 	</dependency>
- 	
- 	
+
+ 	<!-- Pretty faces -->
+	<!-- <dependency>
+	    <groupId>org.ocpsoft.rewrite</groupId>
+	    <artifactId>rewrite-servlet</artifactId>
+	    <version>3.4.4.Final</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.ocpsoft.rewrite</groupId>
+	    <artifactId>rewrite-config-prettyfaces</artifactId>
+	    <version>3.4.4.Final</version>
+	</dependency> -->
 	
+	<!--  Spring Security -->
+	<!-- <dependency>
+	    <groupId>org.springframework.security</groupId>
+	    <artifactId>spring-security-core</artifactId>
+	    <version>5.4.6</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.springframework.security</groupId>
+	    <artifactId>spring-security-crypto</artifactId>
+	    <version>5.4.6</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.springframework.security</groupId>
+	    <artifactId>spring-security-config</artifactId>
+	    <version>5.4.6</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.springframework.security</groupId>
+	    <artifactId>spring-security-web</artifactId>
+	    <version>5.4.6</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.springframework.security</groupId>
+	    <artifactId>spring-security-taglibs</artifactId>
+	    <version>5.4.6</version>
+	</dependency> -->
+	  <dependency>
+		  <groupId>com.fasterxml.jackson.core</groupId>
+		  <artifactId>jackson-databind</artifactId>
+		  <version>2.11.4</version>
+	  </dependency>
+	  <!--	  <dependency>
+<!-		  <groupId>com.github.lbovolini</groupId>-->
+<!--		  <artifactId>ObjectMapper</artifactId>-->
+<!--		  <version>0.2.3</version>-->
+<!--	  </dependency>-->
+<!--	  <dependency>-->
+<!--		  <groupId>com.qualifiedcactus</groupId>-->
+<!--		  <artifactId>sqlObjectMapper</artifactId>-->
+<!--		  <version>1.1.0</version>-->
+<!--	  </dependency>-->
+<!--	  <dependency>-->
+<!--		  <groupId>com.konghq</groupId>-->
+<!--		  <artifactId>unirest-objectmapper-jackson</artifactId>-->
+<!--		  <version>3.14.0</version>-->
+<!--	  </dependency>-->
+<!--	  <dependency>-->
+<!--		  <groupId>com.xellitix.commons</groupId>-->
+<!--		  <artifactId>jackson-utils</artifactId>-->
+<!--		  <version>0.2.0</version>-->
+<!--	  </dependency>-->
+<!--	  <dependency>-->
+<!--		  <groupId>io.github.javiercanillas</groupId>-->
+<!--		  <artifactId>jackson-masker</artifactId>-->
+<!--		  <version>0.9.9</version>-->
+<!--	  </dependency>-->
+<!--	  <dependency>-->
+<!--		  <groupId>org.kie.kogito</groupId>-->
+<!--		  <artifactId>kogito-api-incubation-common-objectmapper</artifactId>-->
+<!--		  <version>1.31.0.Final</version>-->
+<!--	  </dependency>-->
+<!--	  <dependency>-->
+<!--		  <groupId>com.github.lbovolini</groupId>-->
+<!--		  <artifactId>object-mapper</artifactId>-->
+<!--		  <version>1.1.68</version>-->
+<!--	  </dependency>-->
+<!--	  <dependency>-->
+<!--		  <groupId>com.konghq</groupId>-->
+<!--		  <artifactId>unirest-object-mappers-gson</artifactId>-->
+<!--		  <version>3.14.0</version>-->
+<!--	  </dependency>-->
+<!--	  <dependency>-->
+<!--		  <groupId>io.liftwizard</groupId>-->
+<!--		  <artifactId>liftwizard-bundle-object-mapper</artifactId>-->
+<!--		  <version>0.27.0</version>-->
+<!--	  </dependency>-->
+<!--	  <dependency>-->
+<!--		  <groupId>de.flapdoodle.mongoom</groupId>-->
+<!--		  <artifactId>de.flapdoodle.mongoom</artifactId>-->
+<!--		  <version>1.4</version>-->
+<!--	  </dependency>-->
+<!--	  <dependency>-->
+<!--		  <groupId>com.fasterxml</groupId>-->
+<!--		  <artifactId>jackson-xml-databind</artifactId>-->
+<!--		  <version>0.6.2</version>-->
+<!--	  </dependency>-->
+
   </dependencies>
 </project>

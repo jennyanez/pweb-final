@@ -1,4 +1,4 @@
-package cu.edu.cujae.pweb.bean;
+package cu.edu.cujae.pweb.bean.managebeans;
 
 import java.util.List;
 import java.util.UUID;
@@ -52,8 +52,8 @@ public class ManageBookBean {
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
 	public void saveBook() {
 		if (this.selectedBook.getBookId() == null) {
-            this.selectedBook.setBookId(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
-            this.selectedBook.setNewRecord(true);
+            this.selectedBook.setBookId(1L);
+
             this.books.add(this.selectedBook);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_book_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         }

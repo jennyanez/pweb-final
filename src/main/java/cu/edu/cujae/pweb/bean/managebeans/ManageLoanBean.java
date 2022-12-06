@@ -1,4 +1,4 @@
-package cu.edu.cujae.pweb.bean;
+package cu.edu.cujae.pweb.bean.managebeans;
 
 import java.util.Date;
 import java.util.List;
@@ -41,7 +41,7 @@ public class ManageLoanBean {
 	//Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase. 
 	@PostConstruct
     public void init() {
-	    loans = loans == null ? loanService.getLoans() : loans;
+	    loans = loans == null ? loanService.getAll() : loans;
     }
 	
 	//Se ejecuta al dar clic en el button Nuevo
@@ -56,9 +56,9 @@ public class ManageLoanBean {
 	
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
 	public void saveLoan() {
-		if (this.selectedLoan.getLoanId() == null) {
-            this.selectedLoan.setLoanId(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
-            this.selectedLoan.setNewRecord(true);
+		if (this.selectedLoan.getId() == null) {
+            this.selectedLoan.setId(1L);
+
             this.selectedLoan.setLoanDate(new Date());
             this.loans.add(this.selectedLoan);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loan_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
