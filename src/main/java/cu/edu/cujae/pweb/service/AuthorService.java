@@ -58,7 +58,7 @@ public class AuthorService implements ServiceImplementation {
 	@Override
 	public void create(Object author) {
 		AuthorDto authorDto = (AuthorDto) author;
-		String response = (String) restService.POST("/authors/save", author, String.class).getBody();
+		String response = (String) restService.POST("/authors/save", authorDto, String.class).getBody();
 		System.out.println(response);
 	}
 
@@ -66,7 +66,7 @@ public class AuthorService implements ServiceImplementation {
 	public void update(Object author) {
 		AuthorDto authorDto = (AuthorDto) author;
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		String response = (String) restService.PUT("/authors/update/{id}", params, authorDto, String.class).getBody();
+		String response = (String) restService.PUT("/authors/update/", params, authorDto, String.class).getBody();
 		System.out.println(response);
 	}
 

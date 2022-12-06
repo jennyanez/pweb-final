@@ -25,8 +25,6 @@ public class ManageAuthorBean {
 	private AuthorDto selectedAuthor;
 	private List<AuthorDto> authors;
 	
-//	private List<BookDto> books;
-	
 	/* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
 	 * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
 	 */
@@ -46,27 +44,25 @@ public class ManageAuthorBean {
 	
 	//Se ejecuta al dar clic en el button Nuevo
 	public void openNew() {
-        this.setSelectedAuthor(new AuthorDto());
-
+        this.selectedAuthor = new AuthorDto();
     }
 	
 	//Se ejecuta al dar clic en el button con el lapicito
-	public void openForEdit() {
-		
+	public void openForEdit(AuthorDto author) {
+		this.selectedAuthor = author;
 	}
 	
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
 	public void saveAuthor() {
 		if (this.selectedAuthor.getAuthorId() == null) {
-          //  this.selectedAuthor.setAuthorId(Long.valueOf(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9)));
             authorService.create(this.selectedAuthor);
-			this.authors.add(this.selectedAuthor);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_author_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         }
         else {
 			authorService.update(this.selectedAuthor);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_author_edited");
         }
+		authors = authorService.getAll();
         PrimeFaces.current().executeScript("PF('manageAuthorDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
         PrimeFaces.current().ajax().update("form:dt-author");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form	
 	
@@ -75,8 +71,9 @@ public class ManageAuthorBean {
 	//Permite eliminar un usuario
     public void deleteAuthor() {
     	try {
-    		this.authors.remove(this.selectedAuthor);
+			authorService.delete(this.selectedAuthor.getAuthorId());
             this.selectedAuthor = null;
+			authors = authorService.getAll();
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_author_removed");
             PrimeFaces.current().ajax().update("form:dt-author");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
 		} catch (Exception e) {
