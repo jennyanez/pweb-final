@@ -6,7 +6,7 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
 	<ui:define name="title">
-		    Users List
+		    Clients List
 	</ui:define>
 	<ui:define name="layout">
 		<h:form id="form">
@@ -22,11 +22,11 @@
 					      code en Javascript desde el bean de Jsf
 					    -->
 						<p:commandButton value="New" icon="pi pi-plus"
-							actionListener="#{manageXUserBean.openNew}"
-							update=":form:manage-user-content"
-							oncomplete="PF('manageUserDialog').show()"
+							actionListener="#{manageClientBean.openNew}"
+							update=":form:manage-client-content"
+							oncomplete="PF('manageClientDialog').show()"
 							styleClass="ui-button-success" style="margin-right: .5rem">
-							<p:resetInput target=":form:manage-user-content" />
+							<p:resetInput target=":form:manage-client-content" />
 						</p:commandButton>
 					</p:toolbarGroup>
 					<p:toolbarGroup align="right">
@@ -34,7 +34,7 @@
 					         del componente dataExporter. En este caso dt-users es el identificador del componente datatable -->
 						<p:commandButton value="Export" icon="pi pi-upload"
 							styleClass="ui-button-help" ajax="false">
-							<p:dataExporter type="pdf" target="dt-users" fileName="users" />
+							<p:dataExporter type="pdf" target="dt-client" fileName="clients" />
 						</p:commandButton>
 					</p:toolbarGroup>
 				</p:toolbar>
@@ -49,63 +49,68 @@
                 	* El facet header define un encabezado y agrega un button para filtrar. Por defecto esto lo hace el solo, si quieren algo
                 	  con mayor detalle ver el showcase.  
                  -->
-				<p:dataTable id="dt-users" widgetVar="dtUsers" var="xUser"
-					value="#{manageXUserBean.users}" reflow="true" paginator="true"
-					rows="10" paginatorPosition="bottom">
+				<p:dataTable 
+					id="dt-client"
+					widgetVar="dtClient"
+					var="client"
+					value="#{manageClientBean.clients}"
+					reflow="true" paginator="true"
+					rows="10" 
+					paginatorPosition="bottom">
 					<f:facet name="header">
 						<div class="products-table-header">
-							<span style="font-weight: bold">Usuarios</span> <span
+							<span style="font-weight: bold">Client</span> <span
 								class="filter-container ui-input-icon-left"> <i
 								class="pi pi-search"></i> <p:inputText id="globalFilter"
-									onkeyup="PF('dtUsers').filter()" placeholder="Buscar" />
+									onkeyup="PF('dtClient').filter()" placeholder="Search" />
 							</span>
-
 						</div>
 					</f:facet>
 					
-
-					<p:column headerText="Usuario" sortBy="#{xUser.username}" filterBy="#{xUser.username}">
-						<h:outputText value="#{xUser.username}" />
+					<p:column headerText="Name" sortBy="#{client.name}"
+                        filterBy="#{client.name}">
+						<h:outputText value="#{client.name}"/>
 					</p:column>
-					<p:column headerText="Ci" sortBy="#{xUser.identification}"
-						filterBy="#{xUser.identification}">
-						<h:outputText value="#{xUser.identification}" />
+					<p:column headerText="First Surname" sortBy="#{client.firstSurname}"
+							  filterBy="#{client.firstSurname}">
+						<h:outputText value="#{client.firstSurname}"/>
 					</p:column>
-					<p:column headerText="Nombre" sortBy="#{xUser.fullName}">
-						<h:outputText value="#{xUser.fullName}" />
+					<p:column headerText="Second Surname" sortBy="#{client.lastSurname}"
+							  filterBy="#{client.lastSurname}">
+						<h:outputText value="#{client.lastSurname}"/>
 					</p:column>
-					<p:column headerText="Correo" sortBy="#{xUser.email}"
-						filterBy="#{xUser.email}">
-						<h:outputText value="#{xUser.email}" />
+					<p:column headerText="DNI" sortBy="#{client.DNI}"
+							  filterBy="#{client.DNI}">
+						<h:outputText value="#{client.DNI}"/>
 					</p:column>
-					<p:column headerText="Rol" sortBy="#{xUser.rol}"
-							  filterBy="#{xUser.rol}">
-						<h:outputText value="#{xUser.rol.description}" />
+					<p:column headerText="Area" sortBy="#{client.area}"
+							  filterBy="#{client.area}">
+						<h:outputText value="#{client.area}"/>
 					</p:column>
+					
 					<p:column exportable="false">
-						<p:commandButton icon="pi pi-pencil" action="#{manageXUserBean.openForEdit(xUser)}"
-							update=":form:manage-user-content"
-							oncomplete="PF('manageUserDialog').show()"
+						<p:commandButton icon="pi pi-pencil" action="#{manageClientBean.openForEdit(client)}"
+							update=":form:manage-client-content"
+							oncomplete="PF('manageClientDialog').show()"
 							styleClass="edit-button rounded-button ui-button-success"
 							process="@this">
-							<f:setPropertyActionListener value="#{xUser}"
-								target="#{manageXUserBean.selectedUser}" />
-							<p:resetInput target=":form:manage-user-content" />
+							<f:setPropertyActionListener value="#{client}"
+								target="#{manageClientBean.selectedClient}" />
+							<p:resetInput target=":form:manage-client-content" />
 						</p:commandButton>
 						<p:commandButton class="ui-button-warning rounded-button"
-							update=":form:manage-user-content"
 							icon="pi pi-trash" process="@this" 
-							action="#{manageXUserBean.deleteUser}" >
-							<f:setPropertyActionListener value="#{xUser}"
-								target="#{manageXUserBean.selectedUser}" />
-							<p:confirm header="Confirmar" message="Está seguro de eliminar al usuario?" icon="pi pi-exclamation-triangle"/>
+							action="#{manageClientBean.deleteClient}" >
+							<f:setPropertyActionListener value="#{client}"
+								target="#{manageClientBean.selectedClient}" />
+							<p:confirm header="Confirmar" message="Está seguro de eliminar este cliente?" icon="pi pi-exclamation-triangle"/>
 						</p:commandButton>
 					</p:column>
 
 				</p:dataTable>
 
 				<!-- ui:include es una etiqueta de facelet que permite incluir pages y de esta forma el code no se carga tanto -->
-				<ui:include src="user-form.xhtml"></ui:include>
+				<ui:include src="client-form.xhtml"></ui:include>
 
 				<!-- Este comoponente se utiliza mucho para el caso de los eliminar, que es donde casi siempre se necesita confirmation,
 				su uso es bien sencillo, cada confirmDialog va atado a un p:confirm que es el que se definie dentro del button -->

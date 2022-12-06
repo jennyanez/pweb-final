@@ -107,14 +107,4 @@ public class ManageAuthorBean {
 		this.authors = authors;
 	}
 
-//	public List<BookDto> getBooks() {
-//		return books;
-//	}
-//
-//	public void setBooks(List<BookDto> books) {
-//		this.books = books;
-//	}
-
-
-
 }

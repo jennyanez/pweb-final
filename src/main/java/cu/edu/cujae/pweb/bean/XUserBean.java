@@ -23,52 +23,7 @@ public class XUserBean {
 	
 	private String username;
 	private String password;
-	
-//	private List<XRoleDto> roles;
-	
-	@Autowired
-	private RoleService roleService;
-	
-	//Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase. 
-	@PostConstruct
-    public void init() {
-		//roles = roleService.getRoles();
-    }
-
-	public XUserBean() {
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-//	public List<XRoleDto> getRoles() {
-//		return roles;
-//	}
-//
-//	public void setRoles(List<XRoleDto> roles) {
-//		this.roles = roles;
-//	}
-
-	public RoleService getRoleService() {
-		return roleService;
-	}
-
-	public void setRoleService(RoleService roleService) {
-		this.roleService = roleService;
-	}
+	private String rol;
 
 	public String login() {
 		if(username.equalsIgnoreCase("pweb") && password.equals("pweb")) {
@@ -90,4 +45,34 @@ public class XUserBean {
 	protected FacesContext getFacesContext() {
 	    return FacesContext.getCurrentInstance();
 	}
+
+	/***** constructor, getters and setters ******/
+	public XUserBean() {
+	}
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
 }

@@ -70,5 +70,11 @@ public class XUserDto {
 		this.identification = identification;
 	}
 
-
+//	public String generateUsername(String fullName){
+//		String lower = fullName.toLowerCase();
+//	//	lower = lower.trim();
+//		char[] word = lower.toCharArray();
+//		String first = lower.
+//
+//	}
 }
