@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 public class MatterBean{
     private String matterName;
 
-    protected HttpServletRequest getRequest() {
+    protected HttpServletRequest getMatter() {
 	    return (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
 	}
 	

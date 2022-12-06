@@ -1,13 +1,34 @@
 package cu.edu.cujae.pweb.service;
 
+import cu.edu.cujae.pweb.utils.ServiceImplementation;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
-import cu.edu.cujae.pweb.dto.LoanRequestDto;
+@Service
+public class LoanRequestService implements ServiceImplementation {
+    @Override
+    public <T> List<T> getAll() {
+        return null;
+    }
 
-public interface LoanRequestService {
-	List<LoanRequestDto> getLoansRequest();
-	LoanRequestDto getLoanRequestById(Long loanId);
-	void createLoanRequest(LoanRequestDto loan);
-	void updateLoanRequest(LoanRequestDto loan);
-	void deleteLoanRequest(Long id);
+    @Override
+    public Object getById(Long id) {
+        return null;
+    }
+
+    @Override
+    public void create(Object dto) {
+
+    }
+
+    @Override
+    public void update(Object dto) {
+
+    }
+
+    @Override
+    public void delete(Long id) {
+
+    }
 }
