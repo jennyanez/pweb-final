@@ -4,26 +4,19 @@ public class CopyDto {
 
 
 	private int copyNumber;
-	private int copyId;
-
-	public BookDto getBook() {
-		return book;
-	}
-
-	public void setBook(BookDto book) {
-		this.book = book;
-	}
-
+	private Long copyId;
 	private BookDto book;
 
-	public CopyDto(int copyNumber, int copyId, BookDto book){
+	
+	
+	public CopyDto(int copyNumber, Long copyId, BookDto book){
 		setCopyNumber(copyNumber);
 		setCopyId(copyId);
 		this.book = book;
 	}
 
 	public CopyDto() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public int getCopyNumber() {
@@ -33,11 +26,22 @@ public class CopyDto {
 	public void setCopyNumber(int copyNumber) {
 		this.copyNumber = copyNumber;
 	}
-	public int getCopyId() {
+
+	public Long getCopyId() {
 		return copyId;
 	}
 
-	public void setCopyId(int copyId) {
+	public void setCopyId(Long copyId) {
 		this.copyId = copyId;
 	}
+
+	public BookDto getBook() {
+		return book;
+	}
+
+	public void setBook(BookDto book) {
+		this.book = book;
+	}
+
+	
 }

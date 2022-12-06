@@ -18,14 +18,31 @@
 							<p:message for="@previous" ></p:message>
 						</div>
 						
-                        <div class="p-field">
-							<p:outputLabel for="@next">Title</p:outputLabel>
-							<p:inputText id="title" required="true"
-								value="#{manageCopyBean.selectedCopy.title}" />
+						
+						<div class="p-field">
+							<p:outputLabel for="@next">Book</p:outputLabel>
+							<h:selectOneMenu  value="#{manageCopyBean.selectedBook}">
+								<f:selectItems value="#{manageCopyBean.books}" var="book1"
+								 itemLabel="#{book1.bookTitle}" itemValue="#{book1.bookId}">
+								</f:selectItems> 
+							</h:selectOneMenu>
 							<p:message for="@previous"></p:message>
 						</div>
-						
-										
+						  <!--
+						  <div class="p-field">
+						  <p:outputLabel for="@next">Book</p:outputLabel>
+							<p:selectOneMenu id="driver1" required="true" label="Seleccione"
+                                                 value="#{manageCopyBean.selectedCopy.book.bookId}"
+                                                 style="min-width: 15rem" multiple="true" filter="true"
+                                                 filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                                 scrollHeight="250">
+                                    <f:selectItems value="#{manageBookBean.books}" var="book1"
+                                                   itemLabel="#{book1.bookTitle}" itemValue="#{book1.bookId}" />
+                                </p:selectOneMenu>
+                                <p:message for="@previous" ></p:message>
+                                </div>
+                                
+										-->
 					</h:panelGroup>
 				</p:panelGrid>
 		 	</p:outputPanel> 

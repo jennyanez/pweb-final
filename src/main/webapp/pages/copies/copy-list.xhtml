@@ -72,9 +72,9 @@
 						filterBy="#{copy.copyNumber}">
 						<h:outputText value="#{copy.copyNumber}"/>
 					</p:column>
-					<p:column headerText="Title" sortBy="#{copy.title}"
-                        filterBy="#{copy.title}">
-						<h:outputText value="#{copy.title}"/>
+					<p:column headerText="Title" sortBy="#{copy.book.bookTitle}"
+                        filterBy="#{copy.book.bookTitle}">
+						<h:outputText value="#{copy.book.bookTitle}"/>
 					</p:column>
 					
 					<p:column exportable="false">

@@ -29,7 +29,6 @@ public class ManageUserBean {
 	private XUserDto selectedUser;
 	private List<XUserDto> users;
 	private Long[] selectedRoles;
-	
 	private List<XRoleDto> roles;
 	
 	@Autowired
