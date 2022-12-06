@@ -6,8 +6,8 @@ import cu.edu.cujae.pweb.dto.CopyDto;
 
 public interface CopyService {
 	List<CopyDto> getCopies();
-	CopyDto getCopyById(String copyId);
+	CopyDto getCopyById(int copyId);
 	void createCopy(CopyDto author);
 	void updateCopy(CopyDto author);
-	void deleteCopy(String copyId);
+	void deleteCopy(int copyId);
 }

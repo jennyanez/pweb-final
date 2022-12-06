@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean
 public class AuthorBean{
-    private String fullName;
+    private String name;
 
     protected HttpServletRequest getRequest() {
 	    return (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
@@ -16,11 +16,11 @@ public class AuthorBean{
 	    return FacesContext.getCurrentInstance();
 	}
 
-	public String getFullName() {
-		return fullName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setName(String name) {
+		this.name = name;
 	}
 }

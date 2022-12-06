@@ -6,8 +6,8 @@ import java.util.List;
 
 import cu.edu.cujae.pweb.dto.XRoleDto;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
-import cu.edu.cujae.pweb.utils.CrudInterface;
 import cu.edu.cujae.pweb.utils.RestService;
+import cu.edu.cujae.pweb.utils.ServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -15,7 +15,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriTemplate;
 
 @Service
-public class RoleService implements CrudInterface {
+public class RoleService implements ServiceImplementation {
 	@Autowired
 	private RestService restService;
 
@@ -76,6 +76,7 @@ public class RoleService implements CrudInterface {
 		System.out.println(response);
 
 	}
+
 
 	@Override
 	public void delete(Long id) {

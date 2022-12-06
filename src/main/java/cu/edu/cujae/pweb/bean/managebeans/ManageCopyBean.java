@@ -57,18 +57,17 @@ public class ManageCopyBean {
 	
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
 	public void saveCopy() {
-		if (this.selectedCopy.getCopyId() == null) {
-            this.selectedCopy.setCopyId(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
-            this.selectedCopy.setNewRecord(true);
-            this.copies.add(this.selectedCopy);
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_copy_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
-        }
-        else {
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_copy_edited");
-        }
-        PrimeFaces.current().executeScript("PF('manageCopyDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
-        PrimeFaces.current().ajax().update("form:dt-copy");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form	
-	
+//		if (this.selectedCopy.getCopyId() == null) {
+//            this.selectedCopy.setCopyId(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
+//            this.copies.add(this.selectedCopy);
+//            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_copy_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
+//        }
+//        else {
+//            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_copy_edited");
+//        }
+//        PrimeFaces.current().executeScript("PF('manageCopyDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
+//        PrimeFaces.current().ajax().update("form:dt-copy");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+//	
     }
 
 	//Permite eliminar un usuario

@@ -18,6 +18,9 @@ public class AuthorDto {
 		// TODO Auto-generated constructor stub
 	}
 
+	public AuthorDto(String substring, String andy, String piloto, String guevara, boolean b) {
+	}
+
 	public String getName() {
 		return name;
 	}
