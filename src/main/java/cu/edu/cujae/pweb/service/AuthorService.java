@@ -28,9 +28,6 @@ public class AuthorService implements ServiceImplementation {
 			ApiRestMapper<AuthorDto> apiRestMapper = new ApiRestMapper<>();
 			String response = (String)restService.GET("/authors/all", params, String.class).getBody();
 			authorDtoList = apiRestMapper.mapList(response, AuthorDto.class);
-//			for(XUserDto u : users){
-//				u.rolesName();
-//			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
