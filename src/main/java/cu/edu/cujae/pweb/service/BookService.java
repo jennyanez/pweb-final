@@ -20,6 +20,7 @@ public class BookService implements ServiceImplementation {
 	@Autowired
 	private RestService restService;
 	@Override
+	
 	public List<BookDto> getAll() {
 		List<BookDto> bookDtoList = new ArrayList<>();
 		try{
@@ -30,7 +31,7 @@ public class BookService implements ServiceImplementation {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return bookDtoList;
 	}
 
 	@Override

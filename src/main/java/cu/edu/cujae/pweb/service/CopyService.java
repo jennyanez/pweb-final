@@ -1,6 +1,6 @@
 package cu.edu.cujae.pweb.service;
 
-import cu.edu.cujae.pweb.dto.AuthorDto;
+
 import cu.edu.cujae.pweb.dto.BookDto;
 import cu.edu.cujae.pweb.dto.CopyDto;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
@@ -56,7 +56,7 @@ public class CopyService implements ServiceImplementation {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return null;
+        return copyDto;
     }
 
     @Override
@@ -82,20 +82,6 @@ public class CopyService implements ServiceImplementation {
         String uri = template.expand(id).toString();
         String response = (String) restService.DELETE(uri, params, String.class).getBody();
         System.out.println(response);
-    }
-
-    public List<BookDto> getAllBook(){
-        List<BookDto> bookDtoList = new ArrayList<>();
-
-        try{
-            MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
-            ApiRestMapper<BookDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String) restService.GET("/books/all", params,String.class).getBody();
-            bookDtoList = apiRestMapper.mapList(response, BookDto.class);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        return bookDtoList;
     }
 
 }

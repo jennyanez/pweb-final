@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import cu.edu.cujae.pweb.dto.BookDto;
 import cu.edu.cujae.pweb.dto.CopyDto;
+import cu.edu.cujae.pweb.service.BookService;
 import cu.edu.cujae.pweb.service.CopyService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 
@@ -24,7 +25,7 @@ import cu.edu.cujae.pweb.utils.JsfUtils;
 public class ManageCopyBean {
 	
 	private CopyDto selectedCopy;
-	private BookDto selectedBook;
+	private Long selectedBook;
 	private List<CopyDto> copies;
 	private List<BookDto> books;
 	
@@ -36,6 +37,9 @@ public class ManageCopyBean {
 	@Autowired
 	private CopyService copyService;
 	
+	@Autowired
+	private BookService bookService;
+	
 	
 	public ManageCopyBean() {
 		
@@ -46,7 +50,7 @@ public class ManageCopyBean {
 	@PostConstruct
     public void init() {
 	    copies = copyService.getAll();
-	    books = copyService.getAllBook();	    
+	    books = bookService.getAll();	    
 	}
 	
 	//Se ejecuta al dar clic en el button Nuevo
@@ -56,22 +60,28 @@ public class ManageCopyBean {
     }
 
 	//Se ejecuta al dar clic en el button con el lapicito
-	public void openForEdit(CopyDto copy) {
-		this.selectedCopy = copy;
-		this.selectedBook = copy.getBook();
+	public void openForEdit() {
+		/*this.selectedCopy = copy;
+		this.selectedBook = copy.getBook();*/
+		
+		BookDto book = this.selectedCopy.getBook();
+		this.selectedBook = book.getBookId();
 	}
 
 	
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
 	public void saveCopy() {
 		if (this.selectedCopy.getCopyId() == null){
+			this.selectedCopy.setBook(this.bookService.getById(selectedBook));
 			copyService.create(this.selectedCopy);
+			copies = copyService.getAll();
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_copy_added");
 		}else{
+			this.selectedCopy.setBook(this.bookService.getById(selectedBook));
 			copyService.update(this.selectedCopy);
+			copies = copyService.getAll();
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_copy_edited");
 		}
-		copies = copyService.getAll();
 		PrimeFaces.current().executeScript("PF('manageCopyDialog').hide()");
 		PrimeFaces.current().ajax().update("form:dt-copy");
 
@@ -91,6 +101,8 @@ public class ManageCopyBean {
     }
 
 
+    /******************************   GETTERS AND SETTERS   *****************************/
+    
 	public CopyDto getSelectedCopy() {
 		return selectedCopy;
 	}
@@ -98,6 +110,16 @@ public class ManageCopyBean {
 
 	public void setSelectedCopy(CopyDto selectedCopy) {
 		this.selectedCopy = selectedCopy;
+	}
+
+
+	public Long getSelectedBook() {
+		return selectedBook;
+	}
+
+
+	public void setSelectedBook(Long selectedBook) {
+		this.selectedBook = selectedBook;
 	}
 
 
@@ -109,13 +131,6 @@ public class ManageCopyBean {
 	public void setCopies(List<CopyDto> copies) {
 		this.copies = copies;
 	}
-	public BookDto getSelectedBook() {
-		return selectedBook;
-	}
-
-	public void setSelectedBook(BookDto selectedBook) {
-		this.selectedBook = selectedBook;
-	}
 
 
 	public List<BookDto> getBooks() {
@@ -126,12 +141,5 @@ public class ManageCopyBean {
 	public void setBooks(List<BookDto> books) {
 		this.books = books;
 	}
-
-
     
-    
-    
-/******************************   GETTERS AND SETTERS   *****************************/
-	
-
 }
