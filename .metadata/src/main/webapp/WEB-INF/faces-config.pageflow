@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf16662988934130" configfile="/pweb-jsf/src/main/webapp/WEB-INF/faces-config.xml">
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf16662988934130" configfile="/proyecto-final/src/main/webapp/WEB-INF/faces-config.xml">
   <nodes xsi:type="pageflow:PFPage" name="pages/security/login.xhtml" x="122" y="562" id="pf16664942197582" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf16664942197593 pf16664942197594 pf16664942197595" path="/pages/security/login.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/welcome/welcome.xhtml" x="338" y="178" id="pf16664942197596" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf16664942197593" path="/pages/welcome/welcome.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/security/login-success.xhtml" x="338" y="562" id="pf16664942197607" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf16664942197594" path="/pages/security/login-success.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/security/login-failure.xhtml" x="338" y="946" id="pf16664942197608" referenceLink="//@navigationRule.0/@navigationCase.2/@toViewId|" inlinks="pf16664942197595" path="/pages/security/login-failure.xhtml"/>
-  <links id="pf16664942197593" target="pf16664942197596" source="pf16664942197582" outcome="login"/>
-  <links id="pf16664942197594" target="pf16664942197607" source="pf16664942197582" outcome="success"/>
-  <links id="pf16664942197595" target="pf16664942197608" source="pf16664942197582" outcome="failure"/>
+  <links id="pf16664942197593" target="pf16664942197596" source="pf16664942197582"/>
+  <links id="pf16664942197594" target="pf16664942197607" source="pf16664942197582"/>
+  <links id="pf16664942197595" target="pf16664942197608" source="pf16664942197582"/>
 </pageflow:Pageflow>

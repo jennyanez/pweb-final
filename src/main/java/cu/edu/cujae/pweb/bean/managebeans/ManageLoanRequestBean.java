@@ -9,13 +9,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
+import cu.edu.cujae.pweb.service.LoanRequestService;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
 import cu.edu.cujae.pweb.dto.LoanRequestDto;
-import cu.edu.cujae.pweb.service.LoanRequestService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 
 @Component 
@@ -26,7 +25,7 @@ public class ManageLoanRequestBean {
 	private LoanRequestDto selectedLoanRequest;
 	private List<LoanRequestDto> loansRequest;
 	
-	@Autowired
+    @Autowired
 	private LoanRequestService loanRequestService;
 	
 	public ManageLoanRequestBean() {
@@ -35,7 +34,7 @@ public class ManageLoanRequestBean {
 	
 	@PostConstruct
     public void init() {
-	    loansRequest = loansRequest == null ? loanRequestService.getLoansRequest() : loansRequest;
+	    loansRequest = loansRequest == null ? loanRequestService.getAll() : loansRequest;
     }
 	
 	//Se ejecuta al dar clic en el button Nuevo

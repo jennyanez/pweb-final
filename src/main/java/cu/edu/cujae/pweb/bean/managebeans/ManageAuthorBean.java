@@ -1,5 +1,7 @@
 package cu.edu.cujae.pweb.bean.managebeans;
 
+import java.util.List;
+import java.util.UUID;
 import cu.edu.cujae.pweb.dto.AuthorDto;
 import cu.edu.cujae.pweb.dto.BookDto;
 import cu.edu.cujae.pweb.service.AuthorService;
@@ -12,6 +14,16 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
+
+import org.primefaces.PrimeFaces;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import cu.edu.cujae.pweb.dto.AuthorDto;
+import cu.edu.cujae.pweb.dto.BookDto;
+import cu.edu.cujae.pweb.service.AuthorService;
+import cu.edu.cujae.pweb.service.BookService;
+import cu.edu.cujae.pweb.utils.JsfUtils;
 import java.util.List;
 import java.util.UUID;
 

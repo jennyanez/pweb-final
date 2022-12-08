@@ -41,5 +41,5 @@ public class DefaulterClientDto extends ClientDto {
 	public void setAmountDaysBreach(int amountDaysBreach) {
 		this.amountDaysBreach = amountDaysBreach;
 	}
-	
+
 }
