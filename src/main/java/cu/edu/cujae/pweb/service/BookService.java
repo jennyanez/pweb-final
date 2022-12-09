@@ -28,6 +28,9 @@ public class BookService implements ServiceImplementation {
 			ApiRestMapper<BookDto> apiRestMapper = new ApiRestMapper<>();
 			String response = (String)restService.GET("/books/all", params, String.class).getBody();
 			bookDtoList = apiRestMapper.mapList(response, BookDto.class);
+			for(BookDto b: bookDtoList){
+				b.authorsName();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

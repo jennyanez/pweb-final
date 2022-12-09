@@ -1,5 +1,6 @@
 package cu.edu.cujae.pweb.bean.managebeans;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -8,7 +9,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
+import cu.edu.cujae.pweb.dto.AuthorDto;
 import cu.edu.cujae.pweb.dto.MatterDto;
+import cu.edu.cujae.pweb.service.AuthorService;
+import cu.edu.cujae.pweb.service.MatterService;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,12 +28,18 @@ public class ManageBookBean {
 	
 	private BookDto bookDto;
 	private BookDto selectedBook;
-	private MatterDto selectedMatter;
+	private Long selectedMatter;
 	private List<BookDto> books;
 	private List<MatterDto> matters;
+	private List<AuthorDto> authors;
+	private Long[] selectedAuthors;
 	
 	@Autowired
 	private BookService bookService;
+	@Autowired
+	private MatterService matterService;
+	@Autowired
+	private AuthorService authorService;
 	
 	
 	public ManageBookBean() {
@@ -39,31 +49,53 @@ public class ManageBookBean {
 	//Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase. 
 	@PostConstruct
     public void init() {
-		books = books == null ? bookService.getAll() : books;
+		books = bookService.getAll();
+		matters = matterService.getAll();
+		authors = authorService.getAll();
     }
 	
 	//Se ejecuta al dar clic en el button Nuevo
 	public void openNew() {
-        this.selectedBook = new BookDto();
+		this.selectedBook = new BookDto();
+		this.selectedMatter = null;
+		this.selectedAuthors = null;
     }
 	
 	//Se ejecuta al dar clic en el button con el lapicito
 	public void openForEdit() {
-		//codigo aqui
+		MatterDto matter = this.selectedBook.getMatter();
+		this.selectedMatter = matter.getMatterId();
+
+		List<AuthorDto> authorDtos = this.selectedBook.getAuthors();
+		this.selectedAuthors = authorDtos.stream().map(AuthorDto::getAuthorId).toArray(Long[]::new);
 	}
+
 	
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
 	public void saveBook() {
 		if (this.selectedBook.getBookId() == null) {
-            this.selectedBook.setBookId(1L);
-
-            this.books.add(this.selectedBook);
+            bookDto = selectedBook;
+			bookDto.setMatter(matterService.getById(selectedMatter));
+			List<AuthorDto> authorDtos = new ArrayList<>();
+			for (Long selectedAuthor : selectedAuthors) {
+				authorDtos.add(authorService.getById(selectedAuthor));
+			}
+			bookDto.setAuthors(authorDtos);
+			bookService.create(bookDto);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_book_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         }
         else {
+			/////codigo para updatear
+			List<AuthorDto> authorDtos = new ArrayList<>();
+			for (Long selectedAuthor : selectedAuthors) {
+				authorDtos.add(authorService.getById(selectedAuthor));
+			}
+			bookDto.setAuthors(authorDtos);
+			this.selectedBook.setMatter(matterService.getById(selectedMatter));
+			bookService.update(this.selectedBook);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_book_edited");
         }
-
+		books = bookService.getAll();
         PrimeFaces.current().executeScript("PF('manageBookDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
         PrimeFaces.current().ajax().update("form:dt-book");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
 	}
@@ -71,15 +103,31 @@ public class ManageBookBean {
 	//Permite eliminar un usuario
     public void deleteBook() {
     	try {
-    		this.books.remove(this.selectedBook);
+    		bookService.delete(this.selectedBook.getBookId());
             this.selectedBook = null;
+			books = bookService.getAll();
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_book_deleted");
             PrimeFaces.current().ajax().update("form:dt-book");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
 		} catch (Exception e) {
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
 		}
-        
     }
+
+	public List<AuthorDto> getAuthors() {
+		return authors;
+	}
+
+	public void setAuthors(List<AuthorDto> authors) {
+		this.authors = authors;
+	}
+
+	public Long[] getSelectedAuthors() {
+		return selectedAuthors;
+	}
+
+	public void setSelectedAuthors(Long[] selectedAuthors) {
+		this.selectedAuthors = selectedAuthors;
+	}
 
 	public BookDto getBookDto() {
 		return this.bookDto;
@@ -93,8 +141,8 @@ public class ManageBookBean {
 		return this.selectedBook;
 	}
 
-	public void setSelectedBook(BookDto selectedLoan) {
-		this.selectedBook = selectedLoan;
+	public void setSelectedBook(BookDto selectedBook) {
+		this.selectedBook = selectedBook;
 	}
 
 	public List<BookDto> getBooks() {
@@ -105,11 +153,11 @@ public class ManageBookBean {
 		this.books = books;
 	}
 
-	public MatterDto getSelectedMatter() {
+	public Long getSelectedMatter() {
 		return selectedMatter;
 	}
 
-	public void setSelectedMatter(MatterDto selectedMatter) {
+	public void setSelectedMatter(Long selectedMatter) {
 		this.selectedMatter = selectedMatter;
 	}
 
