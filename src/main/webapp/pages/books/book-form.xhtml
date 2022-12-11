@@ -26,7 +26,7 @@
 						</div>
 					
                         <div class="p-field">
-							<p:outputLabel for="@next" value="Year Edition"/>
+							<p:outputLabel for="@next">Year Edition</p:outputLabel>
 							<p:spinner id="rotate" value="#{manageBookBean.selectedBook.yearEdition}" min="1" max="2022" rotate="true"/>
 							<p:message for="@previous"></p:message>
 						</div>
@@ -39,6 +39,30 @@
 							<p:message for="@previous"></p:message>
 						</div>
 
+						<!--Authors-->
+						<div class="p-field">
+							<p:outputLabel for="@next">Authors</p:outputLabel>
+							<p:selectCheckboxMenu id="authors"
+												  value="#{manageBookBean.selectedAuthors}"
+												  label="Select the authors"
+												  style="min-width: 15rem"
+												  multiple="true"
+												  filter="true"
+												  filterMatchMode="startsWith"
+												  panelStyle="width: 30rem"
+												  scrollHeight="250"
+												  emptyLabel="Please select..."
+												  updateLabel="true"
+												  required="true">
+								<!--							<p:ajax event="itemUnselect" listener="#{checkboxView.onItemUnselect}"/>-->
+								<f:selectItems value="#{manageBookBean.authors}"
+											   var="author"
+											   itemLabel="#{author.name}" itemValue="#{author.authorId}"/>
+							</p:selectCheckboxMenu>
+						</div>
+
+					</h:panelGroup>
+					<h:panelGroup>
 						<!--country-->
 						<div class="p-field">
 							<p:outputLabel for="@next">Country Origin</p:outputLabel>
@@ -70,15 +94,7 @@
 							</p:selectOneMenu>
 						</div>
 						<!--fin de countries -->
-					</h:panelGroup>
-					<h:panelGroup>
-						<!-- book summary -->
-						<div class="p-field">
-							<p:outputLabel for="@next">Book summary</p:outputLabel>
-							<p:inputTextarea rows="5" cols="30" counter="display" maxlength="180"
-											 counterTemplate="{0} characters remaining." autoResize="false"/>
-							<h:outputText id="display" class="block" />
-						</div>
+
 
 						<!--Amount pages-->
 						<div class="p-field">
@@ -109,32 +125,19 @@
 							</p:selectOneMenu>
 							<p:message for="@previous" ></p:message>
 						</div>
-						<!--Authors-->
-						<div class="p-field">
-							<p:outputLabel for="@next">Authors</p:outputLabel>
-							<p:selectCheckboxMenu id="authors"
-												  value="#{manageBookBean.selectedAuthors}"
-												  label="Select the authors"
-												  style="min-width: 15rem"
-												  multiple="true"
-												  filter="true"
-												  filterMatchMode="startsWith"
-												  panelStyle="width: 30rem"
-												  scrollHeight="250"
-												  emptyLabel="Please select..."
-												  updateLabel="true"
-												  required="true">
-								<!--							<p:ajax event="itemUnselect" listener="#{checkboxView.onItemUnselect}"/>-->
-								<f:selectItems value="#{manageBookBean.authors}"
-											   var="author"
-											   itemLabel="#{author.name}" itemValue="#{author.authorId}"/>
-							</p:selectCheckboxMenu>
-						</div>
 
 						<!--amount of copies-->
 						<div class="p-field">
 							<p:outputLabel for="@next" value="Amount of new copies"/>
 							<p:spinner id="copies" value="#{manageBookBean.amountCopies}" min="0"/>
+						</div>
+
+						<!-- book summary -->
+						<div class="p-field">
+							<p:outputLabel for="@next">Book summary</p:outputLabel>
+							<p:inputTextarea rows="5" cols="30" counter="display" maxlength="180"
+											 counterTemplate="{0} characters remaining." autoResize="false"/>
+							<h:outputText id="display" class="block" />
 						</div>
 
 					</h:panelGroup>

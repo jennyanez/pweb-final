@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import cu.edu.cujae.pweb.dto.AuthorDto;
-import cu.edu.cujae.pweb.dto.XUserDto;
+import cu.edu.cujae.pweb.dto.UserDto;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
-import cu.edu.cujae.pweb.utils.IUserService;
 import cu.edu.cujae.pweb.utils.RestService;
 import cu.edu.cujae.pweb.utils.ServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriTemplate;
 
 @Service
-public class UserService implements ServiceImplementation, IUserService {
+public class UserService implements ServiceImplementation {
 
 	@Autowired
 	private RoleService roleService;
@@ -25,15 +23,15 @@ public class UserService implements ServiceImplementation, IUserService {
 	private RestService restService;
 
 	@Override
-	public  List<XUserDto> getAll() {
-		List<XUserDto> users = new ArrayList<XUserDto>();
+	public  List<UserDto> getAll() {
+		List<UserDto> users = new ArrayList<UserDto>();
 		try {
 			MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-			ApiRestMapper<XUserDto> apiRestMapper = new ApiRestMapper<>();
+			ApiRestMapper<UserDto> apiRestMapper = new ApiRestMapper<>();
 			String response = (String)restService.GET("/users/all", params, String.class).getBody();
-			users = apiRestMapper.mapList(response, XUserDto.class);
-			for(XUserDto u : users){
-				u.getRol().getDescription();
+			users = apiRestMapper.mapList(response, UserDto.class);
+			for(UserDto u : users){
+				u.rolesName();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -42,56 +40,46 @@ public class UserService implements ServiceImplementation, IUserService {
 	}
 
 	@Override
-	public XUserDto getById(Long id) {
-		return null;
+	public UserDto getById(Long id) {
+		UserDto user = null;
+		int code = Math.toIntExact(id);
+
+		try {
+			MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+			ApiRestMapper<UserDto> apiRestMapper = new ApiRestMapper<>();
+
+			UriTemplate template = new UriTemplate("/users/{code}");
+			String uri = template.expand(code).toString();
+			String response = (String)restService.GET(uri, params, String.class).getBody();
+			user = apiRestMapper.mapOne(response, UserDto.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return user;
 	}
 
 	@Override
 	public void create(Object dto) {
-		XUserDto user = (XUserDto) dto;
+		UserDto user = (UserDto) dto;
 		String response = (String) restService.POST("/users/save", user, String.class).getBody();
 		System.out.println(response);
 	}
 
 	@Override
 	public void update(Object dto) {
-		XUserDto user = (XUserDto) dto;
+		UserDto user = (UserDto) dto;
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		UriTemplate template = new UriTemplate("/users/update");
-		String uri = template.expand(user.getUsername()).toString();
-		String response = (String) restService.PUT(uri, params, user, String.class).getBody();
+		String response = (String) restService.PUT("/users/update", params, user, String.class).getBody();
 		System.out.println(response);
 	}
 
 	@Override
-	public void delete(Long code) {
-
-	}
-
-	@Override
-	public void deleteByUsername(String username) {
+	public void delete(Long id) {
+		int code = Math.toIntExact(id);
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		UriTemplate template = new UriTemplate("/users/delete/{id}");
-		String uri = template.expand(username).toString();
+		UriTemplate template = new UriTemplate("/users/delete/{code}");
+		String uri = template.expand(code).toString();
 		String response = (String) restService.DELETE(uri, params, String.class).getBody();
 		System.out.println(response);
-	}
-
-	@Override
-	public XUserDto getByUsername(String username) {
-		XUserDto xUserDto = null;
-		try {
-			MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-			ApiRestMapper<XUserDto> apiRestMapper = new ApiRestMapper<>();
-
-			UriTemplate template = new UriTemplate("/users/{id}");
-			String uri = template.expand(username).toString();
-			String response = (String)restService.GET(uri, params, String.class).getBody();
-			xUserDto = apiRestMapper.mapOne(response, XUserDto.class);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return xUserDto;
 	}
 }
