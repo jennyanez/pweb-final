@@ -110,24 +110,32 @@
 							<p:message for="@previous" ></p:message>
 						</div>
 						<!--Authors-->
-						<p:outputLabel for="@next">Authors</p:outputLabel>
-						<p:selectCheckboxMenu id="authors"
-											  value="#{manageBookBean.selectedAuthors}"
-											  label="Select the authors"
-											  style="min-width: 15rem"
-											  multiple="true"
-											  filter="true"
-											  filterMatchMode="startsWith"
-											  panelStyle="width: 30rem"
-											  scrollHeight="250"
-											  emptyLabel="Please select..."
-											  updateLabel="true"
-											  required="true">
-<!--							<p:ajax event="itemUnselect" listener="#{checkboxView.onItemUnselect}"/>-->
-							<f:selectItems value="#{manageBookBean.authors}"
-										var="author"
-										itemLabel="#{author.name}" itemValue="#{author.authorId}"/>
-						</p:selectCheckboxMenu>
+						<div class="p-field">
+							<p:outputLabel for="@next">Authors</p:outputLabel>
+							<p:selectCheckboxMenu id="authors"
+												  value="#{manageBookBean.selectedAuthors}"
+												  label="Select the authors"
+												  style="min-width: 15rem"
+												  multiple="true"
+												  filter="true"
+												  filterMatchMode="startsWith"
+												  panelStyle="width: 30rem"
+												  scrollHeight="250"
+												  emptyLabel="Please select..."
+												  updateLabel="true"
+												  required="true">
+								<!--							<p:ajax event="itemUnselect" listener="#{checkboxView.onItemUnselect}"/>-->
+								<f:selectItems value="#{manageBookBean.authors}"
+											   var="author"
+											   itemLabel="#{author.name}" itemValue="#{author.authorId}"/>
+							</p:selectCheckboxMenu>
+						</div>
+
+						<!--amount of copies-->
+						<div class="p-field">
+							<p:outputLabel for="@next" value="Amount of new copies"/>
+							<p:spinner id="copies" value="#{manageBookBean.amountCopies}" min="0"/>
+						</div>
 
 					</h:panelGroup>
 				</p:panelGrid>
@@ -137,9 +145,9 @@
 		<f:facet name="footer">
 			<p:commandButton value="Salvar" icon="pi pi-check"
 				actionListener="#{manageBookBean.saveBook}"
-				update="manage-book-content" process="manage-book-content @this" />
+				update="manage-book-content" process="manage-book-content @this"/>
 			<p:commandButton value="Cancelar" icon="pi pi-times"
-				onclick="PF('manageBookDialog').hide()" class="ui-button-secondary" />
+				onclick="PF('manageBookDialog').hide()" class="ui-button-secondary"/>
 		</f:facet>
 	</p:dialog>
 </ui:composition>

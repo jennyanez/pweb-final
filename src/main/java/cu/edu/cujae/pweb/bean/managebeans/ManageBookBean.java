@@ -10,8 +10,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
 import cu.edu.cujae.pweb.dto.AuthorDto;
+import cu.edu.cujae.pweb.dto.CopyDto;
 import cu.edu.cujae.pweb.dto.MatterDto;
 import cu.edu.cujae.pweb.service.AuthorService;
+import cu.edu.cujae.pweb.service.CopyService;
 import cu.edu.cujae.pweb.service.MatterService;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,14 +35,18 @@ public class ManageBookBean {
 	private List<MatterDto> matters;
 	private List<AuthorDto> authors;
 	private Long[] selectedAuthors;
-	
+
+	private int amountCopies;
+
+	/**** SERVICES*****/
 	@Autowired
 	private BookService bookService;
 	@Autowired
 	private MatterService matterService;
 	@Autowired
 	private AuthorService authorService;
-	
+	@Autowired
+	private CopyService copyService;
 	
 	public ManageBookBean() {
 		
@@ -52,6 +58,7 @@ public class ManageBookBean {
 		books = bookService.getAll();
 		matters = matterService.getAll();
 		authors = authorService.getAll();
+		amountCopies = 0;
     }
 	
 	//Se ejecuta al dar clic en el button Nuevo
@@ -59,6 +66,7 @@ public class ManageBookBean {
 		this.selectedBook = new BookDto();
 		this.selectedMatter = null;
 		this.selectedAuthors = null;
+		amountCopies = 0;
     }
 	
 	//Se ejecuta al dar clic en el button con el lapicito
@@ -68,6 +76,8 @@ public class ManageBookBean {
 
 		List<AuthorDto> authorDtos = this.selectedBook.getAuthors();
 		this.selectedAuthors = authorDtos.stream().map(AuthorDto::getAuthorId).toArray(Long[]::new);
+
+		amountCopies = 0;
 	}
 
 	
@@ -75,43 +85,97 @@ public class ManageBookBean {
 	public void saveBook() {
 		if (this.selectedBook.getBookId() == null) {
             bookDto = selectedBook;
+
+			///establece materia
 			bookDto.setMatter(matterService.getById(selectedMatter));
+
+			//establece autores
 			List<AuthorDto> authorDtos = new ArrayList<>();
 			for (Long selectedAuthor : selectedAuthors) {
 				authorDtos.add(authorService.getById(selectedAuthor));
 			}
 			bookDto.setAuthors(authorDtos);
+
+			//crea el libro
 			bookService.create(bookDto);
+
+			//actualizo lista de libros
+			books = bookService.getAll();
+
+			//crea las copias y las guarda
+			insertCopies(amountCopies);
+
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_book_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         }
         else {
 			/////codigo para updatear
+
+			//updatea autores
 			List<AuthorDto> authorDtos = new ArrayList<>();
 			for (Long selectedAuthor : selectedAuthors) {
 				authorDtos.add(authorService.getById(selectedAuthor));
 			}
 			bookDto.setAuthors(authorDtos);
+
+			//updatea materia
 			this.selectedBook.setMatter(matterService.getById(selectedMatter));
+
+			// updatea el libro
 			bookService.update(this.selectedBook);
+			books = bookService.getAll();
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_book_edited");
         }
-		books = bookService.getAll();
         PrimeFaces.current().executeScript("PF('manageBookDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
         PrimeFaces.current().ajax().update("form:dt-book");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+
+//		ManageCopyBean manageCopyBean = new ManageCopyBean();
+//		manageCopyBean.updateAjax();
+
 	}
 
 	//Permite eliminar un usuario
     public void deleteBook() {
     	try {
+
+			///elimina las copias de ese libro
+			/// pues sin libro no hay copia, duhh
+			List<CopyDto> copies = copyService.getByBookId(this.selectedBook.getBookId());
+			for(CopyDto c:copies){
+				copyService.delete(c.getCopyId());
+			}
+
+			////ahora si elimino el libro
     		bookService.delete(this.selectedBook.getBookId());
             this.selectedBook = null;
+
+			//actualizo lista de libros
 			books = bookService.getAll();
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_book_deleted");
             PrimeFaces.current().ajax().update("form:dt-book");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+
+//			//update copies w ajax
+//			ManageCopyBean manageCopyBean = new ManageCopyBean();
+//			manageCopyBean.updateAjax();
+
 		} catch (Exception e) {
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
 		}
     }
+
+	public void insertCopies(int amountCopies){
+		if(amountCopies > 0){
+			for(int i=0; i<amountCopies; i++){
+				CopyDto copy = new CopyDto();
+				copy.setCopyNumber(i);
+				copy.setBook(books.get(books.size()-1));
+				copyService.create(copy);
+
+//				//update copies w ajax
+//				ManageCopyBean manageCopyBean = new ManageCopyBean();
+//				manageCopyBean.updateAjax();
+			}
+		}
+	}
 
 	public List<AuthorDto> getAuthors() {
 		return authors;
@@ -167,5 +231,13 @@ public class ManageBookBean {
 
 	public void setMatters(List<MatterDto> matters) {
 		this.matters = matters;
+	}
+
+	public int getAmountCopies() {
+		return amountCopies;
+	}
+
+	public void setAmountCopies(int amountCopies) {
+		this.amountCopies = amountCopies;
 	}
 }
