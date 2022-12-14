@@ -11,8 +11,17 @@
 
         <h:form styleClass="topbar-form">
             <ul class="topbar-menu">
-                
             </ul>
+
+                <h:selectOneMenu class="frigth"
+                                 value="#{languageBean.lang}"
+                                 valueChangeListener="#{languageBean.changeLang}"
+                                 onchange="submit();">
+                    <f:selectItem itemValue="es" itemLabel="Español"/>
+                    <f:selectItem itemValue="en" itemLabel="English" />
+                </h:selectOneMenu>
+
         </h:form>
+
     </div>
 </ui:composition>

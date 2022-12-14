@@ -77,7 +77,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
 	</dependency>
 
  	<!-- Pretty faces -->
-	<!-- <dependency>
+ 	<dependency>
 	    <groupId>org.ocpsoft.rewrite</groupId>
 	    <artifactId>rewrite-servlet</artifactId>
 	    <version>3.4.4.Final</version>
@@ -86,8 +86,8 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
 	    <groupId>org.ocpsoft.rewrite</groupId>
 	    <artifactId>rewrite-config-prettyfaces</artifactId>
 	    <version>3.4.4.Final</version>
-	</dependency> -->
-	
+	</dependency>
+
 	<!--  Spring Security -->
 	<!-- <dependency>
 	    <groupId>org.springframework.security</groupId>
