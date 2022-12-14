@@ -1,5 +1,6 @@
 package cu.edu.cujae.pweb.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookDto {
@@ -14,7 +15,8 @@ public class BookDto {
 	private MatterDto matter;
 	private List<AuthorDto> authors;
 
-	
+	private List<String> authorsName;
+
 	public BookDto(Long bookId, String bookCode, String bookTitle, MatterDto matter, List<AuthorDto> authors){
 		setBookId(bookId);
 		setBookCode(bookCode);
@@ -116,5 +118,20 @@ public class BookDto {
 
 	public void setAuthors(List<AuthorDto> authors) {
 		this.authors = authors;
+	}
+
+	public List<String> getAuthorsName() {
+		return authorsName;
+	}
+
+	public void authorsName() {
+		authorsName = new ArrayList<>();
+		for (AuthorDto a: authors){
+			this.authorsName.add(a.getName());
+		}
+	}
+
+	public void setAuthorsName(List<String> authorsName) {
+		this.authorsName = authorsName;
 	}
 }

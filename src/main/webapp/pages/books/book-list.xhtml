@@ -65,19 +65,19 @@
 						</div>
 					</f:facet>
 					
-					<p:column headerText="ISBN Code" sortBy="#{book.code}"
-						filterBy="#{book.code}">
-						<h:outputText value="#{book.code}"/>
+					<p:column headerText="ISBN Code" sortBy="#{book.bookCode}"
+						filterBy="#{book.bookCode}">
+						<h:outputText value="#{book.bookCode}"/>
 					</p:column>
-					<p:column headerText="Title" sortBy="#{book.title}"
-                        filterBy="#{book.title}">
-						<h:outputText value="#{book.title}"/>
+					<p:column headerText="Title" sortBy="#{book.bookTitle}"
+                        filterBy="#{book.bookTitle}">
+						<h:outputText value="#{book.bookTitle}"/>
 					</p:column>
-                    <p:column headerText="Author" sortBy="#{book.authors}" filterBy="#{book.authors}">
-						<h:outputText value="#{book.authors}" />
+                    <p:column headerText="Author" sortBy="#{book.authorsName}" filterBy="#{bookauthorsName}">
+						<h:outputText value="#{book.authorsName}" />
 					</p:column>
-                    <p:column headerText="Matter" sortBy="#{book.matter}" filterBy="#{book.matter}">
-						<h:outputText value="#{book.matter}" />
+                    <p:column headerText="Matter" sortBy="#{book.matter.matterName}" filterBy="#{book.matter.matterName}">
+						<h:outputText value="#{book.matter.matterName}" />
 					</p:column>
 					
 					<p:column exportable="false">

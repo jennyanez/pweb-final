@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cu.edu.cujae.pweb.dto.AuthorDto;
-import cu.edu.cujae.pweb.dto.XUserDto;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
 import cu.edu.cujae.pweb.utils.ServiceImplementation;

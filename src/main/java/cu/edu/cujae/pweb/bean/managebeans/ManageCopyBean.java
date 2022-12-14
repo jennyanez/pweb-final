@@ -141,5 +141,9 @@ public class ManageCopyBean {
 	public void setBooks(List<BookDto> books) {
 		this.books = books;
 	}
+
+	public void updateAjax(){
+		PrimeFaces.current().ajax().update("form:dt-copy");
+	}
     
 }

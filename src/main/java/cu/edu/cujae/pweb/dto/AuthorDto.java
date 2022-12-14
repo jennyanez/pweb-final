@@ -18,9 +18,6 @@ public class AuthorDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AuthorDto(String substring, String andy, String piloto, String guevara, boolean b) {
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -28,14 +25,6 @@ public class AuthorDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-//	public List<BookDto> getBooks() {
-//		return books;
-//	}
-//
-//	public void setBooks(List<BookDto> books) {
-//		this.books = books;
-//	}
 
 	public Long getAuthorId() {
 		return authorId;

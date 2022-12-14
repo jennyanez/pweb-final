@@ -4,6 +4,7 @@ package cu.edu.cujae.pweb.service;
 import cu.edu.cujae.pweb.dto.BookDto;
 import cu.edu.cujae.pweb.dto.CopyDto;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
+import cu.edu.cujae.pweb.utils.ICopyService;
 import cu.edu.cujae.pweb.utils.RestService;
 import cu.edu.cujae.pweb.utils.ServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CopyService implements ServiceImplementation {
+public class CopyService implements ServiceImplementation, ICopyService {
 
     @Autowired
     private RestService restService;
-    
-  
 
     @Override
     public List<CopyDto> getAll() {
@@ -84,4 +83,19 @@ public class CopyService implements ServiceImplementation {
         System.out.println(response);
     }
 
+    @Override
+    public List<CopyDto> getByBookId(Long id) {
+        List<CopyDto> copyDtoList = new ArrayList<>();
+        try{
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<CopyDto> apiRestMapper = new ApiRestMapper<>();
+            UriTemplate template = new UriTemplate("/copies/book/{id}");
+            String uri = template.expand(id).toString();
+            String response = (String) restService.GET(uri, params, String.class).getBody();
+            copyDtoList = apiRestMapper.mapList(response, CopyDto.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return copyDtoList;
+    }
 }
