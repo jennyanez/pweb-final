@@ -13,18 +13,42 @@
 						
                     <div class="p-field">
 							<p:outputLabel for="@next">Book</p:outputLabel>
-							<p:inputText id="book" required="true" 
-								value="#{manageLoanRequestBean.selectedLoanRequest.book}" />
-							<p:message for="@previous" ></p:message>
-						</div>
-						
-                        <div class="p-field">
-							<p:outputLabel for="@next">Usuario</p:outputLabel>
-							<p:inputText id="username" required="true"
-								value="#{manageLoanRequestBean.selectedLoanRequest.user}" />
-							<p:message for="@previous"></p:message>
-						</div>
-								
+							<p:selectOneMenu 
+									id="book" 
+									required="true" 
+									label="Seleccione"
+                                    value="#{manageLoanRequestBean.selectedBook}"                                          
+                                    style="min-width: 15rem" 
+                                    multiple="true" 
+                                    filter="true"
+                                    filterMatchMode="startsWith" 
+                                    panelStyle="width: 30rem"
+                                    scrollHeight="250">
+                           		<f:selectItem itemLabel="Seleccione" itemValue="" noSelectionOption="true"/>
+                                <f:selectItems value="#{manageLoanRequestBean.books}" var="book"
+                                                   itemValue="#{book.bookId}" itemLabel="#{book.bookTitle}"/>                                  
+                            </p:selectOneMenu>
+					</div>
+							
+					<div>
+						<p:outputLabel for="@next">Copies Available</p:outputLabel>
+							<p:selectOneMenu 
+									id="copy" 
+									required="true" 
+									label="Seleccione"
+                                    value="#{manageLoanRequestBean.selectedCopy}"                                          
+                                    style="min-width: 15rem" 
+                                    multiple="true" 
+                                    filter="true"
+                                    filterMatchMode="startsWith" 
+                                    panelStyle="width: 30rem"
+                                    scrollHeight="250">
+                           		<f:selectItem itemLabel="Seleccione" itemValue="" noSelectionOption="true"/>
+                                <f:selectItems value="#{manageLoanRequestBean.copies}" var="copy"
+                                                   itemValue="#{copy.copyId}" itemLabel="#{copy.book.bookTitle}"/>                                  
+                            </p:selectOneMenu>
+					
+					</div>			
 					</h:panelGroup>
 				</p:panelGrid>
 		 	</p:outputPanel> 

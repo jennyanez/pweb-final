@@ -33,7 +33,7 @@ public class ClientService implements ServiceImplementation {
     }
 
     @Override
-    public Object getById(Long id) {
+    public ClientDto getById(Long id) {
         ClientDto clientDto = null;
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();

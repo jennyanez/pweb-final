@@ -12,9 +12,9 @@ import cu.edu.cujae.pweb.dto.CopyDto;
 
 @ManagedBean
 public class LoanRequestBean {
-	 	private BookDto book;
-		private CopyDto copy;
-		private ClientDto user;
+	
+		private String bookTitle;
+		private String client;
 		private Date loanDate;
 
 	    protected HttpServletRequest getRequest() {
@@ -25,28 +25,20 @@ public class LoanRequestBean {
 		    return FacesContext.getCurrentInstance();
 		}
 
-		public BookDto getBook() {
-			return book;
+		public String getBookTitle() {
+			return bookTitle;
 		}
 
-		public void setBook(BookDto book) {
-			this.book = book;
+		public void setBookTitle(String bookTitle) {
+			this.bookTitle = bookTitle;
 		}
 
-		public CopyDto getCopy() {
-			return copy;
+		public String getClient() {
+			return client;
 		}
 
-		public void setCopy(CopyDto copy) {
-			this.copy = copy;
-		}
-
-		public ClientDto getUser() {
-			return user;
-		}
-
-		public void setUser(ClientDto user) {
-			this.user = user;
+		public void setClient(String client) {
+			this.client = client;
 		}
 
 		public Date getLoanDate() {
@@ -55,5 +47,7 @@ public class LoanRequestBean {
 
 		public void setLoanDate(Date loanDate) {
 			this.loanDate = loanDate;
-		}    	
+		}
+
+		 	
 }

@@ -68,13 +68,13 @@
 						</div>
 					</f:facet>
 					
-					<p:column headerText="Book" sortBy="#{loanRequest.book}"
-						filterBy="#{loanRequest.book}">
-						<h:outputText value="#{loanRequest.book}"/>
+					<p:column headerText="Client" sortBy="#{loanRequest.client.name}"
+                        filterBy="#{loanRequest.client.name}">
+						<h:outputText value="#{loanRequest.client.name}"/>
 					</p:column>
-					<p:column headerText="User" sortBy="#{loanRequest.user}"
-                        filterBy="#{loanRequest.book}">
-						<h:outputText value="#{loanRequest.user}"/>
+					<p:column headerText="Book" sortBy="#{loanRequest.copy.book.bookTitle}"
+						filterBy="#{loanRequest.copy.book.bookTitle}">
+						<h:outputText value="#{loanRequest.copy.book.bookTitle}"/>
 					</p:column>
                     <p:column headerText="Loan Request Date" sortBy="#{loanRequest.loanRequestDate}" filterBy="#{loanRequest.loanRequestDate}">
 						<h:outputText value="#{loanRequest.loanRequestDate}" />
