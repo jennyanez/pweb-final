@@ -15,7 +15,16 @@ public class UrlRewriteConfigurationProvider extends HttpConfigurationProvider{
         return ConfigurationBuilder.begin()
 
                 .addRule(Join.path("/security-users").to("/pages/security/users/user-list.jsf"))
-                .addRule(Join.path("/welcome").to("/pages/welcome/welcome.jsf"));
+                .addRule(Join.path("/welcome").to("/pages/welcome/welcome.jsf"))
+                .addRule(Join.path("/authors").to("/pages/authors/author-list.jsf"))
+                .addRule(Join.path("/books").to("/pages/books/book-list.jsf"))
+                .addRule(Join.path("/clients").to("/pages/client/client-list.jsf"))
+                .addRule(Join.path("/copies").to("/pages/copies/copy-list.jsf"))
+                .addRule(Join.path("/loans").to("/pages/loans/loan-list.jsf"))
+                .addRule(Join.path("/loans-requests").to("/pages/loansRequest/loanRequest-list.jsf"))
+                .addRule(Join.path("/matters").to("/pages/matters/matter-list.jsf"));
+
+
 
 
         //ej using params

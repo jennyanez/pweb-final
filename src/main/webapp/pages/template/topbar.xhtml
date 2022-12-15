@@ -11,16 +11,18 @@
 
         <h:form styleClass="topbar-form">
             <ul class="topbar-menu">
+                <div class="field">
+                    <p:selectOneMenu style="min-width: 5rem"
+                                     panelStyle="width: 5rem"
+                                     value="#{languageBean.lang}"
+                                     valueChangeListener="#{languageBean.changeLang}"
+                                     onchange="submit();">
+                        <f:selectItem itemValue="es" itemLabel="Español"/>
+                        <f:selectItem itemValue="en" itemLabel="English" />
+                    </p:selectOneMenu>
+                </div>
+
             </ul>
-
-                <h:selectOneMenu class="frigth"
-                                 value="#{languageBean.lang}"
-                                 valueChangeListener="#{languageBean.changeLang}"
-                                 onchange="submit();">
-                    <f:selectItem itemValue="es" itemLabel="Español"/>
-                    <f:selectItem itemValue="en" itemLabel="English" />
-                </h:selectOneMenu>
-
         </h:form>
 
     </div>
