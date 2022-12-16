@@ -22,7 +22,9 @@ public class UrlRewriteConfigurationProvider extends HttpConfigurationProvider{
                 .addRule(Join.path("/copies").to("/pages/copies/copy-list.jsf"))
                 .addRule(Join.path("/loans").to("/pages/loans/loan-list.jsf"))
                 .addRule(Join.path("/loans-requests").to("/pages/loansRequest/loanRequest-list.jsf"))
-                .addRule(Join.path("/matters").to("/pages/matters/matter-list.jsf"));
+                .addRule(Join.path("/matters").to("/pages/matters/matter-list.jsf"))
+                .addRule(Join.path("/breaches").to("/pages/breaches/breach-list.jsf"))
+                ;
 
 
 

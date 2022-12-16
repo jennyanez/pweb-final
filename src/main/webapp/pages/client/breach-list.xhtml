@@ -6,7 +6,7 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
 	<ui:define name="title">
-		    Defaulter Clients
+		    #{msgs.label_breach_list}
 	</ui:define>
 	<ui:define name="layout">
 		<h:form id="form">
@@ -16,9 +16,9 @@
 					<p:toolbarGroup align="right">
 					    <!-- Este es un button que tiene como objetivo exportar el contenido de la tabla que apunta a propiedad target
 					         del componente dataExporter. En este caso dt-users es el identificador del componente datatable -->
-						<p:commandButton value="Export" icon="pi pi-upload"
+						<p:commandButton value="#{msgs.btn_export}" icon="pi pi-upload"
 							styleClass="ui-button-help" ajax="false">
-							<p:dataExporter type="pdf" target="dt-defaulter" fileName="defaulter-clients" />
+							<p:dataExporter type="pdf" target="dt-breaches" fileName="all-the-breaches" />
 						</p:commandButton>
 					</p:toolbarGroup>
 				</p:toolbar>
@@ -34,43 +34,47 @@
                 	  con mayor detalle ver el showcase.  
                  -->
 				<p:dataTable 
-					id="dt-defaulter" 
-					widgetVar="dtDefaulter" 
-					var="defaulterUser"
-					value="#{manageDefaulterUserBean.defUsers}" 
+					id="dt-breach"
+					widgetVar="dtBreach"
+					var="breach"
+					value="#{manageBreachBean.breaches}"
 					reflow="true" paginator="true"
 					rows="10" 
 					paginatorPosition="bottom">
 					<f:facet name="header">
 						<div class="products-table-header">
-							<span style="font-weight: bold">Defaulter Users</span> <span
+							<span style="font-weight: bold">#{msgs.label_breach_list}</span> <span
 								class="filter-container ui-input-icon-left"> <i
 								class="pi pi-search"></i> <p:inputText id="globalFilter"
-									onkeyup="PF('dtDefaulter').filter()" placeholder="Search" />
+									onkeyup="PF('dtBreach').filter()" placeholder="#{msgs.input_search}" />
 							</span>
 
 						</div>
 					</f:facet>
 					
-					<p:column headerText="Client" sortBy="#{defaulterUser.clientName}"
-                        filterBy="#{defaulterUser.clientName}">
-						<h:outputText value="#{defaulterUser.clientName}"/>
+					<p:column headerText="#{msgs.label_breach_client}" sortBy="#{breach.client.name}"
+                        filterBy="#{breach.client.name}">
+						<h:outputText value="#{breach.client.name}"/>
 					</p:column>
-					<p:column headerText="Book in possession" sortBy="#{defaulterUser.bookTitlePossession}"
-						filterBy="#{defaulterUser.bookTitlePossession}">
-						<h:outputText value="#{defaulterUser.bookTitlePossession}"/>
+					<p:column headerText="#{msgs.label_breach_book}" sortBy="#{breach.copy.book.bookTitle}"
+						filterBy="#{breach.copy.book.bookTitle}">
+						<h:outputText value="#{breach.copy.book.bookTitle}"/>
 					</p:column>
-                    <p:column headerText="Amount of Days" sortBy="#{defaulterUser.amountDaysBreach}" filterBy="#{defaulterUser.amountDaysBreach}">
-						<h:outputText value="#{defaulterUser.amountDaysBreach}" />
+					<p:column headerText="#{msgs.label_breach_copy}" sortBy="#{breach.copy.copyNumber}"
+							  filterBy="#{breach.copy.copyNumber}">
+						<h:outputText value="#{breach.copy.copyNumber}"/>
+					</p:column>
+                    <p:column headerText="#{msgs.label_breach_amount_days}" sortBy="#{breach.days}" filterBy="#{breach.days}">
+						<h:outputText value="#{breach.days}" />
 					</p:column>
 					
 					<p:column exportable="false">
 						<p:commandButton class="ui-button-warning rounded-button"
 							icon="pi pi-trash" process="@this" 
-							action="#{manageDefaulterUserBean.deleteUser}" >
-							<f:setPropertyActionListener value="#{defaulter}"
-								target="#{manageDefaulterUserBean.selectedUser}" />
-							<p:confirm header="Confirmar" message="Está seguro de que desea eliminar este usuario como incumplidor?" icon="pi pi-exclamation-triangle"/>
+							action="#{manageBreachBean.deleteBreach}" >
+							<f:setPropertyActionListener value="#{breach}"
+								target="#{manageBreachBean.selectedBreach}" />
+							<p:confirm header="#{msgs.message_confirm}" message="#{msgs.message_confirm_delete_breach}" icon="pi pi-exclamation-triangle"/>
 						</p:commandButton>
 					</p:column>
 
@@ -79,9 +83,9 @@
 				<!-- Este comoponente se utiliza mucho para el caso de los eliminar, que es donde casi siempre se necesita confirmation,
 				su uso es bien sencillo, cada confirmDialog va atado a un p:confirm que es el que se definie dentro del button -->
 				<p:confirmDialog global="true" showEffect="fade" width="300">
-					<p:commandButton value="Si" type="button"
+					<p:commandButton value="#{msgs.btn_yes}" type="button"
 						styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-					<p:commandButton value="No" type="button"
+					<p:commandButton value="#{msgs.btn_no}" type="button"
 						styleClass="ui-confirmdialog-no ui-button-secondary"
 						icon="pi pi-times" />
 				</p:confirmDialog>

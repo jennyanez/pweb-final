@@ -19,8 +19,8 @@ import org.springframework.web.util.UriTemplate;
 public class BookService implements ServiceImplementation {
 	@Autowired
 	private RestService restService;
+
 	@Override
-	
 	public List<BookDto> getAll() {
 		List<BookDto> bookDtoList = new ArrayList<>();
 		try{
