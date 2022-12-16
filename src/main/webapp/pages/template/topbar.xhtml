@@ -1,29 +1,44 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+                 >
 
-    <div class="layout-topbar">
-        <a class="menu-button" tabindex="0">
-            <i class="pi pi-bars"></i>
-        </a>
-        <h:link styleClass="logo" outcome="/pages/welcome/welcome.xhtml">
-            <p:graphicImage name="logoBIB.png" library="images" />
-        </h:link>
 
-        <h:form styleClass="topbar-form">
-            <ul class="topbar-menu">
-                <div class="field">
-                    <p:selectOneMenu style="min-width: 5rem"
-                                     panelStyle="width: 5rem"
-                                     value="#{languageBean.lang}"
-                                     valueChangeListener="#{languageBean.changeLang}"
-                                     onchange="submit();">
-                        <f:selectItem itemValue="es" itemLabel="Español"/>
-                        <f:selectItem itemValue="en" itemLabel="English" />
-                    </p:selectOneMenu>
-                </div>
+        <div class="layout-topbar">
+            <a class="menu-button" tabindex="0">
+                <i class="pi pi-bars"></i>
+            </a>
+            <h:link styleClass="logo" outcome="/pages/welcome/welcome.xhtml">
+                <p:graphicImage name="logoBIB.png" library="images" />
+            </h:link>
 
-            </ul>
-        </h:form>
+            <h:form styleClass="topbar-form">
+                <ul class="topbar-menu">
 
-    </div>
+
+                </ul>
+            </h:form>
+
+            <h:form id="j_idt12" style="margin-left:5px">
+
+                <h:panelGroup styleClass="ui-inputgroup" >
+
+                    <h:panelGroup id="icon" styleClass="ui-inputgroup-addon">
+                        <i class="pi pi-globe" style="font-size:22px"/>
+                    </h:panelGroup>
+
+                    <p:menubar>
+                        <p:submenu label="#{msgs.label_change_language}" style="height:10px">
+                            <p:menuitem value="Español" action="#{languageBean.setLanguage('es')}"  ajax="false"></p:menuitem>
+                            <p:menuitem value="English" action="#{languageBean.setLanguage('en')}"  ajax="false"></p:menuitem>
+                        </p:submenu>
+                    </p:menubar>
+
+                </h:panelGroup>
+
+            </h:form>
+
+
+        </div>
+
+
 </ui:composition>

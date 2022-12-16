@@ -14,68 +14,68 @@
             </h:form>
         </div> -->
 
-		<div class="layout-menu" align="center">
-			<div class="menu-category">PRINCIPAL MENU</div>
+		<div class="layout-menu" align="left">
+			<div class="menu-category">#{msgs.label_principal_menu}</div>
 			<div class="menu-items">
 				<p:outputPanel>
-					<a tabindex="0" class="submenu-link"> Books </a>
+					<a tabindex="0" class="submenu-link"> #{msgs.link_books} </a>
 					<div class="submenu">
 						<ul>
 							<li><h:link>
-                                    Available Books
+                                    #{msgs.link_available_books}
                                 </h:link></li>
 							<li><h:link>
-                                    Borrowed Books
+                                    #{msgs.link_borrowed_books}
                                 </h:link></li>
 						</ul>
 					</div>
 				</p:outputPanel>
 				<p:outputPanel>
-					<a tabindex="0" class="submenu-link"> Book Loans </a>
+					<a tabindex="0" class="submenu-link"> #{msgs.link_book_loans} </a>
 					<div class="submenu">
 						<ul>
 							<li><h:link>
-                                    Requested Book Loans
+                                    #{msgs.link_requested_book_loans}
                                 </h:link></li>
 							<li><h:link>
-                                    Confirmed Book Loans
+                                    #{msgs.link_confirmed_book_loans}
                                 </h:link></li>
 						</ul>
 					</div>
-					<div class="menu-category">DATA MANAGEMENT</div>
+					<div class="menu-category">#{msgs.link_data_management}</div>
 					<div class="menu-items">
 						<h:link outcome="/pages/security/users/user-list.xhtml">
-                        Manage Users
+                        #{msgs.link_manage_users}
                     </h:link>
 						<h:link outcome="/pages/books/book-list.xhtml">
-                       Manage Books
+                       #{msgs.link_manage_books}
                     </h:link>
 						<h:link outcome="/pages/loans/loan-list.xhtml">
-                        Manage Loans
+                        #{msgs.link_manage_book_loans}
                     </h:link>
 						<h:link outcome="/pages/loansRequest/loanRequest-list.xhtml">
-                        Manage Loans Request
+                       #{msgs.link_manage_book_requests}
                     </h:link>
                     <h:link outcome="/pages/authors/author-list.xhtml">
-                        Manage Authors
+                        #{msgs.link_manage_authors}
                     </h:link>
                     <h:link outcome="/pages/copies/copy-list.xhtml">
-                        Manage Copy
+                        #{msgs.link_manage_copies}
                     </h:link>
                     <h:link outcome="/pages/matters/matter-list.xhtml">
-                        Manage Matter
+                        #{msgs.link_manage_matters}
                     </h:link>
-						<a tabindex="0" class="submenu-link"> Manage Clients </a>
+						<a tabindex="0" class="submenu-link"> #{msgs.link_manage_clients} </a>
 						<div class="submenu">
 							<ul>
 								<li><h:link outcome="/pages/client/defaulter-list.xhtml">
-                                    Defaulter Clients
+                                    #{msgs.link_manage_defaulter_clients}
                                 </h:link></li>
 								<li><h:link outcome="/pages/client/sanctioned-list.xhtml">
-                                    Sanctioned Clients
+                                    #{msgs.link_manage_sanctioned_clients}
                                 </h:link></li>
 								<li><h:link outcome="/pages/client/client-list.xhtml">
-                                    All the clients
+                                    #{msgs.link_manage_all_clients}
                                 </h:link></li>
 							</ul>
 						</div>

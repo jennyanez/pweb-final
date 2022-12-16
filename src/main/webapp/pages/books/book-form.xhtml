@@ -4,7 +4,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:dialog header="Book" showEffect="fade" modal="true"
+	<p:dialog header="#{msgs.form_book_title}" showEffect="fade" modal="true"
 		widgetVar="manageBookDialog" responsive="true">
 		<p:outputPanel id="manage-book-content" class="ui-fluid">
 	  	<p:outputPanel rendered="#{not empty manageBookBean.selectedBook}"> 	
@@ -12,28 +12,28 @@
 					<h:panelGroup>
 												
                     <div class="p-field">
-							<p:outputLabel for="@next">ISBN Code</p:outputLabel>
+							<p:outputLabel for="@next">#{msgs.form_book_book_isbn}</p:outputLabel>
 							<p:inputText id="code" required="true" 
 								value="#{manageBookBean.selectedBook.bookCode}" />
 							<p:message for="@previous" ></p:message>
 						</div>
 						
                         <div class="p-field">
-							<p:outputLabel for="@next">Title</p:outputLabel>
+							<p:outputLabel for="@next">#{msgs.form_book_book_title}</p:outputLabel>
 							<p:inputText id="title" required="true"
 								value="#{manageBookBean.selectedBook.bookTitle}" />
 							<p:message for="@previous"></p:message>
 						</div>
 					
                         <div class="p-field">
-							<p:outputLabel for="@next">Year Edition</p:outputLabel>
+							<p:outputLabel for="@next">#{msgs.form_book_year_edition}</p:outputLabel>
 							<p:spinner id="rotate" value="#{manageBookBean.selectedBook.yearEdition}" min="1" max="2022" rotate="true"/>
 							<p:message for="@previous"></p:message>
 						</div>
 
 						<!--editorial-->
 						<div class="p-field">
-							<p:outputLabel for="@next">Editorial</p:outputLabel>
+							<p:outputLabel for="@next">#{msgs.form_book_editorial}</p:outputLabel>
 							<p:inputText id="editorial"
 										 value="#{manageBookBean.selectedBook.editorial}" />
 							<p:message for="@previous"></p:message>
@@ -41,17 +41,16 @@
 
 						<!--Authors-->
 						<div class="p-field">
-							<p:outputLabel for="@next">Authors</p:outputLabel>
+							<p:outputLabel for="@next">#{msgs.form_book_author}</p:outputLabel>
 							<p:selectCheckboxMenu id="authors"
 												  value="#{manageBookBean.selectedAuthors}"
-												  label="Select the authors"
+												  label="#{msgs.input_select}"
 												  style="min-width: 15rem"
 												  multiple="true"
 												  filter="true"
 												  filterMatchMode="startsWith"
 												  panelStyle="width: 30rem"
 												  scrollHeight="250"
-												  emptyLabel="Please select..."
 												  updateLabel="true"
 												  required="true">
 								<!--							<p:ajax event="itemUnselect" listener="#{checkboxView.onItemUnselect}"/>-->
@@ -65,7 +64,7 @@
 					<h:panelGroup>
 						<!--country-->
 						<div class="p-field">
-							<p:outputLabel for="@next">Country Origin</p:outputLabel>
+							<p:outputLabel for="@next">#{msgs.form_book_country}</p:outputLabel>
 							<p:selectOneMenu id="country-origin"
 											 value="#{manageBookBean.selectedBook.countryOrigin}"
 											 converter="#{countryConverter}"
@@ -98,7 +97,7 @@
 
 						<!--Amount pages-->
 						<div class="p-field">
-							<p:outputLabel for="@next">Amount of pages</p:outputLabel>
+							<p:outputLabel for="@next">#{msgs.form_book_amount_pages}</p:outputLabel>
 							<p:inputNumber id="pages"
 										   value="#{manageBookBean.selectedBook.amountPages}"
 										   minValue="1"
@@ -107,11 +106,11 @@
 						</div>
 						<!--Materia-->
 						<div class="p-field">
-							<p:outputLabel for="@next">Matter</p:outputLabel>
+							<p:outputLabel for="@next">#{msgs.form_book_matter}</p:outputLabel>
 							<p:selectOneMenu
 									id="matter"
 									required="true"
-									label="Seleccione"
+									label="#{msgs.input_select}"
 									value="#{manageBookBean.selectedMatter}"
 									style="min-width: 15rem"
 									multiple="true"
@@ -119,7 +118,7 @@
 									filterMatchMode="startsWith"
 									panelStyle="width: 30rem"
 									scrollHeight="250">
-								<f:selectItem itemLabel="Select a matter" itemValue="#{null}" noSelectionOption="true"/>
+								<f:selectItem itemLabel="#{msgs.input_select}" itemValue="#{null}" noSelectionOption="true"/>
 								<f:selectItems value="#{manageBookBean.matters}" var="matter" required="true"
 											   itemValue="#{matter.matterId}" itemLabel="#{matter.matterName}"/>
 							</p:selectOneMenu>
@@ -128,13 +127,13 @@
 
 						<!--amount of copies-->
 						<div class="p-field">
-							<p:outputLabel for="@next" value="Amount of new copies"/>
+							<p:outputLabel for="@next" value="#{msgs.form_book_amount_copies}"/>
 							<p:spinner id="copies" value="#{manageBookBean.amountCopies}" min="0"/>
 						</div>
 
 						<!-- book summary -->
 						<div class="p-field">
-							<p:outputLabel for="@next">Book summary</p:outputLabel>
+							<p:outputLabel for="@next">#{msgs.form_book_summary}</p:outputLabel>
 							<p:inputTextarea rows="5" cols="30" counter="display" maxlength="180"
 											 counterTemplate="{0} characters remaining." autoResize="false"/>
 							<h:outputText id="display" class="block" />
@@ -146,10 +145,10 @@
 		</p:outputPanel>
 
 		<f:facet name="footer">
-			<p:commandButton value="Salvar" icon="pi pi-check"
+			<p:commandButton value="#{msgs.btn_save}" icon="pi pi-check"
 				actionListener="#{manageBookBean.saveBook}"
 				update="manage-book-content" process="manage-book-content @this"/>
-			<p:commandButton value="Cancelar" icon="pi pi-times"
+			<p:commandButton value="#{msgs.btn_cancel}" icon="pi pi-times"
 				onclick="PF('manageBookDialog').hide()" class="ui-button-secondary"/>
 		</f:facet>
 	</p:dialog>

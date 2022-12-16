@@ -1,26 +1,23 @@
 package cu.edu.cujae.pweb.bean;
 
-import cu.edu.cujae.pweb.utils.JsfUtils;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.component.UIViewRoot;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
-import java.util.Locale;
-import java.util.logging.Logger;
+
+import cu.edu.cujae.pweb.utils.JsfUtils;
 
 @ManagedBean
 @SessionScoped
 public class LanguageBean {
-    private Locale locale;
-    private String lang;
+
+    private  Locale locale;
 
     @PostConstruct
     public void init() {
         locale = JsfUtils.getCurrentLocale();
-
     }
 
     public Locale getLocale() {
@@ -31,25 +28,11 @@ public class LanguageBean {
         return locale.getLanguage();
     }
 
-    public String getLang() {
-        return lang;
+
+    public void setLanguage(String language) {
+        locale = new Locale(language);
+        FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
     }
 
-    public void setLang(String lang) {
-        this.lang = lang;
-    }
-
-//    public void setLanguage() {
-//        locale = new Locale(this.lang);
-//        FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
-//    }
-
-    public void changeLang(ValueChangeEvent e) {
-        Object newValue = e.getNewValue();
-        this.lang = newValue.toString();
-        Logger.getAnonymousLogger().severe("new lang ==> " + newValue.toString());
-        UIViewRoot viewRoot = FacesContext.getCurrentInstance().getViewRoot();
-        viewRoot.setLocale(new Locale(newValue.toString()));
-    }
 
 }

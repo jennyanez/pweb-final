@@ -4,50 +4,50 @@
 				xmlns:ui="http://java.sun.com/jsf/facelets"
 				xmlns:p="http://primefaces.org/ui">
 
-	<p:dialog header="Usuario" showEffect="fade" modal="true"
+	<p:dialog header="#{msgs.form_user_title}" showEffect="fade" modal="true"
 			  widgetVar="manageUserDialog" responsive="true">
 		<p:outputPanel id="manage-user-content" class="ui-fluid">
 			<p:outputPanel rendered="#{not empty manageUserBean.selectedUser}">
 				<p:panelGrid layout="grid" columns="2">
 					<h:panelGroup>
 						<div class="p-field">
-							<p:outputLabel for="@next">Usuario</p:outputLabel>
+							<p:outputLabel for="@next">#{msgs.form_user_username}</p:outputLabel>
 							<p:inputText
 									id="username"
 									required="true"
-									requiredMessage="Usuario requerido"
+									requiredMessage="#{msgs.form_user_required_fields}"
 									onclick="setTimeout(function() { $('[id$=msgUser]').hide(1000); }, 2000);"
 									value="#{manageUserBean.selectedUser.username}" />
 							<p:message for="username" id = "msgUser"></p:message>
 						</div>
 						<div class="p-field">
-							<p:outputLabel for="@next">Frist name</p:outputLabel>
+							<p:outputLabel for="@next">#{msgs.form_user_firstName}</p:outputLabel>
 							<p:inputText
 									id="firstname"
 									required="true"
-									requiredMessage="Nombre requerido"
+									requiredMessage="#{msgs.form_user_required_fields}"
 									oninvalid="setTimeout(function() { $('[id$=msgName]').hide(1000); }, 2000);"
 									value="#{manageUserBean.selectedUser.firstName}" />
 							<p:message for="firstname" id="msgName"></p:message>
 						</div>
 						<div class="p-field">
-							<p:outputLabel for="@next">Last name</p:outputLabel>
+							<p:outputLabel for="@next">#{msgs.form_user_lastName}</p:outputLabel>
 							<p:inputText
 									id="lastname"
 									required="true"
-									requiredMessage="Apellidos requeridos"
+									requiredMessage="#{msgs.form_user_required_fields}"
 									onclick="setTimeout(function() { $('[id$=msgLastname]').hide(1000); }, 2000);"
 									value="#{manageUserBean.selectedUser.lastName}" />
 							<p:message for="lastname" id="msgLastname"></p:message>
 						</div>
 						<div class="p-field">
-							<p:outputLabel for="@next">Correo</p:outputLabel>
+							<p:outputLabel for="@next">#{msgs.form_user_email}</p:outputLabel>
 							<p:inputText
 									id="email"
 									required="true"
 									value="#{manageUserBean.selectedUser.email}"
-									validatorMessage="Email mal formado"
-									requiredMessage="Email requerido"
+									validatorMessage="#{msgs.form_email_bad_format}"
+									requiredMessage="#{msgs.form_user_required_fields}"
 									onclick="setTimeout(function() { $('[id$=msgEmail]').hide(1000); }, 2000);"
 							>
 								<f:validateRegex
@@ -58,13 +58,13 @@
 					</h:panelGroup>
 					<h:panelGroup>
 						<div class="p-field">
-							<p:outputLabel for="@next">Roles</p:outputLabel>
+							<p:outputLabel for="@next">#{msgs.form_user_role}</p:outputLabel>
 							<p:selectCheckboxMenu
 									id="multiple"
 									required="true"
-									value="#{manageUserBean.selectedRoles}" label="Seleccione un rol"
+									value="#{manageUserBean.selectedRoles}" label="#{msgs.input_select}"
 									style="min-width: 15rem" multiple="true" filter="true"
-									requiredMessage="Selecione un rol"
+									requiredMessage="#{msgs.form_user_required_fields}"
 									onHide="setTimeout(function() { $('[id$=msgRoles]').hide(1000); }, 2000);"
 									filterMatchMode="startsWith" panelStyle="width: 30rem"
 									scrollHeight="250">
@@ -74,10 +74,10 @@
 							<p:message for="multiple" id="msgRoles" ></p:message>
 						</div>
 						<div class="p-field">
-							<p:outputLabel for="@next" >Contraseña</p:outputLabel>
+							<p:outputLabel for="@next">#{msgs.form_user_password}</p:outputLabel>
 							<p:password id="password1" required="true"
-										requiredMessage="Contraseña requerida"
-										validatorMessage="Las contraseñas deben coincidir"
+										requiredMessage="#{msgs.form_user_required_fields}"
+										validatorMessage="#{msgs.form_passwords_not_match}"
 										onclick="setTimeout(function() { $('[id$=msgpass1]').hide(1000); }, 2000);"
 										value="#{manageUserBean.selectedUser.password}"
 										match="password2">
@@ -85,10 +85,10 @@
 							<p:message for="password1" id="msgpass1" ></p:message>
 						</div>
 						<div class="p-field">
-							<p:outputLabel for="@next" >Repetir contraseña</p:outputLabel>
+							<p:outputLabel for="@next">#{msgs.form_user_repeat_password}</p:outputLabel>
 							<p:password id="password2" required="true"
-										requiredMessage="Contraseña requerida"
-										validatorMessage="Las contraseñas deben coincidir"
+										requiredMessage="#{msgs.form_user_required_fields}"
+										validatorMessage="#{msgs.form_passwords_not_match}"
 										onclick="setTimeout(function() { $('[id$=msgpass2]').hide(1000); }, 2000);"
 										value="#{manageUserBean.selectedUser.password}">
 							</p:password>
@@ -101,10 +101,10 @@
 		</p:outputPanel>
 
 		<f:facet name="footer">
-			<p:commandButton value="Salvar" icon="pi pi-check"
+			<p:commandButton value="#{msgs.btn_save}" icon="pi pi-check"
 							 actionListener="#{manageUserBean.saveUser}"
 							 update="manage-user-content" process="manage-user-content @this" />
-			<p:commandButton value="Cancelar" icon="pi pi-times"
+			<p:commandButton value="#{msgs.btn_cancel}" icon="pi pi-times"
 							 onclick="PF('manageUserDialog').hide()" class="ui-button-secondary"
 							 action="#{manageUserBean.onCancel()}" actionListener="#{manageUserBean.onCancel}" process="@this"/>
 		</f:facet>

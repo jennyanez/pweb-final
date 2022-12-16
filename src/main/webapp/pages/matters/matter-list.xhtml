@@ -6,7 +6,7 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
     <ui:define name="title">
-        Matter List
+        #{msgs.label_matter_list}
     </ui:define>
     <ui:define name="layout">
         <h:form id="form">
@@ -21,7 +21,7 @@
                         * La propiedad onComplete ejecuta un code en Javascript una vez finalizada el action del button. También es posible ejecutar
                           code en Javascript desde el bean de Jsf
                         -->
-                        <p:commandButton value="New" icon="pi pi-plus"
+                        <p:commandButton value="#{msgs.btn_new}" icon="pi pi-plus"
                                          actionListener="#{manageMatterBean.openNew}"
                                          update=":form:manage-matter-content"
                                          oncomplete="PF('manageMatterDialog').show()"
@@ -32,7 +32,7 @@
                     <p:toolbarGroup align="right">
                         <!-- Este es un button que tiene como objetivo exportar el contenido de la tabla que apunta a propiedad target
                              del componente dataExporter. En este caso dt-users es el identificador del componente datatable -->
-                        <p:commandButton value="Export" icon="pi pi-upload"
+                        <p:commandButton value="#{msgs.btn_export}" icon="pi pi-upload"
                                          styleClass="ui-button-help" ajax="false">
                             <p:dataExporter type="pdf" target="dt-matter" fileName="matters" />
                         </p:commandButton>
@@ -59,16 +59,19 @@
                         paginatorPosition="bottom">
                     <f:facet name="header">
                         <div class="products-table-header">
-                            <span style="font-weight: bold">Matter</span> <span
-                                class="filter-container ui-input-icon-left"> <i
-                                class="pi pi-search"></i> <p:inputText id="globalFilter"
-                                                                       onkeyup="PF('dtMatter').filter()" placeholder="Search" />
+                            <span style="font-weight: bold">#{msgs.form_matter_title}</span>
+                            <span
+                                class="filter-container ui-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <p:inputText id="globalFilter"
+                                             onkeyup="PF('dtMatter').filter()"
+                                             placeholder="#{msgs.input_search}" />
 							</span>
 
                         </div>
                     </f:facet>
 
-                    <p:column headerText="Matter Name" sortBy="#{matter.matterName}"
+                    <p:column headerText="#{msgs.form_matter_name}" sortBy="#{matter.matterName}"
                               filterBy="#{matter.matterName}">
                         <h:outputText value="#{matter.matterName}"/>
                     </p:column>
@@ -88,7 +91,7 @@
                                          action="#{manageMatterBean.deleteMatter}" >
                             <f:setPropertyActionListener value="#{matter}"
                                                          target="#{manageMatterBean.selectedMatter}" />
-                            <p:confirm header="Confirmar" message="Está seguro de eliminar esta materia?" icon="pi pi-exclamation-triangle"/>
+                            <p:confirm header="#{msgs.message_confirm}" message="#{msgs.message_confirm_delete_matter}" icon="pi pi-exclamation-triangle"/>
                         </p:commandButton>
                     </p:column>
 
@@ -100,9 +103,9 @@
                 <!-- Este comoponente se utiliza mucho para el caso de los eliminar, que es donde casi siempre se necesita confirmation,
                 su uso es bien sencillo, cada confirmDialog va atado a un p:confirm que es el que se definie dentro del button -->
                 <p:confirmDialog global="true" showEffect="fade" width="300">
-                    <p:commandButton value="Si" type="button"
+                    <p:commandButton value="#{msgs.btn_yes}" type="button"
                                      styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-                    <p:commandButton value="No" type="button"
+                    <p:commandButton value="#{msgs.btn_no}" type="button"
                                      styleClass="ui-confirmdialog-no ui-button-secondary"
                                      icon="pi pi-times" />
                 </p:confirmDialog>

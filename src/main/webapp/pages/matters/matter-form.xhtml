@@ -4,7 +4,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
 
-  <p:dialog header="matter" showEffect="fade" modal="true"
+  <p:dialog header="#{msgs.form_matter_title}" showEffect="fade" modal="true"
             widgetVar="manageMatterDialog" responsive="true">
     <p:outputPanel id="manage-matter-content" class="ui-fluid">
       <p:outputPanel rendered="#{not empty manageMatterBean.selectedMatter}">
@@ -12,7 +12,7 @@
           <h:panelGroup>
 
             <div class="p-field">
-              <p:outputLabel for="@next">Full Name</p:outputLabel>
+              <p:outputLabel for="@next">#{msgs.form_matter_name}</p:outputLabel>
               <p:inputText id="code" required="true"
                            value="#{manageMatterBean.selectedMatter.matterName}" />
               <p:message for="@previous" ></p:message>
@@ -25,10 +25,10 @@
     </p:outputPanel>
 
     <f:facet name="footer">
-      <p:commandButton value="Salvar" icon="pi pi-check"
+      <p:commandButton value="#{msgs.btn_save}" icon="pi pi-check"
                        actionListener="#{manageMatterBean.saveMatter}"
                        update="manage-matter-content" process="manage-matter-content @this" />
-      <p:commandButton value="Cancelar" icon="pi pi-times"
+      <p:commandButton value="#{msgs.btn_cancel}" icon="pi pi-times"
                        onclick="PF('manageMatterDialog').hide()" class="ui-button-secondary" />
     </f:facet>
   </p:dialog>

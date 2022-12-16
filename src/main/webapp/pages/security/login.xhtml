@@ -4,7 +4,7 @@
     xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <title>Login</title>
+        <title>#{msgs.label_login}</title>
     	<h:outputStylesheet name="primeflex.min.css" library="css"></h:outputStylesheet>
     </h:head>
 
@@ -18,7 +18,7 @@
 			    <div class="p-col">
 			       <p:card style="width: auto">
 					    <f:facet name="title">
-					        Login 
+							#{msgs.label_login}
 					    </f:facet>
 					    <h:outputLabel value="user: admin y pass: 1234"></h:outputLabel>
 						<p:panelGrid columns="1" layout="grid">

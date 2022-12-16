@@ -4,7 +4,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:dialog header="Copy" showEffect="fade" modal="true"
+	<p:dialog header="#{msgs.form_copy_title}" showEffect="fade" modal="true"
 		widgetVar="manageCopyDialog" responsive="true">
 		<p:outputPanel id="manage-copy-content" class="ui-fluid">
 	  	<p:outputPanel rendered="#{not empty manageCopyBean.selectedCopy}"> 	
@@ -12,18 +12,18 @@
 					<h:panelGroup>
 						
                     	<div class="p-field">
-							<p:outputLabel for="@next">Copy Number</p:outputLabel>
+							<p:outputLabel for="@next">#{msgs.form_copy_number}</p:outputLabel>
 							<p:inputText id="copyNumber" required="true" 
 								value="#{manageCopyBean.selectedCopy.copyNumber}" />
 							<p:message for="@previous" ></p:message>
 						</div>
 						
 						<div class="p-field">
-						  <p:outputLabel for="@next">Book</p:outputLabel>
+						  <p:outputLabel for="@next">#{msgs.form_copy_book}</p:outputLabel>
 							<p:selectOneMenu 
 									id="driver1" 
 									required="true" 
-									label="Seleccione"
+									label="#{msgs.input_select}"
                                     value="#{manageCopyBean.selectedBook}"                                          
                                     style="min-width: 15rem" 
                                     multiple="true" 
@@ -31,7 +31,7 @@
                                     filterMatchMode="startsWith" 
                                     panelStyle="width: 30rem"
                                     scrollHeight="250">
-                           		<f:selectItem itemLabel="Seleccione" itemValue="" noSelectionOption="true"/>
+                           		<f:selectItem itemLabel="#{msgs.input_select}" itemValue="" noSelectionOption="true"/>
                                 <f:selectItems value="#{manageCopyBean.books}" var="book1"
                                                    itemValue="#{book1.bookId}" itemLabel="#{book1.bookTitle}"/>                                  
                             </p:selectOneMenu>
@@ -46,10 +46,10 @@
 		</p:outputPanel>
 
 		<f:facet name="footer">
-			<p:commandButton value="Salvar" icon="pi pi-check"
+			<p:commandButton value="#{msgs.btn_save}" icon="pi pi-check"
 				actionListener="#{manageCopyBean.saveCopy}"
 				update="manage-copy-content" process="manage-copy-content @this" />
-			<p:commandButton value="Cancelar" icon="pi pi-times"
+			<p:commandButton value="#{msgs.btn_cancel}" icon="pi pi-times"
 				onclick="PF('manageCopyDialog').hide()" class="ui-button-secondary" />
 		</f:facet>
 	</p:dialog>

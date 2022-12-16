@@ -6,7 +6,7 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
 	<ui:define name="title">
-		Listado de usuarios
+		#{msgs.label_user_list}
 	</ui:define>
 	<ui:define name="layout">
 		<h:form id="form">
@@ -21,7 +21,7 @@
                         * La propiedad onComplete ejecuta un code en Javascript una vez finalizada el action del button. También es posible ejecutar
                           code en Javascript desde el bean de Jsf
                         -->
-						<p:commandButton value="Nuevo" icon="pi pi-plus"
+						<p:commandButton value="#{msgs.btn_new}" icon="pi pi-plus"
 										 actionListener="#{manageUserBean.openNew}"
 										 update=":form:manage-user-content"
 										 oncomplete="PF('manageUserDialog').show()"
@@ -32,7 +32,7 @@
 					<p:toolbarGroup align="right">
 						<!-- Este es un button que tiene como objetivo exportar el contenido de la tabla que apunta a propiedad target
                              del componente dataExporter. En este caso dt-users es el identificador del componente datatable -->
-						<p:commandButton value="Export" icon="pi pi-upload"
+						<p:commandButton value="#{msgs.btn_export}" icon="pi pi-upload"
 										 styleClass="ui-button-help" ajax="false">
 							<p:dataExporter type="pdf" target="dt-users" fileName="users" />
 						</p:commandButton>
@@ -54,33 +54,33 @@
 							 rows="10" paginatorPosition="bottom">
 					<f:facet name="header">
 						<div class="products-table-header">
-							<span style="font-weight: bold">Usuarios</span> <span
+							<span style="font-weight: bold">#{msgs.form_user_title}</span> <span
 								class="filter-container ui-input-icon-left"> <i
 								class="pi pi-search"></i> <p:inputText id="globalFilter"
-																	   onkeyup="PF('dtUsers').filter()" placeholder="Buscar" />
+																	   onkeyup="PF('dtUsers').filter()" placeholder="#{msgs.input_search}" />
 							</span>
 
 						</div>
 					</f:facet>
 
 
-					<p:column headerText="User" sortBy="#{user.username}" filterBy="#{user.username}">
+					<p:column headerText="#{msgs.form_user_username}" sortBy="#{user.username}" filterBy="#{user.username}">
 						<h:outputText value="#{user.username}" />
 					</p:column>
-					<p:column headerText="First name" sortBy="#{user.firstName}" filterBy="#{user.firstName}">
+					<p:column headerText="#{msgs.form_user_firstName}" sortBy="#{user.firstName}" filterBy="#{user.firstName}">
 						<h:outputText value="#{user.firstName}" />
 					</p:column>
-					<p:column headerText="Last name" sortBy="#{user.lastName}" filterBy="#{user.lastName}">
+					<p:column headerText="#{msgs.form_user_lastName}" sortBy="#{user.lastName}" filterBy="#{user.lastName}">
 						<h:outputText value="#{user.lastName}" />
 					</p:column>
-					<p:column headerText="Password" sortBy="#{user.password}" filterBy="#{user.password}">
-						<h:outputText value="#{user.password}" />
-					</p:column>
-					<p:column headerText="E-mail" sortBy="#{user.email}"
+<!--					<p:column headerText="#{msgs.form_user_password}" sortBy="#{user.password}" filterBy="#{user.password}">-->
+<!--						<h:outputText value="#{user.password}" />-->
+<!--					</p:column>-->
+					<p:column headerText="#{msgs.form_user_email}" sortBy="#{user.email}"
 							  filterBy="#{user.email}">
 						<h:outputText value="#{user.email}" />
 					</p:column>
-					<p:column headerText="Roles" sortBy="#{user.roles}"
+					<p:column headerText="#{msgs.form_user_role}" sortBy="#{user.roles}"
 							  filterBy="#{user.roles}">
 						<h:outputText value="#{user.rolesName}" />
 					</p:column>
@@ -99,7 +99,7 @@
 										 action="#{manageUserBean.deleteUser}" >
 							<f:setPropertyActionListener value="#{user}"
 														 target="#{manageUserBean.selectedUser}" />
-							<p:confirm header="Confirmar" message="Está seguro de eliminar al usuario?" icon="pi pi-exclamation-triangle"/>
+							<p:confirm header="#{msgs.message_confirm}" message="#{msgs.message_confirm_delete_user}" icon="pi pi-exclamation-triangle"/>
 						</p:commandButton>
 					</p:column>
 
@@ -111,9 +111,9 @@
 				<!-- Este comoponente se utiliza mucho para el caso de los eliminar, que es donde casi siempre se necesita confirmation,
 				su uso es bien sencillo, cada confirmDialog va atado a un p:confirm que es el que se definie dentro del button -->
 				<p:confirmDialog global="true" showEffect="fade" width="300">
-					<p:commandButton value="Si" type="button"
+					<p:commandButton value="#{msgs.btn_yes}" type="button"
 									 styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-					<p:commandButton value="No" type="button"
+					<p:commandButton value="#{msgs.btn_no}" type="button"
 									 styleClass="ui-confirmdialog-no ui-button-secondary"
 									 icon="pi pi-times" />
 				</p:confirmDialog>

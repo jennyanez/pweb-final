@@ -6,7 +6,7 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
 	<ui:define name="title">
-		    Loans List
+		    #{msgs.label_loan_list}
 	</ui:define>
 	<ui:define name="layout">
 		<h:form id="form">
@@ -21,7 +21,7 @@
 					    * La propiedad onComplete ejecuta un code en Javascript una vez finalizada el action del button. También es posible ejecutar
 					      code en Javascript desde el bean de Jsf
 					    -->
-						<p:commandButton value="New" icon="pi pi-plus"
+						<p:commandButton value="#{msgs.btn_new}" icon="pi pi-plus"
 							actionListener="#{manageLoanBean.openNew}"
 							update=":form:manage-loan-content"
 							oncomplete="PF('manageLoanDialog').show()"
@@ -32,7 +32,7 @@
 					<p:toolbarGroup align="right">
 					    <!-- Este es un button que tiene como objetivo exportar el contenido de la tabla que apunta a propiedad target
 					         del componente dataExporter. En este caso dt-users es el identificador del componente datatable -->
-						<p:commandButton value="Export" icon="pi pi-upload"
+						<p:commandButton value="#{msgs.btn_export}" icon="pi pi-upload"
 							styleClass="ui-button-help" ajax="false">
 							<p:dataExporter type="pdf" target="dt-loan" fileName="loans" />
 						</p:commandButton>
@@ -62,24 +62,24 @@
 							<span style="font-weight: bold">Loans</span> <span
 								class="filter-container ui-input-icon-left"> <i
 								class="pi pi-search"></i> <p:inputText id="globalFilter"
-									onkeyup="PF('dtLoan').filter()" placeholder="Search" />
+									onkeyup="PF('dtLoan').filter()" placeholder="#{msgs.input_search}" />
 							</span>
 
 						</div>
 					</f:facet>
 					
-					<p:column headerText="Book" sortBy="#{loan.book}"
+					<p:column headerText="#{msgs.form_loan_book}" sortBy="#{loan.book}"
 						filterBy="#{loan.book}">
 						<h:outputText value="#{loan.book}"/>
 					</p:column>
-					<p:column headerText="User" sortBy="#{loan.user}"
+					<p:column headerText="#{msgs.form_client_title}" sortBy="#{loan.user}"
                         filterBy="#{loan.book}">
 						<h:outputText value="#{loan.user}"/>
 					</p:column>
-                    <p:column headerText="Loan Date" sortBy="#{loan.loanDate}" filterBy="#{loan.loanDate}">
+                    <p:column headerText="#{msgs.label_loan_date}" sortBy="#{loan.loanDate}" filterBy="#{loan.loanDate}">
 						<h:outputText value="#{loan.loanDate}" />
 					</p:column>
-                    <p:column headerText="Return Date" sortBy="#{loan.returnDate}" filterBy="#{loan.returnDate}">
+                    <p:column headerText="#{msgs.label_loan_return_date}" sortBy="#{loan.returnDate}" filterBy="#{loan.returnDate}">
 						<h:outputText value="#{loan.returnDate}" />
 					</p:column>
 					
@@ -98,7 +98,7 @@
 							action="#{manageLoanBean.deleteLoan}" >
 							<f:setPropertyActionListener value="#{loan}"
 								target="#{manageLoanBean.selectedLoan}" />
-							<p:confirm header="Confirmar" message="Está seguro de eliminar el prestamo?" icon="pi pi-exclamation-triangle"/>
+							<p:confirm header="#{msgs.message_confirm}" message="#{msgs.message_confirm_delete_loan}" icon="pi pi-exclamation-triangle"/>
 						</p:commandButton>
 					</p:column>
 
@@ -110,9 +110,9 @@
 				<!-- Este comoponente se utiliza mucho para el caso de los eliminar, que es donde casi siempre se necesita confirmation,
 				su uso es bien sencillo, cada confirmDialog va atado a un p:confirm que es el que se definie dentro del button -->
 				<p:confirmDialog global="true" showEffect="fade" width="300">
-					<p:commandButton value="Si" type="button"
+					<p:commandButton value="#{msgs.btn_yes}" type="button"
 						styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-					<p:commandButton value="No" type="button"
+					<p:commandButton value="#{msgs.btn_no}" type="button"
 						styleClass="ui-confirmdialog-no ui-button-secondary"
 						icon="pi pi-times" />
 				</p:confirmDialog>

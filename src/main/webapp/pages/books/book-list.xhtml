@@ -6,7 +6,7 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
 	<ui:define name="title">
-		    Books List
+		    #{msgs.label_book_list}
 	</ui:define>
 	<ui:define name="layout">
 		<h:form id="form">
@@ -21,7 +21,7 @@
 					    * La propiedad onComplete ejecuta un code en Javascript una vez finalizada el action del button. También es posible ejecutar
 					      code en Javascript desde el bean de Jsf
 					    -->
-						<p:commandButton value="New" icon="pi pi-plus"
+						<p:commandButton value="#{msgs.btn_new}" icon="pi pi-plus"
 							actionListener="#{manageBookBean.openNew}"
 							update=":form:manage-book-content"
 							oncomplete="PF('manageBookDialog').show()"
@@ -34,7 +34,7 @@
 					    <!-- Este es un button que tiene como objetivo exportar el contenido de la tabla que apunta a propiedad target
 					         del componente dataExporter. En este caso dt-book es el identificador del componente datatable -->
 						
-						<p:commandButton value="Export" icon="pi pi-upload"
+						<p:commandButton value="#{msgs.btn_export}" icon="pi pi-upload"
 							styleClass="ui-button-help" ajax="false">
 							<p:dataExporter type="pdf" target="dt-book" fileName="books" />
 						</p:commandButton>
@@ -57,26 +57,26 @@
 					rows="10" paginatorPosition="bottom">
 					<f:facet name="header">
 						<div class="products-table-header">
-							<span style="font-weight: bold">Books</span> <span
+							<span style="font-weight: bold">#{msgs.form_book_title}</span> <span
 								class="filter-container ui-input-icon-left"> <i
 								class="pi pi-search"></i> <p:inputText id="globalFilter"
-									onkeyup="PF('dtBook').filter()" placeholder="Search" />
+									onkeyup="PF('dtBook').filter()" placeholder="#{msgs.input_search}" />
 							</span>
 						</div>
 					</f:facet>
 					
-					<p:column headerText="ISBN Code" sortBy="#{book.bookCode}"
+					<p:column headerText="#{msgs.form_book_book_isbn}" sortBy="#{book.bookCode}"
 						filterBy="#{book.bookCode}">
 						<h:outputText value="#{book.bookCode}"/>
 					</p:column>
-					<p:column headerText="Title" sortBy="#{book.bookTitle}"
+					<p:column headerText="#{msgs.form_book_book_title}" sortBy="#{book.bookTitle}"
                         filterBy="#{book.bookTitle}">
 						<h:outputText value="#{book.bookTitle}"/>
 					</p:column>
-                    <p:column headerText="Author" sortBy="#{book.authorsName}" filterBy="#{bookauthorsName}">
+                    <p:column headerText="#{msgs.form_book_author}" sortBy="#{book.authorsName}" filterBy="#{bookauthorsName}">
 						<h:outputText value="#{book.authorsName}" />
 					</p:column>
-                    <p:column headerText="Matter" sortBy="#{book.matter.matterName}" filterBy="#{book.matter.matterName}">
+                    <p:column headerText="#{msgs.form_book_matter}" sortBy="#{book.matter.matterName}" filterBy="#{book.matter.matterName}">
 						<h:outputText value="#{book.matter.matterName}" />
 					</p:column>
 					
@@ -96,7 +96,7 @@
 							action="#{manageBookBean.deleteBook}" >
 							<f:setPropertyActionListener value="#{book}"
 								target="#{manageBookBean.selectedBook}" />
-							<p:confirm header="Confirmar" message="¿Está seguro de eliminar el libro?" icon="pi pi-exclamation-triangle"/>
+							<p:confirm header="#{msgs.message_confirm}" message="#{msgs.message_confirm_delete_book}" icon="pi pi-exclamation-triangle"/>
 						</p:commandButton>
 					</p:column>
 
@@ -108,9 +108,9 @@
 				<!-- Este comoponente se utiliza mucho para el caso de los eliminar, que es donde casi siempre se necesita confirmation,
 				su uso es bien sencillo, cada confirmDialog va atado a un p:confirm que es el que se definie dentro del button -->
 				<p:confirmDialog global="true" showEffect="fade" width="300">
-					<p:commandButton value="Si" type="button"
+					<p:commandButton value="#{msgs.btn_yes}" type="button"
 						styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-					<p:commandButton value="No" type="button"
+					<p:commandButton value="#{msgs.btn_no}" type="button"
 						styleClass="ui-confirmdialog-no ui-button-secondary"
 						icon="pi pi-times" />
 				</p:confirmDialog>
