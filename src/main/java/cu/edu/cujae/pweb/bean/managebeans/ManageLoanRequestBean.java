@@ -2,14 +2,12 @@ package cu.edu.cujae.pweb.bean.managebeans;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
-import cu.edu.cujae.pweb.service.BookService;
 import cu.edu.cujae.pweb.service.ClientService;
 import cu.edu.cujae.pweb.service.CopyService;
 import cu.edu.cujae.pweb.service.LoanRequestService;
@@ -35,16 +33,12 @@ public class ManageLoanRequestBean {
 	private LoanRequestDto selectedLoanRequest;
 	private Long selectedCopy;
 	private Long selectedBook;
-	
-	
-	//El cliente se selecciona del mismo usuario
 	private Long selectedClient;
+	
 	
 	private List<LoanRequestDto> loansRequest;
 	private List<CopyDto> copies;
-	private List<LoanDto> loans;
-	private List<BookDto> books;
-	
+	private List<ClientDto> clients;	
 	private List<Long> copiasPrestadas;
 	
     @Autowired
@@ -68,10 +62,9 @@ public class ManageLoanRequestBean {
 	@PostConstruct
     public void init() {
 	    loansRequest = loanRequestService.getAll();
-	    loans = loanService.getAll();
+	    clients = clientService.getAll();
 	    copiasPrestadas = loanService.idCopies();
 	    copies = copyService.copyAvailable(copiasPrestadas);
-	    //copies = copyService.getAll();
 	    
     }
 	
@@ -103,8 +96,7 @@ public class ManageLoanRequestBean {
 		
 		if (this.selectedLoanRequest.getId() == null) {
          
-           //this.selectedLoanRequest.setClient(this.clientService.getById(selectedClient));
-		   this.selectedLoanRequest.setClient(this.clientService.getById(110L));
+           this.selectedLoanRequest.setClient(this.clientService.getById(selectedClient));
 		   this.selectedLoanRequest.setLoanRequestDate(new Date());
            this.selectedLoanRequest.setCopy(this.copyService.getById(selectedCopy));
            this.selectedLoanRequest.setBook(this.copyService.getById(selectedCopy).getBook());
@@ -116,8 +108,7 @@ public class ManageLoanRequestBean {
         }
         else {
         	
-        	//this.selectedLoanRequest.setClient(this.clientService.getById(selectedClient));
-        	this.selectedLoanRequest.setClient(this.clientService.getById(110L));
+        	this.selectedLoanRequest.setClient(this.clientService.getById(selectedClient));
  		    this.selectedLoanRequest.setLoanRequestDate(new Date());
             this.selectedLoanRequest.setCopy(this.copyService.getById(selectedCopy));
             this.selectedLoanRequest.setBook(this.copyService.getById(selectedCopy).getBook());
@@ -202,20 +193,13 @@ public class ManageLoanRequestBean {
 	}
 
 	public List<CopyDto> getCopies() {
-		copies = copyService.copyAvailable(copiasPrestadas);
+		copiasPrestadas = loanService.idCopies();
+	    copies = copyService.copyAvailable(copiasPrestadas);
 		return copies;
 	}
 
 	public void setCopies(List<CopyDto> copies) {
 		this.copies = copies;
-	}
-
-	public List<LoanDto> getLoans() {
-		return loans;
-	}
-
-	public void setLoans(List<LoanDto> loans) {
-		this.loans = loans;
 	}
 
 	public List<Long> getCopiasPrestadas() {
@@ -226,12 +210,14 @@ public class ManageLoanRequestBean {
 		this.copiasPrestadas = copiasPrestadas;
 	}
 
-	public List<BookDto> getBooks() {
-		return books;
+
+	public List<ClientDto> getClients() {
+		clients = clientService.getAll();
+		return clients;
 	}
 
-	public void setBooks(List<BookDto> books) {
-		this.books = books;
+	public void setClients(List<ClientDto> clients) {
+		this.clients = clients;
 	}
     
 }

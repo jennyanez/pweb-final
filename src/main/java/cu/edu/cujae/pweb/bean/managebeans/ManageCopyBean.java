@@ -124,6 +124,7 @@ public class ManageCopyBean {
 
 
 	public List<CopyDto> getCopies() {
+		copies = copyService.getAll();
 		return copies;
 	}
 
@@ -134,16 +135,13 @@ public class ManageCopyBean {
 
 
 	public List<BookDto> getBooks() {
+		 books = bookService.getAll();
 		return books;
 	}
 
 
 	public void setBooks(List<BookDto> books) {
 		this.books = books;
-	}
-
-	public void updateAjax(){
-		PrimeFaces.current().ajax().update("form:dt-copy");
 	}
     
 }

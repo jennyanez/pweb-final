@@ -1,6 +1,5 @@
 package cu.edu.cujae.pweb.service;
 
-import cu.edu.cujae.pweb.dto.CopyDto;
 import cu.edu.cujae.pweb.dto.LoanRequestDto;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;

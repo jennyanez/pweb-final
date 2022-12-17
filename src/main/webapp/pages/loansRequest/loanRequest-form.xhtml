@@ -10,7 +10,26 @@
 	  	<p:outputPanel rendered="#{not empty manageLoanRequestBean.selectedLoanRequest}"> 	
 				<p:panelGrid layout="grid" columns="1">
 					<h:panelGroup>
-					 
+					 <div class="p-field">
+						  <p:outputLabel for="@next">Client</p:outputLabel>
+							<p:selectOneMenu 
+									id="client" 
+									required="true" 
+									label="Seleccione"
+                                    value="#{manageLoanRequestBean.selectedClient}"                                          
+                                    style="min-width: 15rem" 
+                                    multiple="true" 
+                                    filter="true"
+                                    filterMatchMode="startsWith" 
+                                    panelStyle="width: 30rem"
+                                    scrollHeight="250">
+                           		<f:selectItem itemLabel="Seleccione" itemValue="" noSelectionOption="true"/>
+                                <f:selectItems value="#{manageLoanRequestBean.clients}" var="clientVar"
+                                                   itemValue="#{clientVar.clientId}" itemLabel="#{clientVar.name}"/>                                  
+                            </p:selectOneMenu>
+                                
+                            <p:message for="@previous" ></p:message>
+                        </div>
 					<div>
 						<p:selectOneListbox 
 									id="copyA" 

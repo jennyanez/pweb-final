@@ -85,8 +85,7 @@ public class LoanService implements ServiceImplementation {
 	}
 	
 	public List<Long> idCopies(){
-		List<Long> idCopies = new ArrayList<>();
-		
+		List<Long> idCopies = new ArrayList<>();		
 		List<LoanDto> loans = getAll();
 		
 		for (int i = 0;i<loans.size();i++) {
@@ -94,4 +93,5 @@ public class LoanService implements ServiceImplementation {
 		}
 			return idCopies;
 	}
+	
 }

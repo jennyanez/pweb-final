@@ -10,14 +10,35 @@
 	  	<p:outputPanel rendered="#{not empty manageLoanBean.selectedLoan}"> 	
 				<p:panelGrid layout="grid" columns="1">
 					<h:panelGroup>
-												
+							
+							<!--  					
+						<div>
+							<p:selectOneMenu 
+										id="loanR" 
+										required="true" 
+										label="Seleccione"
+	                                    value="#{manageLoanBean.selectedLoanRequest}"                                          
+	                                    style="min-width: 15rem" 
+	                                    multiple="true" 
+	                                    filter="true"
+	                                    filterMatchMode="startsWith" 
+	                                    panelStyle="width: 30rem"
+	                                    scrollHeight="250">
+	                           		<f:selectItem itemLabel="Seleccione" itemValue="" noSelectionOption="true"/>
+	                                <f:selectItems value="#{manageLoanBean.loansRequest}" var="LoanV"
+	                                                   itemValue="#{LoanV.id}" itemLabel="#{loanV.copy.book.bookTitle}"/> 
+	                                <p:ajax event="change" update="@this"/>                                 
+	                         </p:selectOneMenu>
+						</div>
+						-->
+						
 						<h:form>					
 					        <h6>Loan Request</h6>
 					        <div class="col-12 md:col-6 lg:col-4 xl:col-3">
 					            <p:selectOneListbox 
 					            		id="advanced" 
 					            		value="#{manageLoanBean.selectedLoan}" 
-					            		converter="#{loanConverter}"
+					            		
 					                	var="c" 
 					                	filter="true" 
 					                	filterMatchMode="contains">
@@ -35,9 +56,15 @@
 					                <p:column>
 					                    <h:outputText value="#{c.loanRequestDate}"/>
 					                </p:column>
+					                <p:column>
+					                    <p:commandButton  icon="pi pi-check">
+					                    	              
+					                    </p:commandButton>													 
+					                </p:column>
 					            </p:selectOneListbox>
 					        </div>
 					    </h:form>
+		
 						
                         <div class="p-field">
 							<p:outputLabel for="@next">Fecha de devolucion</p:outputLabel>

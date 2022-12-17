@@ -2,7 +2,6 @@ package cu.edu.cujae.pweb.bean.managebeans;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -127,7 +126,7 @@ public class ManageBookBean {
         }
         PrimeFaces.current().executeScript("PF('manageBookDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
         PrimeFaces.current().ajax().update("form:dt-book");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
-
+        
 //		ManageCopyBean manageCopyBean = new ManageCopyBean();
 //		manageCopyBean.updateAjax();
 
@@ -240,4 +239,6 @@ public class ManageBookBean {
 	public void setAmountCopies(int amountCopies) {
 		this.amountCopies = amountCopies;
 	}
+	
+	
 }

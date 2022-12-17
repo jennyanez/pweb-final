@@ -27,7 +27,7 @@ public class ManageLoanBean {
 	
 	private LoanDto loanDto;
 	private LoanDto selectedLoan;
-	private LoanRequestDto selectedLoanRequest;
+	private Long selectedLoanRequest;
 	private List<LoanDto> loans;
 	private List<LoanRequestDto> loansRequest;
 	
@@ -60,15 +60,27 @@ public class ManageLoanBean {
 	
 	//Se ejecuta al dar clic en el button con el lapicito
 	public void openForEdit() {
-		
+		LoanRequestDto loanRequest = new LoanRequestDto();
 	}
 	
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
 	public void saveLoan() {
+		/*
+		System.out.println(selectedLoan.getClient().getName());
+		System.out.println(selectedLoan.getCopy().getBook().getBookTitle());
+		System.out.println(selectedLoan.getReturnDate());
+		
+		System.out.println("");
+		System.out.println(selectedLoanRequest.getClient().getName());
+		System.out.println(selectedLoanRequest.getCopy().getBook().getBookTitle());
+		System.out.println(selectedLoanRequest.getLoanRequestDate());
+		*/
+		LoanRequestDto loanRequest = loanRequestService.getById(selectedLoanRequest);
+		
 		if (this.selectedLoan.getId() == null) {
 			
-			this.selectedLoan.setClient(this.selectedLoanRequest.getClient());
-			this.selectedLoan.setCopy(this.selectedLoanRequest.getCopy());
+			this.selectedLoan.setClient(loanRequest.getClient());
+			this.selectedLoan.setCopy(loanRequest.getCopy());
 			this.selectedLoan.setLoanDate(new Date());
 			loanService.create(selectedLoan);
 			loans = loanService.getAll();
@@ -77,11 +89,12 @@ public class ManageLoanBean {
         }
         else {
         	
-        	this.selectedLoan.setClient(this.selectedLoanRequest.getClient());
-			this.selectedLoan.setCopy(this.selectedLoanRequest.getCopy());
+        	this.selectedLoan.setClient(loanRequest.getClient());
+			this.selectedLoan.setCopy(loanRequest.getCopy());
 			this.selectedLoan.setLoanDate(new Date());
 			loanService.update(selectedLoan);
-        	
+			loans = loanService.getAll();
+			
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loan_edited");
         }
 
@@ -93,18 +106,21 @@ public class ManageLoanBean {
 	//Permite eliminar un usuario
     public void deleteLoan() {
     	try {
-    		this.loans.remove(this.selectedLoan);
+    		loanService.delete(this.selectedLoan.getId());
             this.selectedLoan = null;
+            loans = loanService.getAll();
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loan_deleted");
             PrimeFaces.current().ajax().update("form:dt-loan");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
 		} catch (Exception e) {
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
 		}
     }
+
+	
     
 /*********************************GETTERS AND SETTERS***************************/
-	public LoanDto getLoanDto() {
-		return this.loanDto;
+    public LoanDto getLoanDto() {
+		return loanDto;
 	}
 
 	public void setLoanDto(LoanDto loanDto) {
@@ -112,27 +128,27 @@ public class ManageLoanBean {
 	}
 
 	public LoanDto getSelectedLoan() {
-		return this.selectedLoan;
+		return selectedLoan;
 	}
 
 	public void setSelectedLoan(LoanDto selectedLoan) {
 		this.selectedLoan = selectedLoan;
 	}
 
+	public Long getSelectedLoanRequest() {
+		return selectedLoanRequest;
+	}
+
+	public void setSelectedLoanRequest(Long selectedLoanRequest) {
+		this.selectedLoanRequest = selectedLoanRequest;
+	}
+
 	public List<LoanDto> getLoans() {
-		return this.loans;
+		return loans;
 	}
 
 	public void setLoans(List<LoanDto> loans) {
 		this.loans = loans;
-	}
-
-	public LoanRequestDto getSelectedLoanRequest() {
-		return selectedLoanRequest;
-	}
-
-	public void setSelectedLoanRequest(LoanRequestDto selectedLoanRequest) {
-		this.selectedLoanRequest = selectedLoanRequest;
 	}
 
 	public List<LoanRequestDto> getLoansRequest() {
@@ -143,6 +159,5 @@ public class ManageLoanBean {
 	public void setLoansRequest(List<LoanRequestDto> loansRequest) {
 		this.loansRequest = loansRequest;
 	}
-
 
 }
