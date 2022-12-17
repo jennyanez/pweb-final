@@ -68,13 +68,13 @@
 						</div>
 					</f:facet>
 					
-					<p:column headerText="Book" sortBy="#{loan.book}"
-						filterBy="#{loan.book}">
-						<h:outputText value="#{loan.book}"/>
+					<p:column headerText="Client" sortBy="#{loan.client.name}"
+                        filterBy="#{loan.client.name}">
+						<h:outputText value="#{loan.client.name}"/>
 					</p:column>
-					<p:column headerText="User" sortBy="#{loan.user}"
-                        filterBy="#{loan.book}">
-						<h:outputText value="#{loan.user}"/>
+					<p:column headerText="Title Book" sortBy="#{loan.copy.book.bookTitle}"
+						filterBy="#{loan.copy.book.bookTitle}">
+						<h:outputText value="#{loan.copy.book.bookTitle}"/>
 					</p:column>
                     <p:column headerText="Loan Date" sortBy="#{loan.loanDate}" filterBy="#{loan.loanDate}">
 						<h:outputText value="#{loan.loanDate}" />
@@ -82,6 +82,7 @@
                     <p:column headerText="Return Date" sortBy="#{loan.returnDate}" filterBy="#{loan.returnDate}">
 						<h:outputText value="#{loan.returnDate}" />
 					</p:column>
+					
 					
 					<p:column exportable="false">
 						<p:commandButton icon="pi pi-pencil" action="#{manageLoanBean.openForEdit}"

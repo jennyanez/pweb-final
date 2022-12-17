@@ -48,13 +48,14 @@ public class CopyService implements ServiceImplementation, ICopyService {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<CopyDto> apiRestMapper = new ApiRestMapper<>();
 
-            UriTemplate template = new UriTemplate("copies/{id}");
+            UriTemplate template = new UriTemplate("/copies/{id}");
             String uri = template.expand(id).toString();
             String response = (String) restService.GET(uri, params , String.class).getBody();
             copyDto = apiRestMapper.mapOne(response,CopyDto.class);
         }catch (Exception e){
             e.printStackTrace();
         }
+        
         return copyDto;
     }
 
@@ -97,5 +98,25 @@ public class CopyService implements ServiceImplementation, ICopyService {
             throw new RuntimeException(e);
         }
         return copyDtoList;
+    }
+    
+    @Override
+    public List<CopyDto> copyAvailable(List<Long> copiasPrestadas){
+    	List<CopyDto> copies = getAll();
+    	int i = 0;
+    	int f;
+    	
+    	
+    	if(!copiasPrestadas.isEmpty()) {
+	    	for ( i = 0 ; i<copiasPrestadas.size() ; i++) {
+	    		for  (f = 0 ; f<copies.size() ; f++) {
+	    			
+	    			if(copies.get(f).getCopyId() == copiasPrestadas.get(i)) {
+	    				copies.remove(f);	    					
+	        		}		
+	    		}
+	    	}	
+    	}    	
+    		return copies;   		    	
     }
 }

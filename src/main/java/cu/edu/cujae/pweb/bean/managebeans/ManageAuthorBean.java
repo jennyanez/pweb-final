@@ -51,7 +51,7 @@ public class ManageAuthorBean {
 	//Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase. 
 	@PostConstruct
     public void init() {
-	   	authors = authorService.getAll();
+	   	
     }
 	
 	//Se ejecuta al dar clic en el button Nuevo
@@ -112,6 +112,7 @@ public class ManageAuthorBean {
 	}
 
 	public List<AuthorDto> getAuthors() {
+		this.authors = authorService.getAll();
 		return authors;
 	}
 

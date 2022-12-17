@@ -13,6 +13,8 @@ import cu.edu.cujae.pweb.service.BookService;
 import cu.edu.cujae.pweb.service.ClientService;
 import cu.edu.cujae.pweb.service.CopyService;
 import cu.edu.cujae.pweb.service.LoanRequestService;
+import cu.edu.cujae.pweb.service.LoanService;
+
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Component;
 import cu.edu.cujae.pweb.dto.BookDto;
 import cu.edu.cujae.pweb.dto.ClientDto;
 import cu.edu.cujae.pweb.dto.CopyDto;
+import cu.edu.cujae.pweb.dto.LoanDto;
 import cu.edu.cujae.pweb.dto.LoanRequestDto;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 
@@ -32,14 +35,19 @@ public class ManageLoanRequestBean {
 	private LoanRequestDto selectedLoanRequest;
 	private Long selectedCopy;
 	private Long selectedBook;
+	
+	
+	//El cliente se selecciona del mismo usuario
 	private Long selectedClient;
 	
 	private List<LoanRequestDto> loansRequest;
-	private List<ClientDto> clients;
 	private List<CopyDto> copies;
+	private List<LoanDto> loans;
 	private List<BookDto> books;
 	
-    @Autowired(required=true)
+	private List<Long> copiasPrestadas;
+	
+    @Autowired
 	private LoanRequestService loanRequestService;
     
     @Autowired
@@ -48,8 +56,10 @@ public class ManageLoanRequestBean {
     @Autowired
     private ClientService clientService;
     
+
+    
     @Autowired
-    private BookService bookService;
+    private LoanService loanService;
 	
 	public ManageLoanRequestBean() {
 		
@@ -58,18 +68,23 @@ public class ManageLoanRequestBean {
 	@PostConstruct
     public void init() {
 	    loansRequest = loanRequestService.getAll();
-	    clients = clientService.getAll();
-	    books = bookService.getAll();
-	    copies = copyService.getByBookId(selectedBook);
+	    loans = loanService.getAll();
+	    copiasPrestadas = loanService.idCopies();
+	    copies = copyService.copyAvailable(copiasPrestadas);
+	    //copies = copyService.getAll();
 	    
     }
 	
+	
+
 	//Se ejecuta al dar clic en el button Nuevo
 	public void openNew() {
+
         this.selectedLoanRequest = new LoanRequestDto();
         this.selectedClient = null;
         this.selectedCopy = null;
         this.selectedBook = null;
+     
 	}
 	
 	//Se ejecuta al dar clic en el button con el lapicito
@@ -81,32 +96,39 @@ public class ManageLoanRequestBean {
 			this.selectedClient = client.getClientId();
 			this.selectedCopy = copy.getCopyId();
 			this.selectedBook = book.getBookId();
+			
 	}
 	
 	public void saveLoan() {
-			
+		
 		if (this.selectedLoanRequest.getId() == null) {
-           
-           this.selectedLoanRequest.setClient(this.clientService.getById(selectedClient));
+         
+           //this.selectedLoanRequest.setClient(this.clientService.getById(selectedClient));
+		   this.selectedLoanRequest.setClient(this.clientService.getById(110L));
+		   this.selectedLoanRequest.setLoanRequestDate(new Date());
            this.selectedLoanRequest.setCopy(this.copyService.getById(selectedCopy));
-           this.selectedLoanRequest.setBook(this.bookService.getById(selectedBook));
-           loanRequestService.create(this.selectedLoanRequest);
+           this.selectedLoanRequest.setBook(this.copyService.getById(selectedCopy).getBook());
+           loanRequestService.create(selectedLoanRequest);
            loansRequest = loanRequestService.getAll();
+           
             
            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loanRequest_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         }
         else {
         	
-        	this.selectedLoanRequest.setClient(this.clientService.getById(selectedClient));
+        	//this.selectedLoanRequest.setClient(this.clientService.getById(selectedClient));
+        	this.selectedLoanRequest.setClient(this.clientService.getById(110L));
+ 		    this.selectedLoanRequest.setLoanRequestDate(new Date());
             this.selectedLoanRequest.setCopy(this.copyService.getById(selectedCopy));
-            this.selectedLoanRequest.setBook(this.bookService.getById(selectedBook));
-            loanRequestService.update(this.selectedLoanRequest);
+            this.selectedLoanRequest.setBook(this.copyService.getById(selectedCopy).getBook());
+            loanRequestService.update(selectedLoanRequest);
             loansRequest = loanRequestService.getAll();
         	
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loanRequest_edited");
         }
         PrimeFaces.current().executeScript("PF('manageLoanRequestDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
         PrimeFaces.current().ajax().update("form:dt-loanRequest");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form	
+        
 	}
 	
 	//Permite eliminar un usuario
@@ -127,7 +149,7 @@ public class ManageLoanRequestBean {
     public void updateAjax(){
 		PrimeFaces.current().ajax().update("form:dt-loanRequest");
 	}
-
+	
     
     ////////////////////////////////////////////////      SETTERS Y GETTERS    ////////////////////////////////////////////////////*
 
@@ -155,20 +177,20 @@ public class ManageLoanRequestBean {
 		this.selectedCopy = selectedCopy;
 	}
 
-	public Long getSelectedBook() {
-		return selectedBook;
-	}
-
-	public void setSelectedBook(Long selectedBook) {
-		this.selectedBook = selectedBook;
-	}
-
 	public Long getSelectedClient() {
 		return selectedClient;
 	}
 
 	public void setSelectedClient(Long selectedClient) {
 		this.selectedClient = selectedClient;
+	}
+
+	public Long getSelectedBook() {
+		return selectedBook;
+	}
+
+	public void setSelectedBook(Long selectedBook) {
+		this.selectedBook = selectedBook;
 	}
 
 	public List<LoanRequestDto> getLoansRequest() {
@@ -179,20 +201,29 @@ public class ManageLoanRequestBean {
 		this.loansRequest = loansRequest;
 	}
 
-	public List<ClientDto> getClients() {
-		return clients;
-	}
-
-	public void setClients(List<ClientDto> clients) {
-		this.clients = clients;
-	}
-
 	public List<CopyDto> getCopies() {
+		copies = copyService.copyAvailable(copiasPrestadas);
 		return copies;
 	}
 
 	public void setCopies(List<CopyDto> copies) {
 		this.copies = copies;
+	}
+
+	public List<LoanDto> getLoans() {
+		return loans;
+	}
+
+	public void setLoans(List<LoanDto> loans) {
+		this.loans = loans;
+	}
+
+	public List<Long> getCopiasPrestadas() {
+		return copiasPrestadas;
+	}
+
+	public void setCopiasPrestadas(List<Long> copiasPrestadas) {
+		this.copiasPrestadas = copiasPrestadas;
 	}
 
 	public List<BookDto> getBooks() {

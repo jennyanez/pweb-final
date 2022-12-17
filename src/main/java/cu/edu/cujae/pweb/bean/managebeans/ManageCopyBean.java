@@ -74,14 +74,14 @@ public class ManageCopyBean {
 		if (this.selectedCopy.getCopyId() == null){
 			this.selectedCopy.setBook(this.bookService.getById(selectedBook));
 			copyService.create(this.selectedCopy);
-			copies = copyService.getAll();
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_copy_added");
 		}else{
 			this.selectedCopy.setBook(this.bookService.getById(selectedBook));
 			copyService.update(this.selectedCopy);
-			copies = copyService.getAll();
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_copy_edited");
 		}
+		
+		copies = copyService.getAll();
 		PrimeFaces.current().executeScript("PF('manageCopyDialog').hide()");
 		PrimeFaces.current().ajax().update("form:dt-copy");
 

@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cu.edu.cujae.pweb.dto.LoanDto;
+import cu.edu.cujae.pweb.dto.LoanRequestDto;
+import cu.edu.cujae.pweb.service.LoanRequestService;
 import cu.edu.cujae.pweb.service.LoanService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 
@@ -25,13 +27,18 @@ public class ManageLoanBean {
 	
 	private LoanDto loanDto;
 	private LoanDto selectedLoan;
+	private LoanRequestDto selectedLoanRequest;
 	private List<LoanDto> loans;
+	private List<LoanRequestDto> loansRequest;
 	
 	/* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
 	 * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
 	 */
 	@Autowired
 	private LoanService loanService;
+	
+	@Autowired
+	private LoanRequestService loanRequestService;
 	
 	
 	public ManageLoanBean() {
@@ -41,12 +48,14 @@ public class ManageLoanBean {
 	//Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase. 
 	@PostConstruct
     public void init() {
-	    loans = loans == null ? loanService.getAll() : loans;
+	    loans = loanService.getAll();
+	    loansRequest = loanRequestService.getAll();
     }
 	
 	//Se ejecuta al dar clic en el button Nuevo
 	public void openNew() {
         this.selectedLoan = new LoanDto();
+        this.selectedLoanRequest = null;
     }
 	
 	//Se ejecuta al dar clic en el button con el lapicito
@@ -57,13 +66,22 @@ public class ManageLoanBean {
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
 	public void saveLoan() {
 		if (this.selectedLoan.getId() == null) {
-            this.selectedLoan.setId(1L);
-
-            this.selectedLoan.setLoanDate(new Date());
-            this.loans.add(this.selectedLoan);
+			
+			this.selectedLoan.setClient(this.selectedLoanRequest.getClient());
+			this.selectedLoan.setCopy(this.selectedLoanRequest.getCopy());
+			this.selectedLoan.setLoanDate(new Date());
+			loanService.create(selectedLoan);
+			loans = loanService.getAll();
+			
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loan_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         }
         else {
+        	
+        	this.selectedLoan.setClient(this.selectedLoanRequest.getClient());
+			this.selectedLoan.setCopy(this.selectedLoanRequest.getCopy());
+			this.selectedLoan.setLoanDate(new Date());
+			loanService.update(selectedLoan);
+        	
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loan_edited");
         }
 
@@ -107,6 +125,23 @@ public class ManageLoanBean {
 
 	public void setLoans(List<LoanDto> loans) {
 		this.loans = loans;
+	}
+
+	public LoanRequestDto getSelectedLoanRequest() {
+		return selectedLoanRequest;
+	}
+
+	public void setSelectedLoanRequest(LoanRequestDto selectedLoanRequest) {
+		this.selectedLoanRequest = selectedLoanRequest;
+	}
+
+	public List<LoanRequestDto> getLoansRequest() {
+		loansRequest = loanRequestService.getAll();
+		return loansRequest;
+	}
+
+	public void setLoansRequest(List<LoanRequestDto> loansRequest) {
+		this.loansRequest = loansRequest;
 	}
 
 

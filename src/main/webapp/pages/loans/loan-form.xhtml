@@ -10,20 +10,34 @@
 	  	<p:outputPanel rendered="#{not empty manageLoanBean.selectedLoan}"> 	
 				<p:panelGrid layout="grid" columns="1">
 					<h:panelGroup>
-						
-                    <div class="p-field">
-							<p:outputLabel for="@next">Book</p:outputLabel>
-							<p:inputText id="book" required="true" 
-								value="#{manageLoanBean.selectedLoan.book}" />
-							<p:message for="@previous" ></p:message>
-						</div>
-						
-                        <div class="p-field">
-							<p:outputLabel for="@next">Usuario</p:outputLabel>
-							<p:inputText id="username" required="true"
-								value="#{manageLoanBean.selectedLoan.user}" />
-							<p:message for="@previous"></p:message>
-						</div>
+												
+						<h:form>					
+					        <h6>Loan Request</h6>
+					        <div class="col-12 md:col-6 lg:col-4 xl:col-3">
+					            <p:selectOneListbox 
+					            		id="advanced" 
+					            		value="#{manageLoanBean.selectedLoan}" 
+					            		converter="#{loanConverter}"
+					                	var="c" 
+					                	filter="true" 
+					                	filterMatchMode="contains">
+					                <f:selectItems 
+					                		value="#{manageLoanBean.loansRequest}" 
+					                		var="loan" 
+					                		itemLabel="#{loan.copy.book.bookTitle}" 
+					                		itemValue="#{loan}"/>
+					                <p:column headerText="Client name">					                	 
+					                     <h:outputText value="#{c.client.name}"/>
+					                </p:column>
+					                <p:column>
+					                    <h:outputText value="#{c.copy.book.bookTitle}"/>
+					                </p:column>
+					                <p:column>
+					                    <h:outputText value="#{c.loanRequestDate}"/>
+					                </p:column>
+					            </p:selectOneListbox>
+					        </div>
+					    </h:form>
 						
                         <div class="p-field">
 							<p:outputLabel for="@next">Fecha de devolucion</p:outputLabel>

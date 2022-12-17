@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ICopyService {
     List<CopyDto> getByBookId(Long bookId);
+    List<CopyDto> copyAvailable(List<Long> copiasPrestadas);
 }
