@@ -6,7 +6,7 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
 	<ui:define name="title">
-		    Sanctioned Clients 
+		    #{msgs.label_sanction_list}
 	</ui:define>
 	<ui:define name="layout">
 		<h:form id="form">
@@ -35,38 +35,59 @@
 				<p:dataTable 
 					id="dt-sanctioned" 
 					widgetVar="dtSanctioned" 
-					var="sanctUser"
-					value="#{manageSanctionedUserBean.sanctUsers}" 
+					var="sanction"
+					value="#{manageSanctionBean.sanctions}"
 					reflow="true" paginator="true"
 					rows="10" 
 					paginatorPosition="bottom">
 					<f:facet name="header">
 						<div class="products-table-header">
-							<span style="font-weight: bold">Defaulter Users</span> <span
+							<span style="font-weight: bold">#{msgs.label_sanction_list}</span> <span
 								class="filter-container ui-input-icon-left"> <i
 								class="pi pi-search"></i> <p:inputText id="globalFilter"
-									onkeyup="PF('dtSanctioned').filter()" placeholder="Search" />
+									onkeyup="PF('dtSanctioned').filter()" placeholder="#{msgs.input_search}" />
 							</span>
 
 						</div>
 					</f:facet>
 					
-					<p:column headerText="Client" sortBy="#{sanctUser.clientName}"
-                        filterBy="#{sanctUser.clientName}">
-						<h:outputText value="#{sanctUser.clientName}"/>
+					<p:column headerText="#{msgs.label_sanction_client}" sortBy="#{sanction.client.name}"
+                        filterBy="#{sanction.client.name}">
+						<h:outputText value="#{sanction.client.name}"/>
 					</p:column>
-					<p:column headerText="Type of sanction" sortBy="#{sanctUser.typeOfSanction}"
-						filterBy="#{sanctUser.typeOfSanction}">
-						<h:outputText value="#{sanctUser.typeOfSanction}"/>
+					<p:column headerText="#{msgs.label_sanction_type}" sortBy="#{sanction.typeOfSanction}"
+						filterBy="#{sanction.typeOfSanction}">
+						<h:outputText value="#{sanction.typeOfSanction}"/>
 					</p:column>
-                    <p:column headerText="Date Start" sortBy="#{sanctUser.dateStartSanction}" filterBy="#{sanctUser.dateStartSanction}">
-						<h:outputText value="#{sanctUser.dateStartSanction}" />
+                    <p:column headerText="#{msgs.label_sanction_start_date}" sortBy="#{sanction.dateStartSanction}"
+							  filterBy="#{sanction.dateStartSanction}">
+						<h:outputText value="#{sanction.dateStartSanction}" />
 					</p:column>
-					<p:column headerText="Date End" sortBy="#{sanctUser.dateEndSanction}" filterBy="#{sanctUser.dateEndSanction}">
-						<h:outputText value="#{sanctUser.dateEndSanction}" />
+					<p:column headerText="#{msgs.label_sanction_end_date}" sortBy="#{sanction.dateEndSanction}"
+							  filterBy="#{sanction.dateEndSanction}">
+						<h:outputText value="#{sanction.dateEndSanction}" />
+					</p:column>
+
+					<p:column exportable="false">
+						<p:commandButton class="ui-button-warning rounded-button"
+										 icon="pi pi-trash" process="@this"
+										 action="#{manageSanctionBean.deleteSanction}" >
+							<f:setPropertyActionListener value="#{sanction}"
+														 target="#{manageSanctionBean.selectedSanction}" />
+							<p:confirm header="#{msgs.message_confirm}" message="#{msgs.message_confirm_delete_sanction}" icon="pi pi-exclamation-triangle"/>
+						</p:commandButton>
 					</p:column>
 
 				</p:dataTable>
+
+				<p:confirmDialog global="true" showEffect="fade" width="300">
+					<p:commandButton value="#{msgs.btn_yes}" type="button"
+									 styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+					<p:commandButton value="#{msgs.btn_no}" type="button"
+									 styleClass="ui-confirmdialog-no ui-button-secondary"
+									 icon="pi pi-times" />
+				</p:confirmDialog>
+
 			</div>
 		</h:form>
 	</ui:define>

@@ -35,7 +35,6 @@ public class ManageBookBean {
 	private List<MatterDto> matters;
 	private List<AuthorDto> authors;
 	private Long[] selectedAuthors;
-
 	private int amountCopies;
 
 	/**** SERVICES*****/
@@ -109,13 +108,14 @@ public class ManageBookBean {
         }
         else {
 			/////codigo para updatear
-
 			//updatea autores
 			List<AuthorDto> authorDtos = new ArrayList<>();
 			for (Long selectedAuthor : selectedAuthors) {
 				authorDtos.add(authorService.getById(selectedAuthor));
 			}
-			bookDto.setAuthors(authorDtos);
+			if(authorDtos.size()!=0){
+				bookDto.setAuthors(authorDtos);
+			}
 
 			//updatea materia
 			this.selectedBook.setMatter(matterService.getById(selectedMatter));
@@ -136,11 +136,10 @@ public class ManageBookBean {
 	//Permite eliminar un usuario
     public void deleteBook() {
     	try {
-
 			///elimina las copias de ese libro
 			/// pues sin libro no hay copia, duhh
-			List<CopyDto> copies = copyService.getByBookId(this.selectedBook.getBookId());
-			for(CopyDto c:copies){
+			List<CopyDto> copiesList = copyService.getByBookId(this.selectedBook.getBookId());
+			for(CopyDto c:copiesList){
 				copyService.delete(c.getCopyId());
 			}
 
@@ -150,12 +149,9 @@ public class ManageBookBean {
 
 			//actualizo lista de libros
 			books = bookService.getAll();
+
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_book_deleted");
             PrimeFaces.current().ajax().update("form:dt-book");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
-
-//			//update copies w ajax
-//			ManageCopyBean manageCopyBean = new ManageCopyBean();
-//			manageCopyBean.updateAjax();
 
 		} catch (Exception e) {
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
@@ -166,13 +162,9 @@ public class ManageBookBean {
 		if(amountCopies > 0){
 			for(int i=0; i<amountCopies; i++){
 				CopyDto copy = new CopyDto();
-				copy.setCopyNumber(i);
+				copy.setCopyNumber(i+1);
 				copy.setBook(books.get(books.size()-1));
 				copyService.create(copy);
-
-//				//update copies w ajax
-//				ManageCopyBean manageCopyBean = new ManageCopyBean();
-//				manageCopyBean.updateAjax();
 			}
 		}
 	}
@@ -240,4 +232,6 @@ public class ManageBookBean {
 	public void setAmountCopies(int amountCopies) {
 		this.amountCopies = amountCopies;
 	}
+
+
 }
