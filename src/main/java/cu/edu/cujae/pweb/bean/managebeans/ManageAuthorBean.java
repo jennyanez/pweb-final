@@ -49,10 +49,7 @@ public class ManageAuthorBean {
 	}
 	
 	//Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase. 
-	@PostConstruct
-    public void init() {
-	   	
-    }
+	
 	
 	//Se ejecuta al dar clic en el button Nuevo
 	public void openNew() {
@@ -68,13 +65,15 @@ public class ManageAuthorBean {
 	public void saveAuthor() {
 		if (this.selectedAuthor.getAuthorId() == null) {
             authorService.create(this.selectedAuthor);
+            authors = authorService.getAll();
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_copy_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         }
         else {
 			authorService.update(this.selectedAuthor);
+			authors = authorService.getAll();
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_copy_edited");
         }
-		authors = authorService.getAll();
+	
         PrimeFaces.current().executeScript("PF('manageAuthorDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
         PrimeFaces.current().ajax().update("form:dt-author");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form	
 	
@@ -112,7 +111,7 @@ public class ManageAuthorBean {
 	}
 
 	public List<AuthorDto> getAuthors() {
-		this.authors = authorService.getAll();
+		authors = authorService.getAll();
 		return authors;
 	}
 

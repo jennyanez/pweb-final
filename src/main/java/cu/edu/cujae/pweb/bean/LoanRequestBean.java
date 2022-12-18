@@ -6,9 +6,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-import cu.edu.cujae.pweb.dto.BookDto;
-import cu.edu.cujae.pweb.dto.ClientDto;
-import cu.edu.cujae.pweb.dto.CopyDto;
 
 @ManagedBean
 public class LoanRequestBean {

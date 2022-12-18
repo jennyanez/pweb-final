@@ -56,15 +56,6 @@ public class ManageLoanRequestBean {
 		
 	}
 	
-	@PostConstruct
-    public void init() {
-	    loansRequest = loanRequestService.getAll();
-	    clients = clientService.getAll();
-	    copiasPrestadas = loanService.idCopies();
-	    copies = copyService.copyAvailable(copiasPrestadas);
-	    
-    }
-	
 	
 
 	//Se ejecuta al dar clic en el button Nuevo
@@ -191,6 +182,7 @@ public class ManageLoanRequestBean {
 	}
 
 	public List<Long> getCopiasPrestadas() {
+		copiasPrestadas = loanService.idCopies();
 		return copiasPrestadas;
 	}
 

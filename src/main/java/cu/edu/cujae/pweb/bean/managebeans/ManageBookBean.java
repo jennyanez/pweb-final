@@ -52,13 +52,7 @@ public class ManageBookBean {
 	}
 	
 	//Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase. 
-	@PostConstruct
-    public void init() {
-		books = bookService.getAll();
-		matters = matterService.getAll();
-		authors = authorService.getAll();
-		amountCopies = 0;
-    }
+	
 	
 	//Se ejecuta al dar clic en el button Nuevo
 	public void openNew() {
@@ -177,6 +171,7 @@ public class ManageBookBean {
 	}
 
 	public List<AuthorDto> getAuthors() {
+		authors = authorService.getAll();
 		return authors;
 	}
 
@@ -209,6 +204,7 @@ public class ManageBookBean {
 	}
 
 	public List<BookDto> getBooks() {
+		books = bookService.getAll();
 		return this.books;
 	}
 
@@ -225,6 +221,7 @@ public class ManageBookBean {
 	}
 
 	public List<MatterDto> getMatters() {
+		matters = matterService.getAll();
 		return matters;
 	}
 
@@ -233,6 +230,7 @@ public class ManageBookBean {
 	}
 
 	public int getAmountCopies() {
+		amountCopies = 0;
 		return amountCopies;
 	}
 

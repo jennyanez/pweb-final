@@ -45,11 +45,6 @@ public class ManageLoanBean {
 	}
 	
 	//Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase. 
-	@PostConstruct
-    public void init() {
-	    loans = loanService.getAll();
-	    loansRequest = loanRequestService.getAll();
-    }
 	
 	//Se ejecuta al dar clic en el button Nuevo
 	public void openNew() {

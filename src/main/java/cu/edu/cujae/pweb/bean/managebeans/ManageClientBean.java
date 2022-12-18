@@ -24,10 +24,6 @@ public class ManageClientBean {
     @Autowired
     private ClientService clientService;
 
-    @PostConstruct
-    public void init(){
-        clients = clientService.getAll();
-    }
 
     public void openNew(){
         this.selectedClient = new ClientDto();
@@ -85,6 +81,7 @@ public class ManageClientBean {
     }
 
     public List<ClientDto> getClients() {
+    	clients = clientService.getAll();
         return clients;
     }
 
