@@ -2,7 +2,6 @@ package cu.edu.cujae.pweb.bean.managebeans;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -56,25 +55,18 @@ public class ManageLoanBean {
 	public void openNew() {
         this.selectedLoan = new LoanDto();
         this.selectedLoanRequest = null;
+        System.out.println("hola2");
     }
 	
 	//Se ejecuta al dar clic en el button con el lapicito
+	
 	public void openForEdit() {
-		LoanRequestDto loanRequest = new LoanRequestDto();
+	
 	}
 	
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
 	public void saveLoan() {
-		/*
-		System.out.println(selectedLoan.getClient().getName());
-		System.out.println(selectedLoan.getCopy().getBook().getBookTitle());
-		System.out.println(selectedLoan.getReturnDate());
 		
-		System.out.println("");
-		System.out.println(selectedLoanRequest.getClient().getName());
-		System.out.println(selectedLoanRequest.getCopy().getBook().getBookTitle());
-		System.out.println(selectedLoanRequest.getLoanRequestDate());
-		*/
 		LoanRequestDto loanRequest = loanRequestService.getById(selectedLoanRequest);
 		
 		if (this.selectedLoan.getId() == null) {
@@ -84,6 +76,8 @@ public class ManageLoanBean {
 			this.selectedLoan.setLoanDate(new Date());
 			loanService.create(selectedLoan);
 			loans = loanService.getAll();
+			System.out.println("anntes de entrar al delete");
+			loanRequestService.delete(selectedLoanRequest);
 			
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loan_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         }
@@ -144,6 +138,7 @@ public class ManageLoanBean {
 	}
 
 	public List<LoanDto> getLoans() {
+		loans = loanService.getAll();
 		return loans;
 	}
 

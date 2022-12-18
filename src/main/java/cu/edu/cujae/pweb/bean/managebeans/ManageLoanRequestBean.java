@@ -17,10 +17,8 @@ import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import cu.edu.cujae.pweb.dto.BookDto;
 import cu.edu.cujae.pweb.dto.ClientDto;
 import cu.edu.cujae.pweb.dto.CopyDto;
-import cu.edu.cujae.pweb.dto.LoanDto;
 import cu.edu.cujae.pweb.dto.LoanRequestDto;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 
@@ -32,7 +30,6 @@ public class ManageLoanRequestBean {
 	private LoanRequestDto loanRequestDto;
 	private LoanRequestDto selectedLoanRequest;
 	private Long selectedCopy;
-	private Long selectedBook;
 	private Long selectedClient;
 	
 	
@@ -76,7 +73,7 @@ public class ManageLoanRequestBean {
         this.selectedLoanRequest = new LoanRequestDto();
         this.selectedClient = null;
         this.selectedCopy = null;
-        this.selectedBook = null;
+        
      
 	}
 	
@@ -84,11 +81,9 @@ public class ManageLoanRequestBean {
 	public void openForEdit() {
 			ClientDto client = this.selectedLoanRequest.getClient();
 			CopyDto copy = this.selectedLoanRequest.getCopy();
-			BookDto book = this.selectedLoanRequest.getBook();
 			
 			this.selectedClient = client.getClientId();
 			this.selectedCopy = copy.getCopyId();
-			this.selectedBook = book.getBookId();
 			
 	}
 	
@@ -176,15 +171,8 @@ public class ManageLoanRequestBean {
 		this.selectedClient = selectedClient;
 	}
 
-	public Long getSelectedBook() {
-		return selectedBook;
-	}
-
-	public void setSelectedBook(Long selectedBook) {
-		this.selectedBook = selectedBook;
-	}
-
 	public List<LoanRequestDto> getLoansRequest() {
+		loansRequest = loanRequestService.getAll();
 		return loansRequest;
 	}
 

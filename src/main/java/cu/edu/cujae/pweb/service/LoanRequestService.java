@@ -78,6 +78,7 @@ public class LoanRequestService implements ServiceImplementation {
 
     @Override
     public void delete(Long id) {
+    	System.out.println("ya entre en el delete");
     	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/loanRequestList/delete/{id}");
         String uri = template.expand(id).toString();

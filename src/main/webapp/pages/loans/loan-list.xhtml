@@ -85,6 +85,7 @@
 					
 					
 					<p:column exportable="false">
+					  
 						<p:commandButton icon="pi pi-pencil" action="#{manageLoanBean.openForEdit}"
 							update=":form:manage-loan-content"
 							oncomplete="PF('manageLoanDialog').show()"
@@ -94,6 +95,7 @@
 								target="#{manageLoanBean.selectedLoan}" />
 							<p:resetInput target=":form:manage-loan-content" />
 						</p:commandButton>
+						
 						<p:commandButton class="ui-button-warning rounded-button"
 							icon="pi pi-trash" process="@this" 
 							action="#{manageLoanBean.deleteLoan}" >
