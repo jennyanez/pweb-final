@@ -24,7 +24,7 @@ public class ClientService implements ServiceImplementation {
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<ClientDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String)restService.GET("/clients/all", params, String.class).getBody();
+            String response = (String)restService.GET("/api/v1/clients/all", params, String.class).getBody();
             clientDtoList = apiRestMapper.mapList(response, ClientDto.class);
         } catch (IOException e) {
             e.printStackTrace();
@@ -39,7 +39,7 @@ public class ClientService implements ServiceImplementation {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<ClientDto> apiRestMapper = new ApiRestMapper<>();
 
-            UriTemplate template = new UriTemplate("/clients/{id}");
+            UriTemplate template = new UriTemplate("/api/v1/clients/{id}");
             String uri = template.expand(id).toString();
             String response = (String)restService.GET(uri, params, String.class).getBody();
             clientDto = apiRestMapper.mapOne(response, ClientDto.class);
@@ -52,7 +52,7 @@ public class ClientService implements ServiceImplementation {
     @Override
     public void create(Object client) {
         ClientDto clientDto = (ClientDto) client;
-        String response = (String) restService.POST("/clients/save", clientDto, String.class).getBody();
+        String response = (String) restService.POST("/api/v1/clients/save", clientDto, String.class).getBody();
         System.out.println(response);
     }
 
@@ -60,14 +60,14 @@ public class ClientService implements ServiceImplementation {
     public void update(Object client) {
         ClientDto clientDto = (ClientDto) client;
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        String response = (String) restService.PUT("/clients/update", params, clientDto, String.class).getBody();
+        String response = (String) restService.PUT("/api/v1/clients/update", params, clientDto, String.class).getBody();
         System.out.println(response);
     }
 
     @Override
     public void delete(Long id) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        UriTemplate template = new UriTemplate("/clients/delete/{id}");
+        UriTemplate template = new UriTemplate("/api/v1/clients/delete/{id}");
         String uri = template.expand(id).toString();
         String response = (String) restService.DELETE(uri, params, String.class).getBody();
         System.out.println(response);

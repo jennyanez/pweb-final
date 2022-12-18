@@ -30,7 +30,7 @@ public class CopyService implements ServiceImplementation, ICopyService {
         try {
             MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<CopyDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String) restService.GET("/copies/all", params,String.class).getBody();
+            String response = (String) restService.GET("/api/v1/copies/all", params,String.class).getBody();
             copyDtoList = apiRestMapper.mapList(response, CopyDto.class);
         }catch (IOException e){
             e.printStackTrace();
@@ -48,7 +48,7 @@ public class CopyService implements ServiceImplementation, ICopyService {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<CopyDto> apiRestMapper = new ApiRestMapper<>();
 
-            UriTemplate template = new UriTemplate("/copies/{id}");
+            UriTemplate template = new UriTemplate("/api/v1/copies/{id}");
             String uri = template.expand(id).toString();
             String response = (String) restService.GET(uri, params , String.class).getBody();
             copyDto = apiRestMapper.mapOne(response,CopyDto.class);
@@ -62,7 +62,7 @@ public class CopyService implements ServiceImplementation, ICopyService {
     @Override
     public void create(Object copy) {
         CopyDto copyDto = (CopyDto) copy;
-        String response = (String) restService.POST("/copies/save",copyDto,String.class).getBody();
+        String response = (String) restService.POST("/api/v1/copies/save",copyDto,String.class).getBody();
         System.out.println(response);
     }
 
@@ -71,14 +71,14 @@ public class CopyService implements ServiceImplementation, ICopyService {
     public void update(Object copy) {
         CopyDto copyDto = (CopyDto) copy;
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        String response = (String) restService.PUT("/copies/update", params, copyDto, String.class).getBody();
+        String response = (String) restService.PUT("/api/v1/copies/update", params, copyDto, String.class).getBody();
         System.out.println(response);
     }
 
     @Override
     public void delete(Long id) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        UriTemplate template = new UriTemplate("/copies/delete/{id}");
+        UriTemplate template = new UriTemplate("/api/v1/copies/delete/{id}");
         String uri = template.expand(id).toString();
         String response = (String) restService.DELETE(uri, params, String.class).getBody();
         System.out.println(response);
@@ -90,7 +90,7 @@ public class CopyService implements ServiceImplementation, ICopyService {
         try{
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<CopyDto> apiRestMapper = new ApiRestMapper<>();
-            UriTemplate template = new UriTemplate("/copies/book/{id}");
+            UriTemplate template = new UriTemplate("/api/v1/copies/book/{id}");
             String uri = template.expand(id).toString();
             String response = (String) restService.GET(uri, params, String.class).getBody();
             copyDtoList = apiRestMapper.mapList(response, CopyDto.class);

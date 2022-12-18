@@ -27,7 +27,7 @@ public class LoanRequestService implements ServiceImplementation {
     	try {
     		MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<LoanRequestDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String) restService.GET("/loanRequestList/all", params, String.class).getBody();
+            String response = (String) restService.GET("/api/v1/loanRequestList/all", params, String.class).getBody();
             loanRequestDtoList = apiRestMapper.mapList(response, LoanRequestDto.class);
     	}catch(IOException e) {
     		e.printStackTrace();
@@ -47,7 +47,7 @@ public class LoanRequestService implements ServiceImplementation {
     		 MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
              ApiRestMapper<LoanRequestDto> apiRestMapper = new ApiRestMapper<>();
 
-             UriTemplate template = new UriTemplate("/loanRequestList/{id}");
+             UriTemplate template = new UriTemplate("/api/v1/loanRequestList/{id}");
              String uri = template.expand(id).toString();
              String response = (String) restService.GET(uri, params , String.class).getBody();
              loanRequestDto = apiRestMapper.mapOne(response,LoanRequestDto.class);
@@ -63,7 +63,7 @@ public class LoanRequestService implements ServiceImplementation {
     @Override
     public void create(Object dto) {
     	LoanRequestDto loanRequestDto = (LoanRequestDto) dto;
-    	String response = (String) restService.POST("/loanRequestList/save",loanRequestDto,String.class).getBody();
+    	String response = (String) restService.POST("/api/v1/loanRequestList/save",loanRequestDto,String.class).getBody();
         System.out.println(response);
     }
   
@@ -72,7 +72,7 @@ public class LoanRequestService implements ServiceImplementation {
     public void update(Object dto) {
     	LoanRequestDto loanRequestDto = (LoanRequestDto) dto;
     	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        String response = (String) restService.PUT("/loanRequestList/update", params, loanRequestDto, String.class).getBody();
+        String response = (String) restService.PUT("/api/v1/loanRequestList/update", params, loanRequestDto, String.class).getBody();
         System.out.println(response);
     }
 
@@ -80,7 +80,7 @@ public class LoanRequestService implements ServiceImplementation {
     public void delete(Long id) {
     	System.out.println("ya entre en el delete");
     	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        UriTemplate template = new UriTemplate("/loanRequestList/delete/{id}");
+        UriTemplate template = new UriTemplate("/api/v1/loanRequestList/delete/{id}");
         String uri = template.expand(id).toString();
         String response = (String) restService.DELETE(uri, params, String.class).getBody();
         System.out.println(response);

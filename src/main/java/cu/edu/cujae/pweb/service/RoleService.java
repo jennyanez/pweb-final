@@ -26,7 +26,7 @@ public class RoleService implements ServiceImplementation {
 		try {
 			MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 			ApiRestMapper<RoleDto> apiRestMapper = new ApiRestMapper<>();
-			String response = (String)restService.GET("/roles/all", params, String.class).getBody();
+			String response = (String)restService.GET("/api/v1/roles/all", params, String.class).getBody();
 			roles = apiRestMapper.mapList(response, RoleDto.class);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -42,7 +42,7 @@ public class RoleService implements ServiceImplementation {
 			MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 			ApiRestMapper<RoleDto> apiRestMapper = new ApiRestMapper<>();
 
-			UriTemplate template = new UriTemplate("/roles/{code}");
+			UriTemplate template = new UriTemplate("/api/v1/roles/{code}");
 			String uri = template.expand(code).toString();
 			String response = (String)restService.GET(uri, params, String.class).getBody();
 			role = apiRestMapper.mapOne(response, RoleDto.class);
@@ -55,7 +55,7 @@ public class RoleService implements ServiceImplementation {
 	@Override
 	public void create(Object dto) {
 		RoleDto user = (RoleDto) dto;
-		String response = (String) restService.POST("/roles/", user, String.class).getBody();
+		String response = (String) restService.POST("/api/v1/roles/save", user, String.class).getBody();
 		System.out.println(response);
 
 	}
@@ -64,7 +64,7 @@ public class RoleService implements ServiceImplementation {
 	public void update(Object dto) {
 		RoleDto user = (RoleDto) dto;
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		String response = (String) restService.PUT("/roles/", params, user, String.class).getBody();
+		String response = (String) restService.PUT("/api/v1/roles/", params, user, String.class).getBody();
 		System.out.println(response);
 
 	}
@@ -73,7 +73,7 @@ public class RoleService implements ServiceImplementation {
 	public void delete(Long id) {
 		int code = Math.toIntExact(id);
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		UriTemplate template = new UriTemplate("/roles/delete/{code}");
+		UriTemplate template = new UriTemplate("/api/v1/roles/delete/{code}");
 		String uri = template.expand(code).toString();
 		String response = (String) restService.DELETE(uri, params, String.class).getBody();
 		System.out.println(response);
