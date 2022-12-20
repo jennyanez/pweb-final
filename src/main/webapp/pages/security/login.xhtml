@@ -10,7 +10,8 @@
 
     <h:body>
 	    <h:form>
-	    	<p:spacer height="50"></p:spacer>
+			<p:growl for="securityMessages"  globalOnly="true" showDetail="true" showSummary="false" />
+			<p:spacer height="50"></p:spacer>
 	    	<div class="p-grid p-ai-center vertical-container">
 			    <div class="p-col">
 			        
@@ -20,7 +21,6 @@
 					    <f:facet name="title">
 							#{msgs.label_login}
 					    </f:facet>
-					    <h:outputLabel value="user: admin y pass: 1234"></h:outputLabel>
 						<p:panelGrid columns="1" layout="grid">
 					      <h:panelGroup>
 					      	<p:outputLabel for="@next" value="#{msgs.label_username}"/>

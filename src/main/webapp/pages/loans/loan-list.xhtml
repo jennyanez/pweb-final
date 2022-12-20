@@ -67,14 +67,14 @@
 
 						</div>
 					</f:facet>
-					
-					<p:column headerText="#{msgs.form_loan_book}" sortBy="#{loan.book}"
-						filterBy="#{loan.book}">
-						<h:outputText value="#{loan.book}"/>
+
+					<p:column headerText="#{msgs.form_client_title}" sortBy="#{loan.client.name}"
+                        filterBy="#{loan.client.name}">
+						<h:outputText value="#{loan.client.name}"/>
 					</p:column>
-					<p:column headerText="#{msgs.form_client_title}" sortBy="#{loan.user}"
-                        filterBy="#{loan.book}">
-						<h:outputText value="#{loan.user}"/>
+					<p:column headerText="#{msgs.form_loan_book}" sortBy="#{loan.copy.book.bookTitle}"
+						filterBy="#{loan.copy.book.bookTitle}">
+						<h:outputText value="#{loan.copy.book.bookTitle}"/>
 					</p:column>
                     <p:column headerText="#{msgs.label_loan_date}" sortBy="#{loan.loanDate}" filterBy="#{loan.loanDate}">
 						<h:outputText value="#{loan.loanDate}" />
@@ -83,7 +83,9 @@
 						<h:outputText value="#{loan.returnDate}" />
 					</p:column>
 					
+					
 					<p:column exportable="false">
+					  
 						<p:commandButton icon="pi pi-pencil" action="#{manageLoanBean.openForEdit}"
 							update=":form:manage-loan-content"
 							oncomplete="PF('manageLoanDialog').show()"
@@ -93,6 +95,7 @@
 								target="#{manageLoanBean.selectedLoan}" />
 							<p:resetInput target=":form:manage-loan-content" />
 						</p:commandButton>
+						
 						<p:commandButton class="ui-button-warning rounded-button"
 							icon="pi pi-trash" process="@this" 
 							action="#{manageLoanBean.deleteLoan}" >

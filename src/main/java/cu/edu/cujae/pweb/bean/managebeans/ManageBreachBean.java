@@ -35,12 +35,6 @@ public class ManageBreachBean {
     @Autowired
     private BreachService breachService;
 
-    @PostConstruct
-    public void init() {
-        copies = copyService.getAll();
-        clients = clientService.getAll();
-        breaches = breachService.getAll();
-    }
 
     public void openNew() {
         selectedBreach = new BreachDto();
@@ -77,6 +71,7 @@ public class ManageBreachBean {
     }
 
     public List<CopyDto> getCopies() {
+        copies = copyService.getAll();
         return copies;
     }
 
@@ -85,6 +80,7 @@ public class ManageBreachBean {
     }
 
     public List<ClientDto> getClients() {
+        clients = clientService.getAll();
         return clients;
     }
 
@@ -93,6 +89,7 @@ public class ManageBreachBean {
     }
 
     public List<BreachDto> getBreaches() {
+        breaches = breachService.getAll();
         return breaches;
     }
 

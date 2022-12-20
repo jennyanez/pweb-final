@@ -1,47 +1,71 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
 
-	<p:dialog header="Loan" showEffect="fade" modal="true"
-		widgetVar="manageLoanDialog" responsive="true">
-		<p:outputPanel id="manage-loan-content" class="ui-fluid">
-	  	<p:outputPanel rendered="#{not empty manageLoanBean.selectedLoan}"> 	
-				<p:panelGrid layout="grid" columns="1">
-					<h:panelGroup>
-						
-                    <div class="p-field">
-							<p:outputLabel for="@next">Book</p:outputLabel>
-							<p:inputText id="book" required="true" 
-								value="#{manageLoanBean.selectedLoan.book}" />
-							<p:message for="@previous" ></p:message>
-						</div>
-						
-                        <div class="p-field">
-							<p:outputLabel for="@next">Usuario</p:outputLabel>
-							<p:inputText id="username" required="true"
-								value="#{manageLoanBean.selectedLoan.user}" />
-							<p:message for="@previous"></p:message>
-						</div>
-						
-                        <div class="p-field">
-							<p:outputLabel for="@next">Fecha de devolucion</p:outputLabel>
-							<p:calendar id="date" value="#{manageLoanBean.selectedLoan.returnDate}"/>
-							<p:message for="@previous"></p:message>
-						</div>
-										
-					</h:panelGroup>
-				</p:panelGrid>
-		 	</p:outputPanel> 
-		</p:outputPanel>
+  <p:dialog header="Loan" showEffect="fade" modal="true"
+            widgetVar="manageLoanDialog" responsive="true">
+    <p:outputPanel id="manage-loan-content" class="ui-fluid">
+      <p:outputPanel rendered="#{not empty manageLoanBean.selectedLoan}">
+        <p:panelGrid layout="grid" columns="1">
+          <h:panelGroup>
 
-		<f:facet name="footer">
-			<p:commandButton value="Salvar" icon="pi pi-check"
-				actionListener="#{manageLoanBean.saveLoan}"
-				update="manage-loan-content" process="manage-loan-content @this" />
-			<p:commandButton value="Cancelar" icon="pi pi-times"
-				onclick="PF('manageLoanDialog').hide()" class="ui-button-secondary" />
-		</f:facet>
-	</p:dialog>
+           					<h6>Loan Request</h6>
+					        <div class="col-12 md:col-6 lg:col-4 xl:col-3">
+					            <p:selectOneListbox 
+					            	id="loanId" 
+									required="true" 
+									label="Seleccione"
+                                    value="#{manageLoanBean.selectedLoanRequest}" 
+                                                                    
+                                    style="min-width: 15rem" 
+                                    multiple="true" 
+                                    filter="true"
+                                    filterMatchMode="startsWith" 
+                                    panelStyle="width: 30rem"
+                                    scrollHeight="250">
+                                 
+                                <f:selectItems value="#{manageLoanBean.loansRequest}" var="loan"
+                                                   itemValue="#{loan.id}" itemLabel="#{loan.copy.book.bookTitle} "/> 
+					                <!--  
+					                <p:column headerText="Client name">					                	 
+					                     <h:outputText value="#{c.client.name}"/>
+					                </p:column>
+					                <p:column>
+					                    <h:outputText value="#{c.copy.book.bookTitle}"/>
+					                </p:column>
+					                <p:column>
+					                    <h:outputText value="#{c.loanRequestDate}"/>
+					                </p:column>
+					                <p:column>
+					                    <p:commandButton  icon="pi pi-check">
+					                    	              
+					                    </p:commandButton>													 
+					                </p:column>
+					                -->
+					                
+					            </p:selectOneListbox>
+					        </div>
+					        
+					        <div class="p-field">
+								<p:outputLabel for="@next">Fecha de devolucion</p:outputLabel>
+								<p:calendar id="date" value="#{manageLoanBean.selectedLoan.returnDate}" required="true"/>
+								<p:message for="@previous"></p:message>
+							</div>
+
+
+          </h:panelGroup>
+        </p:panelGrid>
+      </p:outputPanel>
+    </p:outputPanel>
+
+    <f:facet name="footer">
+      <p:commandButton value="Salvar" icon="pi pi-check"
+                       actionListener="#{manageLoanBean.saveLoan}"
+                       update="manage-loan-content" process="manage-loan-content @this" />
+      <p:commandButton value="Cancelar" icon="pi pi-times"
+                       onclick="PF('manageLoanDialog').hide()" class="ui-button-secondary" />
+    </f:facet>
+  </p:dialog>
 </ui:composition>

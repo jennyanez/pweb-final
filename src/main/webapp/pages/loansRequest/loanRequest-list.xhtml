@@ -67,14 +67,15 @@
 
 						</div>
 					</f:facet>
-					
-					<p:column headerText="#{msgs.form_loanRequest_book}" sortBy="#{loanRequest.book}"
-						filterBy="#{loanRequest.book}">
-						<h:outputText value="#{loanRequest.book}"/>
+
+					<p:column headerText="#{msgs.form_loanRequest_client}" sortBy="#{loanRequest.client.name}"
+                        filterBy="#{loanRequest.client.name}">
+						<h:outputText value="#{loanRequest.client.name}"/>
 					</p:column>
-					<p:column headerText="#{msgs.form_loanRequest_client}" sortBy="#{loanRequest.user}"
-                        filterBy="#{loanRequest.user}">
-						<h:outputText value="#{loanRequest.user}"/>
+					<p:column headerText="#{msgs.form_loanRequest_book}" sortBy="#{loanRequest.copy.book.bookTitle}"
+						filterBy="#{loanRequest.copy.book.bookTitle}">
+						<h:outputText value="#{loanRequest.copy.book.bookTitle}"/>
+
 					</p:column>
                     <p:column headerText="#{msgs.label_loan_request_date}" sortBy="#{loanRequest.loanRequestDate}" filterBy="#{loanRequest.loanRequestDate}">
 						<h:outputText value="#{loanRequest.loanRequestDate}" />

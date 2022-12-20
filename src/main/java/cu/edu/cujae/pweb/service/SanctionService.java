@@ -25,7 +25,7 @@ public class SanctionService implements ServiceImplementation {
         try{
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<SanctionDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String) restService.GET("/sanctions/all", params, String.class).getBody();
+            String response = (String) restService.GET("/api/v1/sanctions/all", params, String.class).getBody();
             sanctionDtoList = apiRestMapper.mapList(response, SanctionDto.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -39,7 +39,7 @@ public class SanctionService implements ServiceImplementation {
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<SanctionDto> apiRestMapper = new ApiRestMapper<>();
-            UriTemplate template = new UriTemplate("/sanctions/{id}");
+            UriTemplate template = new UriTemplate("/api/v1/sanctions/{id}");
             String uri = template.expand(id).toString();
             String response = (String) restService.GET(uri, params, String.class).getBody();
             sanctionDto = apiRestMapper.mapOne(response, SanctionDto.class);
@@ -62,7 +62,7 @@ public class SanctionService implements ServiceImplementation {
     @Override
     public void delete(Long id) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        UriTemplate template = new UriTemplate("/sanctions/delete/{id}");
+        UriTemplate template = new UriTemplate("/api/v1/sanctions/delete/{id}");
         String uri = template.expand(id).toString();
         String response = (String) restService.DELETE(uri, params, String.class).getBody();
         System.out.println(response);

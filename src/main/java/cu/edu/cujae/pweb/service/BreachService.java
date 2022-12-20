@@ -33,7 +33,7 @@ public class BreachService implements ServiceImplementation {
     @Override
     public void delete(Long id) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        UriTemplate template = new UriTemplate("/breaches/delete/{id}");
+        UriTemplate template = new UriTemplate("/api/v1/breaches/delete/{id}");
         String uri = template.expand(id).toString();
         String response = (String) restService.DELETE(uri, params, String.class).getBody();
         System.out.println(response);
@@ -45,7 +45,7 @@ public class BreachService implements ServiceImplementation {
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<BreachDto> apiRestMapper = new ApiRestMapper<>();
-            UriTemplate template = new UriTemplate("/breaches/{id}");
+            UriTemplate template = new UriTemplate("/api/v1/breaches/{id}");
             String uri = template.expand(id).toString();
             String response = (String) restService.GET(uri, params, String.class).getBody();
             breachDto = apiRestMapper.mapOne(response, BreachDto.class);
@@ -61,7 +61,7 @@ public class BreachService implements ServiceImplementation {
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<BreachDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String) restService.GET("/breaches/all", params, String.class).getBody();
+            String response = (String) restService.GET("/api/v1/breaches/all", params, String.class).getBody();
             breachDtoList = apiRestMapper.mapList(response, BreachDto.class);
         } catch (IOException e) {
             throw new RuntimeException(e);

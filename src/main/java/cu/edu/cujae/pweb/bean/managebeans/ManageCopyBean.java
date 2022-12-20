@@ -47,12 +47,7 @@ public class ManageCopyBean {
 	
 	
 	//Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase. 
-	@PostConstruct
-    public void init() {
-	    copies = copyService.getAll();
-	    books = bookService.getAll();	    
-	}
-	
+
 	//Se ejecuta al dar clic en el button Nuevo
 	public void openNew() {
         this.selectedCopy= new CopyDto();
@@ -74,14 +69,14 @@ public class ManageCopyBean {
 		if (this.selectedCopy.getCopyId() == null){
 			this.selectedCopy.setBook(this.bookService.getById(selectedBook));
 			copyService.create(this.selectedCopy);
-			copies = copyService.getAll();
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_copy_added");
 		}else{
 			this.selectedCopy.setBook(this.bookService.getById(selectedBook));
 			copyService.update(this.selectedCopy);
-			copies = copyService.getAll();
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_copy_edited");
 		}
+		
+		copies = copyService.getAll();
 		PrimeFaces.current().executeScript("PF('manageCopyDialog').hide()");
 		PrimeFaces.current().ajax().update("form:dt-copy");
 
@@ -135,6 +130,7 @@ public class ManageCopyBean {
 
 
 	public List<BookDto> getBooks() {
+		 books = bookService.getAll();
 		return books;
 	}
 
@@ -142,7 +138,6 @@ public class ManageCopyBean {
 	public void setBooks(List<BookDto> books) {
 		this.books = books;
 	}
-
 }
     
 

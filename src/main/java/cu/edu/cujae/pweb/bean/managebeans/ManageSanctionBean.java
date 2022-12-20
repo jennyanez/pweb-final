@@ -30,12 +30,6 @@ public class ManageSanctionBean {
     @Autowired
     private SanctionService sanctionService;
 
-    @PostConstruct
-    public void init() {
-        clients = clientService.getAll();
-        sanctions = sanctionService.getAll();
-    }
-
     public void openNew() {
         selectedSanction = new SanctionDto();
     }
@@ -78,6 +72,7 @@ public class ManageSanctionBean {
     }
 
     public List<SanctionDto> getSanctions() {
+        sanctions = sanctionService.getAll();
         return sanctions;
     }
 
@@ -86,6 +81,7 @@ public class ManageSanctionBean {
     }
 
     public List<ClientDto> getClients() {
+        clients = clientService.getAll();
         return clients;
     }
 

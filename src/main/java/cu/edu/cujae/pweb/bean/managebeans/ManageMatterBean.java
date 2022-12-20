@@ -38,10 +38,7 @@ public class ManageMatterBean {
 	}
 
 	//Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase. 
-	@PostConstruct
-	public void init() {
-		matters = matterService.getAll();
-	}
+
 	//Se ejecuta al dar clic en el button Nuevo
 	public void openNew() {
 		this.selectedMatter = new MatterDto();
@@ -99,6 +96,7 @@ public class ManageMatterBean {
 	}
 
 	public List<MatterDto> getMatters() {
+		matters = matterService.getAll();
 		return matters;
 	}
 
