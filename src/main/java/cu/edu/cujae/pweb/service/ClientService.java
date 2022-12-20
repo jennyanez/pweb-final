@@ -1,6 +1,7 @@
 package cu.edu.cujae.pweb.service;
 
 import cu.edu.cujae.pweb.dto.ClientDto;
+import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
 import cu.edu.cujae.pweb.utils.ServiceImplementation;
@@ -24,7 +25,7 @@ public class ClientService implements ServiceImplementation {
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<ClientDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String)restService.GET("/api/v1/clients/all", params, String.class).getBody();
+            String response = (String)restService.GET("/api/v1/clients/all", params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
             clientDtoList = apiRestMapper.mapList(response, ClientDto.class);
         } catch (IOException e) {
             e.printStackTrace();
@@ -41,7 +42,7 @@ public class ClientService implements ServiceImplementation {
 
             UriTemplate template = new UriTemplate("/api/v1/clients/{id}");
             String uri = template.expand(id).toString();
-            String response = (String)restService.GET(uri, params, String.class).getBody();
+            String response = (String)restService.GET(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
             clientDto = apiRestMapper.mapOne(response, ClientDto.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,7 +53,7 @@ public class ClientService implements ServiceImplementation {
     @Override
     public void create(Object client) {
         ClientDto clientDto = (ClientDto) client;
-        String response = (String) restService.POST("/api/v1/clients/save", clientDto, String.class).getBody();
+        String response = (String) restService.POST("/api/v1/clients/save", clientDto, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
     }
 
@@ -60,7 +61,7 @@ public class ClientService implements ServiceImplementation {
     public void update(Object client) {
         ClientDto clientDto = (ClientDto) client;
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        String response = (String) restService.PUT("/api/v1/clients/update", params, clientDto, String.class).getBody();
+        String response = (String) restService.PUT("/api/v1/clients/update", params, clientDto, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
     }
 
@@ -69,7 +70,7 @@ public class ClientService implements ServiceImplementation {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/clients/delete/{id}");
         String uri = template.expand(id).toString();
-        String response = (String) restService.DELETE(uri, params, String.class).getBody();
+        String response = (String) restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
     }
 }

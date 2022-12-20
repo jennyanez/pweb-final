@@ -11,6 +11,24 @@
                 <p:graphicImage name="logoBIB.png" library="images" />
             </h:link>
 
+			<h:form id="j_idt12" style="margin-left:5px" >
+
+                <h:panelGroup styleClass="ui-inputgroup" >
+
+                    <h:panelGroup id="icon" styleClass="ui-inputgroup-addon">
+                        <i class="pi pi-globe" style="font-size:22px"/>
+                    </h:panelGroup>
+
+                    <p:menubar>
+                       		<p:submenu label="#{msgs.label_change_language}" style="height:15px">                      	
+                            <p:menuitem value="Español" action="#{languageBean.setLanguage('es')}"  ajax="false"></p:menuitem>
+                            <p:menuitem value="English" action="#{languageBean.setLanguage('en')}"  ajax="false"></p:menuitem>
+                        	</p:submenu>
+                    </p:menubar>
+
+                </h:panelGroup>
+            </h:form>
+
             <h:form styleClass="topbar-form">
                 <ul class="topbar-menu">
                     <li>
@@ -22,22 +40,6 @@
                 </ul>
             </h:form>
 
-            <h:form id="j_idt12" style="margin-left:5px">
-
-                <h:panelGroup styleClass="ui-inputgroup" >
-
-                    <h:panelGroup id="icon" styleClass="ui-inputgroup-addon">
-                        <i class="pi pi-globe" style="font-size:22px"/>
-                    </h:panelGroup>
-
-                    <p:menubar>
-                        <p:submenu label="#{msgs.label_change_language}" style="height:10px">
-                            <p:menuitem value="Español" action="#{languageBean.setLanguage('es')}"  ajax="false"></p:menuitem>
-                            <p:menuitem value="English" action="#{languageBean.setLanguage('en')}"  ajax="false"></p:menuitem>
-                        </p:submenu>
-                    </p:menubar>
-
-                </h:panelGroup>
-            </h:form>
+            
         </div>
 </ui:composition>

@@ -45,9 +45,11 @@
 					</div>
 					<div class="menu-category">#{msgs.link_data_management}</div>
 					<div class="menu-items">
+						<sec:authorize access="hasAnyAuthority('admin')">
 						<h:link outcome="/pages/security/users/user-list.xhtml">
                         #{msgs.link_manage_users}
-                    </h:link>
+                        </h:link>
+                    </sec:authorize>
 						<h:link outcome="/pages/books/book-list.xhtml">
                        #{msgs.link_manage_books}
                     </h:link>

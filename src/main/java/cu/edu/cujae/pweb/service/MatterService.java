@@ -1,6 +1,7 @@
 package cu.edu.cujae.pweb.service;
 
 import cu.edu.cujae.pweb.dto.MatterDto;
+import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
 import cu.edu.cujae.pweb.utils.ServiceImplementation;
@@ -27,7 +28,7 @@ public class MatterService implements ServiceImplementation {
         try{
             MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<MatterDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String)restService.GET("/api/v1/matters/all", params,String.class).getBody();
+            String response = (String)restService.GET("/api/v1/matters/all", params,String.class,CurrentUserUtils.getTokenBearer()).getBody();
             matterDtoList = apiRestMapper.mapList(response,MatterDto.class);
         }catch (IOException e){
             e.printStackTrace();
@@ -46,7 +47,7 @@ public class MatterService implements ServiceImplementation {
             ApiRestMapper<MatterDto> apiRestMapper = new ApiRestMapper<>();
             UriTemplate template = new UriTemplate("/api/v1/matters/{id}");
             String uri = template.expand(id).toString();
-            String response = (String)restService.GET(uri,params,String.class).getBody();
+            String response = (String)restService.GET(uri,params,String.class,CurrentUserUtils.getTokenBearer()).getBody();
             matterDto = apiRestMapper.mapOne(response, MatterDto.class);
         }catch (IOException e){
             e.printStackTrace();
@@ -58,7 +59,7 @@ public class MatterService implements ServiceImplementation {
     @Override
     public void create(Object matter) {
         MatterDto matterDto = (MatterDto) matter;
-        String response = (String) restService.POST("/api/v1/matters/save",matterDto,String.class).getBody();
+        String response = (String) restService.POST("/api/v1/matters/save",matterDto,String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
     }
 
@@ -66,7 +67,7 @@ public class MatterService implements ServiceImplementation {
     public void update(Object matter) {
         MatterDto matterDto = (MatterDto) matter;
         MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
-        String response = (String) restService.PUT("/api/v1/matters/update",params,matterDto,String.class).getBody();
+        String response = (String) restService.PUT("/api/v1/matters/update",params,matterDto,String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
     }
 
@@ -75,7 +76,7 @@ public class MatterService implements ServiceImplementation {
         MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/matters/delete/{id}");
         String uri = template.expand(id).toString();
-        String response = (String) restService.DELETE(uri, params,String.class).getBody();
+        String response = (String) restService.DELETE(uri, params,String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
     }
 }

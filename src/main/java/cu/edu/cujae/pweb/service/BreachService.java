@@ -1,6 +1,7 @@
 package cu.edu.cujae.pweb.service;
 
 import cu.edu.cujae.pweb.dto.BreachDto;
+import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
 import cu.edu.cujae.pweb.utils.ServiceImplementation;
@@ -35,7 +36,7 @@ public class BreachService implements ServiceImplementation {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/breaches/delete/{id}");
         String uri = template.expand(id).toString();
-        String response = (String) restService.DELETE(uri, params, String.class).getBody();
+        String response = (String) restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
     }
 
@@ -47,7 +48,7 @@ public class BreachService implements ServiceImplementation {
             ApiRestMapper<BreachDto> apiRestMapper = new ApiRestMapper<>();
             UriTemplate template = new UriTemplate("/api/v1/breaches/{id}");
             String uri = template.expand(id).toString();
-            String response = (String) restService.GET(uri, params, String.class).getBody();
+            String response = (String) restService.GET(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
             breachDto = apiRestMapper.mapOne(response, BreachDto.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,7 +62,7 @@ public class BreachService implements ServiceImplementation {
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<BreachDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String) restService.GET("/api/v1/breaches/all", params, String.class).getBody();
+            String response = (String) restService.GET("/api/v1/breaches/all", params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
             breachDtoList = apiRestMapper.mapList(response, BreachDto.class);
         } catch (IOException e) {
             throw new RuntimeException(e);

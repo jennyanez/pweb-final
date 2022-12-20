@@ -1,6 +1,7 @@
 package cu.edu.cujae.pweb.service;
 
 import cu.edu.cujae.pweb.dto.SanctionDto;
+import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
 import cu.edu.cujae.pweb.utils.ServiceImplementation;
@@ -25,7 +26,7 @@ public class SanctionService implements ServiceImplementation {
         try{
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<SanctionDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String) restService.GET("/api/v1/sanctions/all", params, String.class).getBody();
+            String response = (String) restService.GET("/api/v1/sanctions/all", params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
             sanctionDtoList = apiRestMapper.mapList(response, SanctionDto.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -41,7 +42,7 @@ public class SanctionService implements ServiceImplementation {
             ApiRestMapper<SanctionDto> apiRestMapper = new ApiRestMapper<>();
             UriTemplate template = new UriTemplate("/api/v1/sanctions/{id}");
             String uri = template.expand(id).toString();
-            String response = (String) restService.GET(uri, params, String.class).getBody();
+            String response = (String) restService.GET(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
             sanctionDto = apiRestMapper.mapOne(response, SanctionDto.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -64,7 +65,7 @@ public class SanctionService implements ServiceImplementation {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/sanctions/delete/{id}");
         String uri = template.expand(id).toString();
-        String response = (String) restService.DELETE(uri, params, String.class).getBody();
+        String response = (String) restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
     }
 }

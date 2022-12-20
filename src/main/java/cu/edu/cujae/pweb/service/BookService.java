@@ -6,6 +6,7 @@ import java.util.List;
 
 import cu.edu.cujae.pweb.dto.AuthorDto;
 import cu.edu.cujae.pweb.dto.BookDto;
+import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
 import cu.edu.cujae.pweb.utils.ServiceImplementation;
@@ -26,7 +27,7 @@ public class BookService implements ServiceImplementation {
 		try{
 			MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 			ApiRestMapper<BookDto> apiRestMapper = new ApiRestMapper<>();
-			String response = (String)restService.GET("/api/v1/books/all", params, String.class).getBody();
+			String response = (String)restService.GET("/api/v1/books/all", params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 			bookDtoList = apiRestMapper.mapList(response, BookDto.class);
 			for(BookDto b: bookDtoList){
 				b.authorsName();
@@ -46,7 +47,7 @@ public class BookService implements ServiceImplementation {
 
 			UriTemplate template = new UriTemplate("/api/v1/books/{id}");
 			String uri = template.expand(id).toString();
-			String response = (String)restService.GET(uri, params, String.class).getBody();
+			String response = (String)restService.GET(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 			bookDto = apiRestMapper.mapOne(response, BookDto.class);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,7 +59,7 @@ public class BookService implements ServiceImplementation {
 	@Override
 	public void create(Object book) {
 		BookDto bookDto = (BookDto) book;
-		String response = (String) restService.POST("/api/v1/books/save", bookDto, String.class).getBody();
+		String response = (String) restService.POST("/api/v1/books/save", bookDto, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 		System.out.println(response);
 	}
 
@@ -66,7 +67,7 @@ public class BookService implements ServiceImplementation {
 	public void update(Object book) {
 		BookDto bookDto = (BookDto) book;
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		String response = (String) restService.PUT("/api/v1/books/update", params, bookDto, String.class).getBody();
+		String response = (String) restService.PUT("/api/v1/books/update", params, bookDto, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 		System.out.println(response);
 	}
 
@@ -75,7 +76,7 @@ public class BookService implements ServiceImplementation {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		UriTemplate template = new UriTemplate("/api/v1/books/delete/{id}");
 		String uri = template.expand(id).toString();
-		String response = (String) restService.DELETE(uri, params, String.class).getBody();
+		String response = (String) restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 		System.out.println(response);
 	}
 }

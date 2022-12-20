@@ -3,6 +3,7 @@ package cu.edu.cujae.pweb.service;
 
 import cu.edu.cujae.pweb.dto.BookDto;
 import cu.edu.cujae.pweb.dto.CopyDto;
+import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.ICopyService;
 import cu.edu.cujae.pweb.utils.RestService;
@@ -30,7 +31,7 @@ public class CopyService implements ServiceImplementation, ICopyService {
         try {
             MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<CopyDto> apiRestMapper = new ApiRestMapper<>();
-            String response = (String) restService.GET("/api/v1/copies/all", params,String.class).getBody();
+            String response = (String) restService.GET("/api/v1/copies/all", params,String.class,CurrentUserUtils.getTokenBearer()).getBody();
             copyDtoList = apiRestMapper.mapList(response, CopyDto.class);
         }catch (IOException e){
             e.printStackTrace();
@@ -50,7 +51,7 @@ public class CopyService implements ServiceImplementation, ICopyService {
 
             UriTemplate template = new UriTemplate("/api/v1/copies/{id}");
             String uri = template.expand(id).toString();
-            String response = (String) restService.GET(uri, params , String.class).getBody();
+            String response = (String) restService.GET(uri, params , String.class,CurrentUserUtils.getTokenBearer()).getBody();
             copyDto = apiRestMapper.mapOne(response,CopyDto.class);
         }catch (Exception e){
             e.printStackTrace();
@@ -62,7 +63,7 @@ public class CopyService implements ServiceImplementation, ICopyService {
     @Override
     public void create(Object copy) {
         CopyDto copyDto = (CopyDto) copy;
-        String response = (String) restService.POST("/api/v1/copies/save",copyDto,String.class).getBody();
+        String response = (String) restService.POST("/api/v1/copies/save",copyDto,String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
     }
 
@@ -71,7 +72,7 @@ public class CopyService implements ServiceImplementation, ICopyService {
     public void update(Object copy) {
         CopyDto copyDto = (CopyDto) copy;
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        String response = (String) restService.PUT("/api/v1/copies/update", params, copyDto, String.class).getBody();
+        String response = (String) restService.PUT("/api/v1/copies/update", params, copyDto, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
     }
 
@@ -80,7 +81,7 @@ public class CopyService implements ServiceImplementation, ICopyService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/copies/delete/{id}");
         String uri = template.expand(id).toString();
-        String response = (String) restService.DELETE(uri, params, String.class).getBody();
+        String response = (String) restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
     }
 
@@ -92,7 +93,7 @@ public class CopyService implements ServiceImplementation, ICopyService {
             ApiRestMapper<CopyDto> apiRestMapper = new ApiRestMapper<>();
             UriTemplate template = new UriTemplate("/api/v1/copies/book/{id}");
             String uri = template.expand(id).toString();
-            String response = (String) restService.GET(uri, params, String.class).getBody();
+            String response = (String) restService.GET(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
             copyDtoList = apiRestMapper.mapList(response, CopyDto.class);
         } catch (IOException e) {
             throw new RuntimeException(e);

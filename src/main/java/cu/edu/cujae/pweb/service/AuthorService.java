@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cu.edu.cujae.pweb.dto.AuthorDto;
+import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
 import cu.edu.cujae.pweb.utils.ServiceImplementation;
@@ -25,7 +26,7 @@ public class AuthorService implements ServiceImplementation {
 		try {
 			MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 			ApiRestMapper<AuthorDto> apiRestMapper = new ApiRestMapper<>();
-			String response = (String)restService.GET("/api/v1/authors/all", params, String.class).getBody();
+			String response = (String)restService.GET("/api/v1/authors/all", params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 			authorDtoList = apiRestMapper.mapList(response, AuthorDto.class);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -42,7 +43,7 @@ public class AuthorService implements ServiceImplementation {
 
 			UriTemplate template = new UriTemplate("/api/v1/authors/{id}");
 			String uri = template.expand(id).toString();
-			String response = (String)restService.GET(uri, params, String.class).getBody();
+			String response = (String)restService.GET(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 			authorDto = apiRestMapper.mapOne(response, AuthorDto.class);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -54,7 +55,7 @@ public class AuthorService implements ServiceImplementation {
 	@Override
 	public void create(Object author) {
 		AuthorDto authorDto = (AuthorDto) author;
-		String response = (String) restService.POST("/api/v1/authors/save", authorDto, String.class).getBody();
+		String response = (String) restService.POST("/api/v1/authors/save", authorDto, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 		System.out.println(response);
 	}
 
@@ -62,7 +63,7 @@ public class AuthorService implements ServiceImplementation {
 	public void update(Object author) {
 		AuthorDto authorDto = (AuthorDto) author;
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		String response = (String) restService.PUT("/api/v1/authors/update", params, authorDto, String.class).getBody();
+		String response = (String) restService.PUT("/api/v1/authors/update", params, authorDto, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 		System.out.println(response);
 	}
 
@@ -71,7 +72,7 @@ public class AuthorService implements ServiceImplementation {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		UriTemplate template = new UriTemplate("/api/v1/authors/delete/{id}");
 		String uri = template.expand(id).toString();
-		String response = (String) restService.DELETE(uri, params, String.class).getBody();
+		String response = (String) restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 		System.out.println(response);
 	}
 }

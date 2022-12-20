@@ -2,6 +2,7 @@ package cu.edu.cujae.pweb.service;
 
 import cu.edu.cujae.pweb.dto.LoginRequestDto;
 import cu.edu.cujae.pweb.dto.UserAuthenticatedDto;
+import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.IAuthService;
 import cu.edu.cujae.pweb.utils.RestService;

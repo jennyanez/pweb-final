@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cu.edu.cujae.pweb.dto.RoleDto;
+import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
 import cu.edu.cujae.pweb.utils.ServiceImplementation;
@@ -26,7 +27,7 @@ public class RoleService implements ServiceImplementation {
 		try {
 			MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 			ApiRestMapper<RoleDto> apiRestMapper = new ApiRestMapper<>();
-			String response = (String)restService.GET("/api/v1/roles/all", params, String.class).getBody();
+			String response = (String)restService.GET("/api/v1/roles/all", params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 			roles = apiRestMapper.mapList(response, RoleDto.class);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -44,7 +45,7 @@ public class RoleService implements ServiceImplementation {
 
 			UriTemplate template = new UriTemplate("/api/v1/roles/{code}");
 			String uri = template.expand(code).toString();
-			String response = (String)restService.GET(uri, params, String.class).getBody();
+			String response = (String)restService.GET(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 			role = apiRestMapper.mapOne(response, RoleDto.class);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,7 +56,7 @@ public class RoleService implements ServiceImplementation {
 	@Override
 	public void create(Object dto) {
 		RoleDto user = (RoleDto) dto;
-		String response = (String) restService.POST("/api/v1/roles/save", user, String.class).getBody();
+		String response = (String) restService.POST("/api/v1/roles/save", user, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 		System.out.println(response);
 
 	}
@@ -64,7 +65,7 @@ public class RoleService implements ServiceImplementation {
 	public void update(Object dto) {
 		RoleDto user = (RoleDto) dto;
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		String response = (String) restService.PUT("/api/v1/roles/", params, user, String.class).getBody();
+		String response = (String) restService.PUT("/api/v1/roles/", params, user, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 		System.out.println(response);
 
 	}
@@ -75,7 +76,7 @@ public class RoleService implements ServiceImplementation {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		UriTemplate template = new UriTemplate("/api/v1/roles/delete/{code}");
 		String uri = template.expand(code).toString();
-		String response = (String) restService.DELETE(uri, params, String.class).getBody();
+		String response = (String) restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 		System.out.println(response);
 	}
 }
