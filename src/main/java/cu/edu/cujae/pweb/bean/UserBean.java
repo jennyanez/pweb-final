@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import cu.edu.cujae.pweb.dto.UserAuthenticatedDto;
 import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.security.UserPrincipal;
-import cu.edu.cujae.pweb.service.AuthService;
+import cu.edu.cujae.pweb.utils.IAuthService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,7 +29,7 @@ public class UserBean {
 	private String password;
 
 	@Autowired
-	AuthService authService;
+	IAuthService IAuthService;
 
 	public UserBean() {
 	}
@@ -52,7 +52,7 @@ public class UserBean {
 
 	public String login() {
 		try {
-			UserAuthenticatedDto userAuthenticated = authService.login(username, password);
+			UserAuthenticatedDto userAuthenticated = IAuthService.login(username, password);
 			UserDetails userDetails = UserPrincipal.create(userAuthenticated);
 			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 			SecurityContextHolder.getContext().setAuthentication(authentication);
