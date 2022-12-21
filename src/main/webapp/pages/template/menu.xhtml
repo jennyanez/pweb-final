@@ -19,37 +19,23 @@
 			<div class="menu-category">#{msgs.label_principal_menu}</div>
 			<div class="menu-items">
 				<p:outputPanel>
-					<a tabindex="0" class="submenu-link"> #{msgs.link_books} </a>
+					<a tabindex="0" class="submenu-link">Dashboard</a>				
 					<div class="submenu">
-						<ul>
-							<li><h:link>
-                                    #{msgs.link_available_books}
-                                </h:link></li>
-							<li><h:link>
-                                    #{msgs.link_borrowed_books}
-                                </h:link></li>
+						<ul>						
+							<li><h:link outcome="/pages/welcome/welcome.xhtml">#{msgs.label_welcome}</h:link></li>                                                                                           
 						</ul>
 					</div>
+					<a tabindex="0" class="submenu-link"> </a>
 				</p:outputPanel>
 				<p:outputPanel>
-					<a tabindex="0" class="submenu-link"> #{msgs.link_book_loans} </a>
-					<div class="submenu">
-						<ul>
-							<li><h:link>
-                                    #{msgs.link_requested_book_loans}
-                                </h:link></li>
-							<li><h:link>
-                                    #{msgs.link_confirmed_book_loans}
-                                </h:link></li>
-						</ul>
-					</div>
+					
 					<div class="menu-category">#{msgs.link_data_management}</div>
 					<div class="menu-items">
 						<sec:authorize access="hasAnyAuthority('admin')">
-						<h:link outcome="/pages/security/users/user-list.xhtml">
-                        #{msgs.link_manage_users}
-                        </h:link>
-                    </sec:authorize>
+							<h:link outcome="/pages/security/users/user-list.xhtml">
+	                        #{msgs.link_manage_users}
+	                        </h:link>
+                   		 </sec:authorize>
 						<h:link outcome="/pages/books/book-list.xhtml">
                        #{msgs.link_manage_books}
                     </h:link>
@@ -82,8 +68,20 @@
                                 </h:link></li>
 							</ul>
 						</div>
-
 					</div>
+					<div class="menu-category">#{msgs.link_data_management}</div>
+						<div class="menu-items">
+							<a tabindex="0" class="submenu-link"> #{msgs.link_reports} </a>
+								<div class="submenu">								
+									<ul>
+										<li>
+											<h:link outcome="/pages/reports/report_bookByAuthorId.xhtml">
+				                        		#{msgs.report_bookByAuthor}
+				                        	</h:link>
+				                        </li>
+				                    </ul>				                    						
+							   </div>
+						</div>
 				</p:outputPanel>
 			</div>
 		</div>

@@ -1,0 +1,82 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/pages/template/layout.xhtml">
+        <ui:define name="title">
+            #{msgs.link_books}
+        </ui:define>
+        <ui:define name="layout">
+            <h:form id="form">
+                <div class="card crud-demo">
+                    <p:toolbar>
+                        <p:toolbarGroup>
+                            <p:selectOneMenu id="book_select" required="true"
+                                             value="#{manageAuthorBean.authorId}"
+                                             onchange="submit()"
+                                             placeholder="#{msgs.input_select}" editable="true"
+                                             style="min-width: 15rem" multiple="true" filter="true"
+                                             filterMatchMode="startsWith" panelStyle="width: 30rem"
+                                             scrollHeight="250">
+                                <f:selectItems value="#{manageAuthorBean.authors}" var="author"
+                                               itemLabel="#{author.name}" itemValue="#{author.authorId}" />
+                                <p:ajax render="form:dt-book" process="@this"/>
+                            </p:selectOneMenu>
+                        </p:toolbarGroup>
+                        <p:toolbarGroup align="right">
+                            <!-- Este es un button que tiene como objetivo exportar el contenido de la tabla que apunta a propiedad target
+                                 del componente dataExporter. En este caso dt-users es el identificador del componente datatable -->
+                            <p:commandButton value="#{msgs.btn_export}" icon="pi pi-upload"
+                                             styleClass="ui-button-help" ajax="false">
+                                <p:dataExporter type="pdf" target="dt-book" fileName="Book for Authors"/>
+                            </p:commandButton>
+                        </p:toolbarGroup>
+                    </p:toolbar>
+
+                    <!-- Componente usado para mostrar tablas con datos y ejecutar operaciones
+                        * La propiedad value: apunta a una lista de objetos de tipo UserDto que está en el bean de jsf
+                        * La propiedad var: es una instancia de esta lista para poder extaer los objetos, es como iterador
+                          que luego permite poder decir user.<propiedad del objeto>.
+                        * La propiedad paginator: define si se quiere paginar o no y es posible definir la position del mismo usando
+                          la propiedad pagePosition.
+                        * La propiedad rows: define la cantidad de filas
+                        * El facet header define un encabezado y agrega un button para filtrar. Por defecto esto lo hace el solo, si quieren algo
+                          con mayor detalle ver el showcase.
+                     -->
+
+
+
+                    <p:dataTable id="dt-book" widgetVar="dtBook" var="book"
+                                 value="#{manageAuthorBean.getBooksById(manageAuthorBean.authorId)}" reflow="true" paginator="true"
+                                 rows="10" paginatorPosition="bottom">
+                        <f:facet name="header">
+                            <div class="products-table-header">
+                                <span style="font-weight: bold">#{msgs.label_book_list}</span> <span
+                                    class="filter-container ui-input-icon-left"> <i
+                                    class="pi pi-search"></i> <p:inputText id="globalFilter"
+                                                                           onkeyup="PF('dtBook').filter()" placeholder="#{msgs.input_search}" />
+							</span>
+                            </div>
+                        </f:facet>
+
+                        <p:column headerText="#{msgs.form_book_book_isbn}" sortBy="#{book.bookCode}" filterBy="#{book.bookCode}">
+                            <h:outputText value="#{book.bookCode}" />
+                        </p:column>
+                        <p:column headerText="#{msgs.form_book_book_title}" sortBy="#{book.bookTitle}"
+                        filterBy="#{book.bookTitle}">
+						<h:outputText value="#{book.bookTitle}"/>
+						</p:column>
+	                    <p:column headerText="#{msgs.form_book_matter}" sortBy="#{book.matter.matterName}" filterBy="#{book.matter.matterName}">
+							<h:outputText value="#{book.matter.matterName}" />
+						</p:column>
+
+                    </p:dataTable>
+
+
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

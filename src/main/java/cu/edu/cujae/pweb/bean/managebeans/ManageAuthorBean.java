@@ -36,6 +36,9 @@ public class ManageAuthorBean {
 	private AuthorDto authorDto;
 	private AuthorDto selectedAuthor;
 	private List<AuthorDto> authors;
+	private List<BookDto> BooksById;
+	
+	private Long authorId;
 	
 	/* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
 	 * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
@@ -121,6 +124,23 @@ public class ManageAuthorBean {
 
 	public void setAuthors(List<AuthorDto> authors) {
 		this.authors = authors;
+	}
+
+	public List<BookDto> getBooksById(Long idAuthor) {
+		this.BooksById = authorService.getBookByAuthorId(idAuthor);
+		return BooksById;
+	}
+
+	public void setBooksById(List<BookDto> booksById) {
+		BooksById = booksById;
+	}
+
+	public Long getAuthorId() {
+		return authorId;
+	}
+
+	public void setAuthorId(Long authorId) {
+		this.authorId = authorId;
 	}
 
 }

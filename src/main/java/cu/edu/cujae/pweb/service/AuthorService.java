@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cu.edu.cujae.pweb.dto.AuthorDto;
+import cu.edu.cujae.pweb.dto.BookDto;
 import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
+import cu.edu.cujae.pweb.utils.IAuthorService;
 import cu.edu.cujae.pweb.utils.RestService;
 import cu.edu.cujae.pweb.utils.ServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriTemplate;
 
 @Service
-public class AuthorService implements ServiceImplementation {
+public class AuthorService implements ServiceImplementation,IAuthorService {
 	@Autowired
 	private RestService restService;
 
@@ -74,5 +76,32 @@ public class AuthorService implements ServiceImplementation {
 		String uri = template.expand(id).toString();
 		String response = (String) restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 		System.out.println(response);
+	}
+	
+	@Override
+	public List<BookDto> getBookByAuthorId(Long idAuthor) {
+		
+		List<BookDto> bookList = new ArrayList<>();
+		List<BookDto> bookListResult = new ArrayList<>();
+		
+		try {
+			MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+	        ApiRestMapper<BookDto> apiRestMapper = new ApiRestMapper<>();
+	        String response = (String)restService.GET("/api/v1/books/all", params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
+	        bookList = apiRestMapper.mapList(response, BookDto.class);
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		for (int i = 0;i<bookList.size();i++) {
+			for(int f = 0;f<bookList.get(i).getAuthors().size();f++) {
+				if(bookList.get(i).getAuthors().get(f).getAuthorId().equals(idAuthor)) {
+					bookListResult.add(bookList.get(i));
+				}
+			}
+		}		
+		
+		return bookListResult;
 	}
 }
