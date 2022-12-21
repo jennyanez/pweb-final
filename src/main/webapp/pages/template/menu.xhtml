@@ -5,84 +5,60 @@
 				xmlns:sec="http://www.springframework.org/security/tags"
 				xmlns:p="http://primefaces.org/ui">
 
-	<div class="layout-sidebar" align="center">
-		<!-- <div class="layout-sidebar-filter ui-fluid ui-input-filled">
-            <h:form>
-                    <p:autoComplete placeholder="Search by name..." minQueryLength="3" effect="fade" 
-                                panelStyleClass="layout-sidebar-filter-panel" scrollHeight="300" emptyMessage="No results found!">
-                    
-                </p:autoComplete>
-            </h:form>
-        </div> -->
+	<div class="layout-sidebar">
 
-		<div class="layout-menu" align="left">
+		<div class="layout-menu">
 			<div class="menu-category">#{msgs.label_principal_menu}</div>
 			<div class="menu-items">
-				<p:outputPanel>
-					<a tabindex="0" class="submenu-link">Dashboard</a>				
-					<div class="submenu">
-						<ul>						
-							<li><h:link outcome="/pages/welcome/welcome.xhtml">#{msgs.label_welcome}</h:link></li>                                                                                           
-						</ul>
-					</div>
-					<a tabindex="0" class="submenu-link"> </a>
-				</p:outputPanel>
-				<p:outputPanel>
-					
+						
+					<h:link outcome="/pages/welcome/welcome.xhtml">Dashboard</h:link>                                                                                          
+										
 					<div class="menu-category">#{msgs.link_data_management}</div>
 					<div class="menu-items">
-						<sec:authorize access="hasAnyAuthority('admin')">
-							<h:link outcome="/pages/security/users/user-list.xhtml">
-	                        #{msgs.link_manage_users}
-	                        </h:link>
-                   		 </sec:authorize>
-						<h:link outcome="/pages/books/book-list.xhtml">
-                       #{msgs.link_manage_books}
-                    </h:link>
-						<h:link outcome="/pages/loans/loan-list.xhtml">
-                        #{msgs.link_manage_book_loans}
-                    </h:link>
-						<h:link outcome="/pages/loansRequest/loanRequest-list.xhtml">
-                       #{msgs.link_manage_book_requests}
-                    </h:link>
-                    <h:link outcome="/pages/authors/author-list.xhtml">
-                        #{msgs.link_manage_authors}
-                    </h:link>
-                    <h:link outcome="/pages/copies/copy-list.xhtml">
-                        #{msgs.link_manage_copies}
-                    </h:link>
-                    <h:link outcome="/pages/matters/matter-list.xhtml">
-                        #{msgs.link_manage_matters}
-                    </h:link>
-						<a tabindex="0" class="submenu-link"> #{msgs.link_manage_clients} </a>
-						<div class="submenu">
-							<ul>
-								<li><h:link outcome="/pages/clients/breach-list.xhtml">
-                                    #{msgs.link_manage_defaulter_clients}
-                                </h:link></li>
-								<li><h:link outcome="/pages/clients/sanction-list.xhtml">
-                                    #{msgs.link_manage_sanctioned_clients}
-                                </h:link></li>
-								<li><h:link outcome="/pages/clients/client-list.xhtml">
-                                    #{msgs.link_manage_all_clients}
-                                </h:link></li>
-							</ul>
-						</div>
-					</div>
-					<div class="menu-category">#{msgs.link_data_management}</div>
-						<div class="menu-items">
-							<a tabindex="0" class="submenu-link"> #{msgs.link_reports} </a>
-								<div class="submenu">								
-									<ul>
-										<li>
-											<h:link outcome="/pages/reports/report_bookByAuthorId.xhtml">
-				                        		#{msgs.report_bookByAuthor}
-				                        	</h:link>
-				                        </li>
-				                    </ul>				                    						
-							   </div>
-						</div>
-				</p:outputPanel>
+					<sec:authorize access="hasAnyAuthority('admin')">
+						
+						<h:link outcome="/pages/security/users/user-list.xhtml">#{msgs.link_manage_users}</h:link>
+	                        
+					</sec:authorize>
+						<sec:authorize access="hasAnyAuthority('admin','worker')">
+							<p:outputPanel>
+							<a tabindex="0" class="submenu-link"> Data</a>
+							<div class="submenu">
+								<ul>
+									<li><h:link outcome="/pages/books/book-list.xhtml">#{msgs.link_manage_books}</h:link></li>
+                 					<li><h:link outcome="/pages/loans/loan-list.xhtml"> #{msgs.link_manage_book_loans} </h:link></li>
+                       				<li><h:link outcome="/pages/loansRequest/loanRequest-list.xhtml"> #{msgs.link_manage_book_requests} </h:link></li>
+                      				<li><h:link outcome="/pages/authors/author-list.xhtml"> #{msgs.link_manage_authors} </h:link></li>
+                       				<li><h:link outcome="/pages/copies/copy-list.xhtml">#{msgs.link_manage_copies}</h:link></li>
+                   					<li><h:link outcome="/pages/matters/matter-list.xhtml"> #{msgs.link_manage_matters} </h:link></li>
+									<li><a tabindex="0" class="submenu-link"> #{msgs.link_manage_clients} </a>
+										<div class="submenu">
+											<ul>
+												<li><h:link outcome="/pages/clients/breach-list.xhtml">#{msgs.link_manage_defaulter_clients}</h:link></li>
+				                                <li><h:link outcome="/pages/clients/sanction-list.xhtml"> #{msgs.link_manage_sanctioned_clients}</h:link></li>    
+				                                <li><h:link outcome="/pages/clients/client-list.xhtml"> #{msgs.link_manage_all_clients}</h:link></li>
+											</ul>
+				                         </div>          
+				                     </li>       
+				                  </ul>
+				               </div> 
+				               </p:outputPanel>      
+						</sec:authorize> 			
+				          <p:outputPanel>
+				           <a tabindex="0" class="submenu-link"> #{msgs.link_reports} </a>
+				            <div class="submenu">
+		                        <ul>
+		                            <li>
+										<h:link outcome="/pages/reports/report_bookByAuthorId.xhtml">
+				                        	#{msgs.report_bookByAuthor}
+				                        </h:link>
+				                    </li>
+		                        </ul>
+		                    </div> 
+		                    </p:outputPanel>                     
+				                                
+				
+				</div>
 			</div>
 		</div>
 	</div>
