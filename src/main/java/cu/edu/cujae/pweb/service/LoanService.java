@@ -97,4 +97,8 @@ public class LoanService implements ServiceImplementation,ILoanService {
 			return idCopies;
 	}
 	
+	public Integer sizeLoan() {
+		return getAll().size();
+	}
+	
 }

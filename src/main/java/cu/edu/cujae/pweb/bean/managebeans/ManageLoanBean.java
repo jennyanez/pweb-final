@@ -30,6 +30,8 @@ public class ManageLoanBean {
 	private List<LoanDto> loans;
 	private List<LoanRequestDto> loansRequest;
 	
+	private Integer sizeLoan;
+	
 	/* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
 	 * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
 	 */
@@ -70,8 +72,8 @@ public class ManageLoanBean {
 			this.selectedLoan.setLoanDate(new Date());
 			loanService.create(selectedLoan);
 			loans = loanService.getAll();
-			System.out.println("anntes de entrar al delete");
 			loanRequestService.delete(selectedLoanRequest);
+			this.setSizeLoan(loans.size());
 			
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loan_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         }
@@ -82,6 +84,7 @@ public class ManageLoanBean {
 			this.selectedLoan.setLoanDate(new Date());
 			loanService.update(selectedLoan);
 			loans = loanService.getAll();
+			this.setSizeLoan(loans.size());
 			
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loan_edited");
         }
@@ -150,6 +153,15 @@ public class ManageLoanBean {
 
 	public void setLoansRequest(List<LoanRequestDto> loansRequest) {
 		this.loansRequest = loansRequest;
+	}
+
+	public Integer getSizeLoan() {
+		this.sizeLoan = loanService.sizeLoan();
+		return sizeLoan;
+	}
+
+	public void setSizeLoan(Integer sizeLoan) {
+		this.sizeLoan = sizeLoan;
 	}
 
 }

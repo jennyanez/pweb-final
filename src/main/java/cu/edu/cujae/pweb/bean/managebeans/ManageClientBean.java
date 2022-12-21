@@ -1,13 +1,13 @@
 package cu.edu.cujae.pweb.bean.managebeans;
 
 import cu.edu.cujae.pweb.dto.ClientDto;
+import cu.edu.cujae.pweb.dto.LoanDto;
 import cu.edu.cujae.pweb.service.ClientService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
@@ -20,6 +20,9 @@ public class ManageClientBean {
     private ClientDto clientDto;
     private ClientDto selectedClient;
     private List<ClientDto> clients;
+    private List<LoanDto> loansById;
+    
+    private Long clientId;
 
     @Autowired
     private ClientService clientService;
@@ -94,4 +97,21 @@ public class ManageClientBean {
     public void setClients(List<ClientDto> clients) {
         this.clients = clients;
     }
+
+	public List<LoanDto> getLoansById(Long idClient) {
+		this.loansById = clientService.LoanByClientId(idClient);
+		return loansById;
+	}
+
+	public void setLoansById(List<LoanDto> loansById) {
+		this.loansById = loansById;
+	}
+
+	public Long getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(Long clientId) {
+		this.clientId = clientId;
+	}
 }

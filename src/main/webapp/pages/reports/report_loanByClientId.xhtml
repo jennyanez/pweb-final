@@ -6,23 +6,23 @@
 
     <ui:composition template="/pages/template/layout.xhtml">
         <ui:define name="title">
-            #{msgs.link_books}
+            #{msgs.label_loan_list}
         </ui:define>
         <ui:define name="layout">
             <h:form id="form">
                 <div class="card crud-demo">
                     <p:toolbar>
                         <p:toolbarGroup>
-                            <p:selectOneMenu id="book_select" required="true"
-                                             value="#{manageAuthorBean.authorId}"
+                            <p:selectOneMenu id="loan_select" required="true"
+                                             value="#{manageClientBean.clientId}"
                                              onchange="submit()"
                                              placeholder="#{msgs.input_select}" editable="true"
                                              style="min-width: 15rem" multiple="true" filter="true"
                                              filterMatchMode="startsWith" panelStyle="width: 30rem"
                                              scrollHeight="250">
-                                <f:selectItems value="#{manageAuthorBean.authors}" var="author"
-                                               itemLabel="#{author.name}" itemValue="#{author.authorId}" />
-                                <p:ajax render="form:dt-book" process="@this"/>
+                                <f:selectItems value="#{manageClientBean.clients}" var="client"
+                                               itemLabel="#{client.name}" itemValue="#{client.clientId}" />
+                                <p:ajax render="form:dt-loan" process="@this"/>
                             </p:selectOneMenu>
                         </p:toolbarGroup>
                         <p:toolbarGroup align="right">
@@ -30,7 +30,7 @@
                                  del componente dataExporter. En este caso dt-users es el identificador del componente datatable -->
                             <p:commandButton value="#{msgs.btn_export}" icon="pi pi-upload"
                                              styleClass="ui-button-help" ajax="false">
-                                <p:dataExporter type="pdf" target="dt-book" fileName="Book for Authors"/>
+                                <p:dataExporter type="pdf" target="dt-loan" fileName="Loan for Clients"/>
                             </p:commandButton>
                         </p:toolbarGroup>
                     </p:toolbar>
@@ -48,28 +48,29 @@
 
 
 
-                    <p:dataTable id="dt-book" widgetVar="dtBook" var="book"
-                                 value="#{manageAuthorBean.getBooksById(manageAuthorBean.authorId)}" reflow="true" paginator="true"
+                    <p:dataTable id="dt-loan" widgetVar="dtLoan" var="loan"
+                                 value="#{manageClientBean.getLoansById(manageClientBean.clientId)}" reflow="true" paginator="true"
                                  rows="10" paginatorPosition="bottom">
                         <f:facet name="header">
                             <div class="products-table-header">
-                                <span style="font-weight: bold">#{msgs.label_book_list}</span> <span
+                                <span style="font-weight: bold">#{msgs.label_loan_list}</span> <span
                                     class="filter-container ui-input-icon-left"> <i
                                     class="pi pi-search"></i> <p:inputText id="globalFilter"
-                                                                           onkeyup="PF('dtBook').filter()" placeholder="#{msgs.input_search}" />
+                                                                           onkeyup="PF('dtLoan').filter()" placeholder="#{msgs.input_search}" />
 							</span>
                             </div>
                         </f:facet>
 
-                        <p:column headerText="#{msgs.form_book_book_isbn}" sortBy="#{book.bookCode}" filterBy="#{book.bookCode}">
-                            <h:outputText value="#{book.bookCode}" />
-                        </p:column>
-                        <p:column headerText="#{msgs.form_book_book_title}" sortBy="#{book.bookTitle}"
-                        filterBy="#{book.bookTitle}">
-						<h:outputText value="#{book.bookTitle}"/>
+                    
+						<p:column headerText="#{msgs.form_loan_book}" sortBy="#{loan.copy.book.bookTitle}"
+							filterBy="#{loan.copy.book.bookTitle}">
+							<h:outputText value="#{loan.copy.book.bookTitle}"/>
 						</p:column>
-	                    <p:column headerText="#{msgs.form_book_matter}" sortBy="#{book.matter.matterName}" filterBy="#{book.matter.matterName}">
-							<h:outputText value="#{book.matter.matterName}" />
+	                    <p:column headerText="#{msgs.label_loan_date}" sortBy="#{loan.loanDate}" filterBy="#{loan.loanDate}">
+							<h:outputText value="#{loan.loanDate}" />
+						</p:column>
+	                    <p:column headerText="#{msgs.label_loan_return_date}" sortBy="#{loan.returnDate}" filterBy="#{loan.returnDate}">
+							<h:outputText value="#{loan.returnDate}" />
 						</p:column>
 
                     </p:dataTable>

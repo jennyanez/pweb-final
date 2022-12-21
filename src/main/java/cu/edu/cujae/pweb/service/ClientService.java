@@ -1,8 +1,11 @@
 package cu.edu.cujae.pweb.service;
 
+import cu.edu.cujae.pweb.dto.BookDto;
 import cu.edu.cujae.pweb.dto.ClientDto;
+import cu.edu.cujae.pweb.dto.LoanDto;
 import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
+import cu.edu.cujae.pweb.utils.IClientService;
 import cu.edu.cujae.pweb.utils.RestService;
 import cu.edu.cujae.pweb.utils.ServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ClientService implements ServiceImplementation {
+public class ClientService implements ServiceImplementation,IClientService {
     @Autowired
     private RestService restService;
     @Override
@@ -73,4 +76,30 @@ public class ClientService implements ServiceImplementation {
         String response = (String) restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
     }
+
+	@Override
+	public List<LoanDto> LoanByClientId(Long idClient) {
+		
+		List<LoanDto> loanList = new ArrayList<>();
+		List<LoanDto> loanListResult = new ArrayList<>();
+		
+		try {
+			MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+	        ApiRestMapper<LoanDto> apiRestMapper = new ApiRestMapper<>();
+	        String response = (String) restService.GET("/api/v1/loanList/all", params,String.class,CurrentUserUtils.getTokenBearer()).getBody();
+	        loanList = apiRestMapper.mapList(response, LoanDto.class);			
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+			
+		}
+		
+		for(int i = 0;i<loanList.size();i++) {
+			if(loanList.get(i).getClient().getClientId().equals(idClient)) {
+				loanListResult.add(loanList.get(i));
+			}
+		}
+		
+		return loanListResult;
+	}
 }
