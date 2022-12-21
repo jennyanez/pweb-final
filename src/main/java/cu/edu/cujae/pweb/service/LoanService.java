@@ -8,6 +8,7 @@ import cu.edu.cujae.pweb.dto.CopyDto;
 import cu.edu.cujae.pweb.dto.LoanDto;
 import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
+import cu.edu.cujae.pweb.utils.ILoanService;
 import cu.edu.cujae.pweb.utils.RestService;
 import cu.edu.cujae.pweb.utils.ServiceImplementation;
 
@@ -18,7 +19,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriTemplate;
 
 @Service
-public class LoanService implements ServiceImplementation {
+public class LoanService implements ServiceImplementation,ILoanService {
 	
 	 @Autowired
 	 private RestService restService;
@@ -85,6 +86,7 @@ public class LoanService implements ServiceImplementation {
         System.out.println(response);
 	}
 	
+	@Override
 	public List<Long> idCopies(){
 		List<Long> idCopies = new ArrayList<>();		
 		List<LoanDto> loans = getAll();

@@ -22,7 +22,7 @@
                             <p:graphicImage name="primefaces-logo.svg" library="images" alt="Image"
                                            style="width: 150px; height:80px " styleClass="mb-3"/>
                             <div style="font-size: xx-large"
-                                 class="text-900 text-3xl font-medium mb-3">#{msgs.label_login}</div>
+                                 class="text-900 text-3xl font-medium mb-3">#{msgs.label_library_login}</div>
                                  <span style="font-size: medium"
                                   class="text-600 font-medium line-height-3">#{msgs.label_dont_have_account}</span>
                             <h:link style="color: #2196F3;text-decoration:none"
@@ -33,16 +33,29 @@
 							#{msgs.label_login}
 					    </f:facet>
 						<p:panelGrid columns="1" layout="grid">
-					      <h:panelGroup>
+					      <h:panelGroup >
 					      	<p:outputLabel for="@next" value="#{msgs.label_username}"/>
-					        <p:inputText value="#{userBean.username}" style="width:100%" required="true"/>
+					      	<div class="ui-inputgroup">
+					      	<div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
+					        <p:inputText 
+					        	value="#{userBean.username}" 
+					        	style="width:100%" 
+					        	required="true"/>
 					        <p:message for="@previous"  />
+					        </div>
 					      </h:panelGroup>
 					      
 					      <h:panelGroup>
 					      	<p:outputLabel for="@next" value="#{msgs.label_password}"/>
-					      	<p:password style="width:100%" value="#{userBean.password}" required="true"/>
+					      	<div class="ui-inputgroup">
+					      	<div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
+					      	<p:password 
+					      		style="width:100%" 
+					      		value="#{userBean.password}" 
+					      		required="true"
+					      		/>
 					      	<p:message for="@previous"  />
+					      	 </div>
 					      </h:panelGroup>
 					    </p:panelGrid>
 					
