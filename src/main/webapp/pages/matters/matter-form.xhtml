@@ -13,8 +13,11 @@
 
             <div class="p-field">
               <p:outputLabel for="@next">#{msgs.form_matter_name}</p:outputLabel>
-              <p:inputText id="code" required="true"
-                           value="#{manageMatterBean.selectedMatter.matterName}" />
+              <p:inputText 
+              		id="code" 
+              		required="true"
+                    value="#{manageMatterBean.selectedMatter.matterName}" 
+                    onclick="setTimeout(function() { $('[id$=msgpass2]').hide(1000); }, 2000);"/>
               <p:message for="@previous" ></p:message>
             </div>
 
@@ -31,5 +34,7 @@
       <p:commandButton value="#{msgs.btn_cancel}" icon="pi pi-times"
                        onclick="PF('manageMatterDialog').hide()" class="ui-button-secondary" />
     </f:facet>
+    <p:ajax event="close" listener="#{manageMatterBean.onCancel}" process="@this"
+				update="manage-matter-content" />
   </p:dialog>
 </ui:composition>

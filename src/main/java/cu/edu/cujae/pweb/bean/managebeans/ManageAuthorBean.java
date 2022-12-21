@@ -90,6 +90,12 @@ public class ManageAuthorBean {
 		}
     }
     
+	public void onCancel(){
+		PrimeFaces.current().ajax().update("form:dt-author");
+		this.selectedAuthor = null;
+	}
+
+    
     
 /********************** GETTERS AND SETTERS ***********************/
 	public AuthorDto getAuthor() {

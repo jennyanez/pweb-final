@@ -8,7 +8,7 @@
     	<h:outputStylesheet name="primeflex.min.css" library="css"></h:outputStylesheet>
     </h:head>
 
-    <h:body>
+    <h:body style="background-image: url(#{resource['images/home/intro-bg-dark.jpg']});background-repeat: no-repeat; background-size: 1920px 1080px, cover;">
 	    <h:form>
 			<p:growl for="securityMessages"  globalOnly="true" showDetail="true" showSummary="false" />
 			<p:spacer height="50"></p:spacer>
@@ -18,6 +18,17 @@
 			    </div>
 			    <div class="p-col">
 			       <p:card style="width: auto">
+			       	<div align="center">
+                            <p:graphicImage name="primefaces-logo.svg" library="images" alt="Image"
+                                           style="width: 150px; height:80px " styleClass="mb-3"/>
+                            <div style="font-size: xx-large"
+                                 class="text-900 text-3xl font-medium mb-3">#{msgs.label_login}</div>
+                                 <span style="font-size: medium"
+                                  class="text-600 font-medium line-height-3">#{msgs.label_dont_have_account}</span>
+                            <h:link style="color: #2196F3;text-decoration:none"
+                                    outcome="/pages/security/users/register.xhtml">
+                                #{msgs.label_register}
+                            </h:link></div>
 					    <f:facet name="title">
 							#{msgs.label_login}
 					    </f:facet>

@@ -20,6 +20,7 @@
                                     style="min-width: 15rem" 
                                     multiple="true" 
                                     filter="true"
+                                    onHide="setTimeout(function() { $('[id$=msgClient]').hide(1000); }, 2000);"
                                     filterMatchMode="startsWith" 
                                     panelStyle="width: 30rem"
                                     scrollHeight="250">
@@ -27,19 +28,19 @@
                                 <f:selectItems value="#{manageLoanRequestBean.clients}" var="clientVar"
                                                    itemValue="#{clientVar.clientId}" itemLabel="#{clientVar.name}"/>                                  
                             </p:selectOneMenu>
-                                
-                            <p:message for="@previous" ></p:message>
+                                 <p:message for="client" id="msgClient"></p:message>
                         </div>
 					<div>
 						<p:selectOneListbox 
-									id="copyA" 
+									id="copyLR" 
 									required="true" 
 									label="Seleccione"
                                     value="#{manageLoanRequestBean.selectedCopy}"                                          
                                     style="min-width: 15rem" 
                                     multiple="true" 
                                     filter="true"
-                                    filterMatchMode="startsWith" 
+                                    filterMatchMode="startsWith"
+                                    onHide="setTimeout(function() { $('[id$=msgCopyLR]').hide(1000); }, 2000);" 
                                     panelStyle="width: 30rem"
                                     scrollHeight="250">
                                 <f:selectItems value="#{manageLoanRequestBean.copies}" var="copy"
@@ -48,28 +49,8 @@
 	                   				<h:outputText value="#{c.book.bookTitle}"/>
 	               			</p:column>
             			</p:selectOneListbox>
+            				<p:message for="copyLR" id="msgCopyLR"></p:message>
 					</div>
-					
-					<!-- 
-					<div class="p-field">
-						<p:selectOneMenu 
-									id="book1" 
-									required="true" 
-									label="Seleccione"
-                                    value="#{manageLoanRequestBean.selectedCopy}"                                          
-                                    style="min-width: 15rem" 
-                                    multiple="true" 
-                                    filter="true"
-                                    filterMatchMode="startsWith" 
-                                    panelStyle="width: 30rem"
-                                    scrollHeight="250">
-                           		<f:selectItem itemLabel="Seleccione" itemValue="" noSelectionOption="true"/>
-                                <f:selectItems value="#{manageLoanRequestBean.copies}" var="book1"
-                                                   itemValue="#{book1.copyId}" itemLabel="#{book1.book.bookTitle}"/>                                  
-                            </p:selectOneMenu>
-						<p:message for="@previous" ></p:message>
-					</div>
-					-->
 							
 					</h:panelGroup>
 				</p:panelGrid>
@@ -83,5 +64,7 @@
 			<p:commandButton value="Cancelar" icon="pi pi-times"
 				onclick="PF('manageLoanRequestDialog').hide()" class="ui-button-secondary" />
 		</f:facet>
+		<p:ajax event="close" listener="#{manageLoanRequestBean.onCancel}" process="@this"
+				update="manage-loanRequest-content" />
 	</p:dialog>
 </ui:composition>

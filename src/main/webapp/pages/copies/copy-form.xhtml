@@ -13,20 +13,23 @@
 						
                     	<div class="p-field">
 							<p:outputLabel for="@next">#{msgs.form_copy_number}</p:outputLabel>
-							<p:inputText id="copyNumber" required="true" 
-								value="#{manageCopyBean.selectedCopy.copyNumber}" />
-							<p:message for="@previous" ></p:message>
+							<p:inputText 
+								id="copyNumber" 
+								required="true" 
+								value="#{manageCopyBean.selectedCopy.copyNumber}" 
+								onclick="setTimeout(function() { $('[id$=msgpass2]').hide(1000); }, 2000);"/>
+							<p:message for="copyNumber" id="msgCopyNumber"></p:message>
 						</div>
 						
 						<div class="p-field">
 						  <p:outputLabel for="@next">#{msgs.form_copy_book}</p:outputLabel>
 							<p:selectOneMenu 
-									id="book1" 
+									id="bookByCopyForm" 
 									required="true" 
 									label="#{msgs.input_select}"
                                     value="#{manageCopyBean.selectedBook}"                                          
                                     style="min-width: 15rem" 
-                                    multiple="true" 
+                                    onHide="setTimeout(function() { $('[id$=msgRoles]').hide(1000); }, 2000);"           
                                     filter="true"
                                     filterMatchMode="startsWith" 
                                     panelStyle="width: 30rem"
@@ -34,9 +37,8 @@
                            		<f:selectItem itemLabel="#{msgs.input_select}" itemValue="" noSelectionOption="true"/>
                                 <f:selectItems value="#{manageCopyBean.books}" var="book1"
                                                    itemValue="#{book1.bookId}" itemLabel="#{book1.bookTitle}"/>                                  
-                            </p:selectOneMenu>
-                                
-                            <p:message for="@previous" ></p:message>
+                            </p:selectOneMenu>             
+                            <p:message for="bookByCopyForm" id="msgBookbyCopyForm"></p:message>
                         </div>
                                 
 										
@@ -52,5 +54,7 @@
 			<p:commandButton value="#{msgs.btn_cancel}" icon="pi pi-times"
 				onclick="PF('manageCopyDialog').hide()" class="ui-button-secondary" />
 		</f:facet>
+		<p:ajax event="close" listener="#{manageCopyBean.onCancel}" process="@this"
+				update="manage-copy-content" />
 	</p:dialog>
 </ui:composition>

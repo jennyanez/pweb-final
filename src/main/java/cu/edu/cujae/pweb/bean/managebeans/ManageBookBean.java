@@ -161,6 +161,13 @@ public class ManageBookBean {
 			}
 		}
 	}
+	
+	public void onCancel(){
+		PrimeFaces.current().ajax().update("form:dt-book");
+		this.selectedBook = null;
+	}
+	
+	
 
 	public List<AuthorDto> getAuthors() {
 		authors = authorService.getAll();

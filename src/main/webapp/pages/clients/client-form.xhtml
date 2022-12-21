@@ -13,35 +13,44 @@
 												
                     <div class="p-field">
 							<p:outputLabel for="@next">#{msgs.form_client_name}</p:outputLabel>
-							<p:inputText id="name" required="true"
-								value="#{manageClientBean.selectedClient.name}" />
-							<p:message for="@previous" ></p:message>
+							<p:inputText 
+								id="name" 
+								required="true"
+								value="#{manageClientBean.selectedClient.name}" 
+								onclick="setTimeout(function() { $('[id$=msgName]').hide(1000); }, 2000);"/>
+							<p:message for="name" id="msgName"></p:message>
 					</div>
 						<div class="p-field">
 							<p:outputLabel for="@next">#{msgs.form_client_first_surname}</p:outputLabel>
 							<p:inputText id="firstSurname" required="true"
-										 value="#{manageClientBean.selectedClient.firstSurname}" />
-							<p:message for="@previous" ></p:message>
+										 value="#{manageClientBean.selectedClient.firstSurname}" 
+										 onclick="setTimeout(function() { $('[id$=msgFirstSurname]').hide(1000); }, 2000);"/>
+							<p:message for="firstSurname" id="msgFirstSurname"></p:message>
 						</div>
 						<div class="p-field">
 							<p:outputLabel for="@next">#{msgs.form_client_last_surname}</p:outputLabel>
-							<p:inputText id="lastSurname" required="true"
-										 value="#{manageClientBean.selectedClient.lastSurname}" />
-							<p:message for="@previous" ></p:message>
+							<p:inputText id="lastSurname" 
+										 required="true"
+										 value="#{manageClientBean.selectedClient.lastSurname}" 
+										 onclick="setTimeout(function() { $('[id$=msgLastSurname]').hide(1000); }, 2000);"/>
+							<p:message for="lastSurname" id="msgLastSurname" ></p:message>
 						</div>
 					</h:panelGroup>
 					<h:panelGroup>
 						<div class="p-field">
 							<p:outputLabel for="@next">#{msgs.form_client_dni}</p:outputLabel>
-							<p:inputText id="dni" required="true"
-										 value="#{manageClientBean.selectedClient.DNI}" />
-							<p:message for="@previous" ></p:message>
+							<p:inputText id="dni" 
+										 required="true"
+										 value="#{manageClientBean.selectedClient.DNI}" 
+										 onclick="setTimeout(function() { $('[id$=msgDni]').hide(1000); }, 2000);"/>
+							<p:message for="dni" id="msgDni"></p:message>
 						</div>
 						<div class="p-field">
 							<p:outputLabel for="@next">#{msgs.form_client_area}</p:outputLabel>
 							<p:inputText id="area" required="true"
-										 value="#{manageClientBean.selectedClient.area}" />
-							<p:message for="@previous" ></p:message>
+										 value="#{manageClientBean.selectedClient.area}" 
+										 onclick="setTimeout(function() { $('[id$=msgArea]').hide(1000); }, 2000);"/>
+							<p:message for="area" id="msgArea"></p:message>
 						</div>
 					</h:panelGroup>
 				</p:panelGrid>
@@ -55,5 +64,7 @@
 			<p:commandButton value="#{msgs.btn_cancel}" icon="pi pi-times"
 				onclick="PF('manageClientDialog').hide()" class="ui-button-secondary" />
 		</f:facet>
+		<p:ajax event="close" listener="#{manageClientBean.onCancel}" process="@this"
+				update="manage-client-content" />
 	</p:dialog>
 </ui:composition>

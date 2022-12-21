@@ -11,38 +11,53 @@
 				<p:panelGrid layout="grid" columns="2">
 					<h:panelGroup>
 												
-                    <div class="p-field">
+                    	<div class="p-field">
 							<p:outputLabel for="@next">#{msgs.form_book_book_isbn}</p:outputLabel>
-							<p:inputText id="code" required="true" 
-								value="#{manageBookBean.selectedBook.bookCode}" />
-							<p:message for="@previous" ></p:message>
+							<p:inputText 
+								id="code" 
+								required="true" 
+								value="#{manageBookBean.selectedBook.bookCode}" 
+								onclick="setTimeout(function() { $('[id$=msgBook]').hide(1000); }, 2000);"/>
+							<p:message for="code" id = "msgBook"></p:message>
 						</div>
 						
                         <div class="p-field">
 							<p:outputLabel for="@next">#{msgs.form_book_book_title}</p:outputLabel>
-							<p:inputText id="title" required="true"
-								value="#{manageBookBean.selectedBook.bookTitle}" />
-							<p:message for="@previous"></p:message>
+							<p:inputText 
+								id="title" 
+								required="true"
+								value="#{manageBookBean.selectedBook.bookTitle}" 
+								onclick="setTimeout(function() { $('[id$=msgTitle]').hide(1000); }, 2000);"/>								
+							<p:message for="title" id="msgTitle"></p:message>
 						</div>
 					
                         <div class="p-field">
 							<p:outputLabel for="@next">#{msgs.form_book_year_edition}</p:outputLabel>
-							<p:spinner id="rotate" value="#{manageBookBean.selectedBook.yearEdition}" min="1" max="2022" rotate="true"/>
-							<p:message for="@previous"></p:message>
+							<p:spinner 
+								id="rotate" 
+								value="#{manageBookBean.selectedBook.yearEdition}" 
+								min="1" max="2022" 
+								rotate="true"
+								onHide="setTimeout(function() { $('[id$=msgRotate]').hide(1000); }, 2000);"/>
+								
+							<p:message for="rotate" id="msgRotate"></p:message>
 						</div>
 
 						<!--editorial-->
 						<div class="p-field">
 							<p:outputLabel for="@next">#{msgs.form_book_editorial}</p:outputLabel>
-							<p:inputText id="editorial"
-										 value="#{manageBookBean.selectedBook.editorial}" />
-							<p:message for="@previous"></p:message>
+							<p:inputText 
+								id="editorial"
+								value="#{manageBookBean.selectedBook.editorial}" 
+								onclick="setTimeout(function() { $('[id$=msgEditorial]').hide(1000); }, 2000);"/>
+							<p:message for="editorial" id="msgEditorial"></p:message>
 						</div>
 
 						<!--Authors-->
 						<div class="p-field">
 							<p:outputLabel for="@next">#{msgs.form_book_author}</p:outputLabel>
 							<p:selectCheckboxMenu id="authors"
+												  required="true"
 												  value="#{manageBookBean.selectedAuthors}"
 												  label="#{msgs.input_select}"
 												  style="min-width: 15rem"
@@ -52,12 +67,13 @@
 												  panelStyle="width: 30rem"
 												  scrollHeight="250"
 												  updateLabel="true"
-												  required="true">
+												  onHide="setTimeout(function() { $('[id$=msgAuthors]').hide(1000); }, 2000);">
 								<!--							<p:ajax event="itemUnselect" listener="#{checkboxView.onItemUnselect}"/>-->
 								<f:selectItems value="#{manageBookBean.authors}"
 											   var="author"
 											   itemLabel="#{author.name}" itemValue="#{author.authorId}"/>
 							</p:selectCheckboxMenu>
+							<p:message for="authors" id="msgAuthors" ></p:message>
 						</div>
 
 					</h:panelGroup>
@@ -69,9 +85,12 @@
 											 value="#{manageBookBean.selectedBook.countryOrigin}"
 											 converter="#{countryConverter}"
 											 panelStyle="width:180px"
-											 effect="fade" var="c"
-											 filter="true" filterMatchMode="startsWith">
-
+											 effect="fade" 
+											 var="c"
+											 filter="true" 
+											 filterMatchMode="startsWith"
+											 onHide="setTimeout(function() { $('[id$=msgCountry]').hide(1000); }, 2000);">
+								
 								<f:selectItems value="#{selectOneMenuView.countries}" var="country"
 											   itemLabel="#{country.name}" itemValue="#{country}"/>
 
@@ -91,6 +110,7 @@
 												  style="font-weight:bold;" styleClass="py-1 block"/>
 								</f:facet>
 							</p:selectOneMenu>
+							<p:message for="country-origin" id="msgCountry" ></p:message>
 						</div>
 						<!--fin de countries -->
 
@@ -101,8 +121,10 @@
 							<p:inputNumber id="pages"
 										   value="#{manageBookBean.selectedBook.amountPages}"
 										   minValue="1"
-										   decimalPlaces="0" />
-							<p:message for="@previous"></p:message>
+										   maxValue="5000"
+										   decimalPlaces="0" 
+										   onclick="setTimeout(function() { $('[id$=msgPages]').hide(1000); }, 2000);"/>
+							<p:message for="pages" id="msgPages"></p:message>
 						</div>
 						<!--Materia-->
 						<div class="p-field">
@@ -117,26 +139,40 @@
 									filter="true"
 									filterMatchMode="startsWith"
 									panelStyle="width: 30rem"
-									scrollHeight="250">
+									scrollHeight="250"
+									onclick="setTimeout(function() { $('[id$=msgMatter]').hide(1000); }, 2000);">
 								<f:selectItem itemLabel="#{msgs.input_select}" itemValue="#{null}" noSelectionOption="true"/>
 								<f:selectItems value="#{manageBookBean.matters}" var="matter" required="true"
 											   itemValue="#{matter.matterId}" itemLabel="#{matter.matterName}"/>
 							</p:selectOneMenu>
-							<p:message for="@previous" ></p:message>
+							<p:message for="matter" id="msgMatter"></p:message>
 						</div>
 
 						<!--amount of copies-->
 						<div class="p-field">
 							<p:outputLabel for="@next" value="#{msgs.form_book_amount_copies}"/>
-							<p:spinner id="copies" value="#{manageBookBean.amountCopies}" min="0"/>
+							<p:spinner 
+								id="copies" 
+								value="#{manageBookBean.amountCopies}" 
+								min="0" max="50"
+								onclick="setTimeout(function() { $('[id$=msgCopies]').hide(1000); }, 2000);"/>
+							<p:message for="copies" id="msgCopies"></p:message>
 						</div>
 
 						<!-- book summary -->
 						<div class="p-field">
 							<p:outputLabel for="@next">#{msgs.form_book_summary}</p:outputLabel>
-							<p:inputTextarea rows="5" cols="30" counter="display" maxlength="180"
-											 counterTemplate="{0} characters remaining." autoResize="false"/>
-							<h:outputText id="display" class="block" />
+							<p:inputTextarea 
+							    id="sumary"
+								rows="5" 
+								cols="30" 
+								counter="display" 
+								maxlength="180"
+								counterTemplate="{0} characters remaining." 
+								autoResize="false"
+								onclick="setTimeout(function() { $('[id$=msgSumary]').hide(1000); }, 2000);"/>
+							<p:message for="sumary" id="msgSumary"></p:message>
+							<h:outputText id="display" class="block" />		
 						</div>
 
 					</h:panelGroup>
@@ -151,5 +187,7 @@
 			<p:commandButton value="#{msgs.btn_cancel}" icon="pi pi-times"
 				onclick="PF('manageBookDialog').hide()" class="ui-button-secondary"/>
 		</f:facet>
+		<p:ajax event="close" listener="#{manageBookBean.onCancel}" process="@this"
+				update="manage-book-content" />
 	</p:dialog>
 </ui:composition>

@@ -62,11 +62,15 @@
 							<p:selectCheckboxMenu
 									id="multiple"
 									required="true"
-									value="#{manageUserBean.selectedRoles}" label="#{msgs.input_select}"
-									style="min-width: 15rem" multiple="true" filter="true"
+									value="#{manageUserBean.selectedRoles}" 
+									label="#{msgs.input_select}"
+									style="min-width: 15rem" 
+									multiple="true" 
+									filter="true"
 									requiredMessage="#{msgs.form_user_required_fields}"
 									onHide="setTimeout(function() { $('[id$=msgRoles]').hide(1000); }, 2000);"
-									filterMatchMode="startsWith" panelStyle="width: 30rem"
+									filterMatchMode="startsWith" 
+									panelStyle="width: 30rem"
 									scrollHeight="250">
 								<f:selectItems value="#{manageUserBean.roles}" var="role"
 											   itemLabel="#{role.role}" itemValue="#{role.code}" />

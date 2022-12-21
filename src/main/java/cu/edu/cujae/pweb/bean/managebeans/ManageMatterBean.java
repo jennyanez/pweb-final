@@ -76,6 +76,11 @@ public class ManageMatterBean {
 		}
 
 	}
+	
+	  public void onCancel(){
+			PrimeFaces.current().ajax().update("form:dt-matter");
+			this.selectedMatter = null;
+		}
 
 
 	/********************** GETTERS AND SETTERS ***********************/

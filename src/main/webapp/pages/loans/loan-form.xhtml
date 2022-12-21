@@ -18,7 +18,7 @@
 									required="true" 
 									label="Seleccione"
                                     value="#{manageLoanBean.selectedLoanRequest}" 
-                                                                    
+                                    onHide="setTimeout(function() { $('[id$=msgLoanId]').hide(1000); }, 2000);"                               
                                     style="min-width: 15rem" 
                                     multiple="true" 
                                     filter="true"
@@ -27,31 +27,19 @@
                                     scrollHeight="250">
                                  
                                 <f:selectItems value="#{manageLoanBean.loansRequest}" var="loan"
-                                                   itemValue="#{loan.id}" itemLabel="#{loan.copy.book.bookTitle} "/> 
-					                <!--  
-					                <p:column headerText="Client name">					                	 
-					                     <h:outputText value="#{c.client.name}"/>
-					                </p:column>
-					                <p:column>
-					                    <h:outputText value="#{c.copy.book.bookTitle}"/>
-					                </p:column>
-					                <p:column>
-					                    <h:outputText value="#{c.loanRequestDate}"/>
-					                </p:column>
-					                <p:column>
-					                    <p:commandButton  icon="pi pi-check">
-					                    	              
-					                    </p:commandButton>													 
-					                </p:column>
-					                -->
-					                
+                                                   itemValue="#{loan.id}" itemLabel="#{loan.copy.book.bookTitle} "/> 					                
 					            </p:selectOneListbox>
+					            <p:message for="loanId" id="msgLoanId"></p:message>
 					        </div>
 					        
 					        <div class="p-field">
 								<p:outputLabel for="@next">Fecha de devolucion</p:outputLabel>
-								<p:calendar id="date" value="#{manageLoanBean.selectedLoan.returnDate}" required="true"/>
-								<p:message for="@previous"></p:message>
+								<p:calendar 
+									id="date" 
+									value="#{manageLoanBean.selectedLoan.returnDate}" 
+									required="true"
+									onclick="setTimeout(function() { $('[id$=msgDate]').hide(1000); }, 2000);" />
+								<p:message for="date" id="msgDate"></p:message>
 							</div>
 
 
@@ -67,5 +55,7 @@
       <p:commandButton value="Cancelar" icon="pi pi-times"
                        onclick="PF('manageLoanDialog').hide()" class="ui-button-secondary" />
     </f:facet>
+    <p:ajax event="close" listener="#{manageLoanBean.onCancel}" process="@this"
+				update="manage-loan-content" />
   </p:dialog>
 </ui:composition>

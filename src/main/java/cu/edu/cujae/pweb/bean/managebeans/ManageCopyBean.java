@@ -94,6 +94,11 @@ public class ManageCopyBean {
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
 		}
     }
+    
+    public void onCancel(){
+		PrimeFaces.current().ajax().update("form:dt-copy");
+		this.selectedCopy = null;
+	}
 
 
     /******************************   GETTERS AND SETTERS   *****************************/

@@ -13,9 +13,12 @@
 												
                     <div class="p-field">
 							<p:outputLabel for="@next">#{msgs.form_author_full_name}</p:outputLabel>
-							<p:inputText id="code" required="true" 
-								value="#{manageAuthorBean.selectedAuthor.name}" />
-							<p:message for="@previous" ></p:message>
+							<p:inputText
+								id="code" 
+								required="true" 
+								value="#{manageAuthorBean.selectedAuthor.name}" 
+								onclick="setTimeout(function() { $('[id$=msgCode]').hide(1000); }, 2000);"/>
+							<p:message for="code" id="msgCode"></p:message>
 						</div>
 						
             
@@ -31,5 +34,7 @@
 			<p:commandButton value="#{msgs.btn_cancel}" icon="pi pi-times"
 				onclick="PF('manageAuthorDialog').hide()" class="ui-button-secondary" />
 		</f:facet>
+		<p:ajax event="close" listener="#{manageAuthorBean.onCancel}" process="@this"
+				update="manage-author-content" />
 	</p:dialog>
 </ui:composition>

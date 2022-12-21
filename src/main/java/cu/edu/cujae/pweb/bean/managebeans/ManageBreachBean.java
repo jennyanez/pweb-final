@@ -56,6 +56,11 @@ public class ManageBreachBean {
         }
 
     }
+    
+    public void onCancel(){
+		PrimeFaces.current().ajax().update("form:dt-breach");
+		this.selectedBreach = null;
+	}
 
     /***** Constructor ******/
     public ManageBreachBean() {

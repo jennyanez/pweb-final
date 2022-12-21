@@ -50,7 +50,6 @@ public class ManageLoanBean {
 	public void openNew() {
         this.selectedLoan = new LoanDto();
         this.selectedLoanRequest = null;
-        System.out.println("hola2");
     }
 	
 	//Se ejecuta al dar clic en el button con el lapicito
@@ -105,7 +104,10 @@ public class ManageLoanBean {
 		}
     }
 
-	
+    public void onCancel(){
+		PrimeFaces.current().ajax().update("form:dt-loan");
+		this.selectedLoan = null;
+	}
     
 /*********************************GETTERS AND SETTERS***************************/
     public LoanDto getLoanDto() {

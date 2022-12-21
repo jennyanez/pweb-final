@@ -123,9 +123,11 @@ public class ManageLoanRequestBean {
     	
     }
 
-    public void updateAjax(){
-		PrimeFaces.current().ajax().update("form:dt-loanRequest");
-	}
+    public void onCancel(){
+  		PrimeFaces.current().ajax().update("form:dt-loanRequest");
+  		this.selectedLoanRequest = null;
+  	}
+    
 	
     
     ////////////////////////////////////////////////      SETTERS Y GETTERS    ////////////////////////////////////////////////////*
