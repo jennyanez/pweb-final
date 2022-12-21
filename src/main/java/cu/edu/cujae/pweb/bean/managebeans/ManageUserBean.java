@@ -7,7 +7,6 @@ import cu.edu.cujae.pweb.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
@@ -28,6 +27,8 @@ public class ManageUserBean {
 	private Integer[] selectedRoles;
 
 	private List<RoleDto> roles;
+	
+	private boolean rendered = true;
 
 	/* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
 	 * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
@@ -43,12 +44,14 @@ public class ManageUserBean {
 
 	//Se ejecuta al dar clic en el button Nuevo
 	public void openNew() {
+		setRendered(true);
 		this.selectedUser = new UserDto();
 		this.selectedRoles = null;
 	}
 
 	//Se ejecuta al dar clic en el button con el lapicito
 	public void openForEdit() {
+		setRendered(false);
 		List<RoleDto> roles = this.selectedUser.getRoles();
 		this.selectedRoles =
 				roles.stream().map(RoleDto::getCode).toArray(Integer[]::new);
@@ -56,6 +59,7 @@ public class ManageUserBean {
 
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
 	public void saveUser() {
+		
 		if (this.selectedUser.getCode() == 0) {
 			List<RoleDto> rolesToAdd = new ArrayList<RoleDto>();
 			for (int i = 0; i < this.selectedRoles.length; i++) {
@@ -154,5 +158,15 @@ public class ManageUserBean {
 
 	public void setRoles(List<RoleDto> roles) {
 		this.roles = roles;
+	}
+
+
+	public boolean getRendered() {
+		return rendered;
+	}
+
+
+	public void setRendered(boolean rendered) {
+		this.rendered = rendered;
 	}
 }

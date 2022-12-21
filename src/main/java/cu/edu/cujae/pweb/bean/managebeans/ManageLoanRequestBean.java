@@ -32,6 +32,8 @@ public class ManageLoanRequestBean {
 	private Long selectedCopy;
 	private Long selectedClient;
 	
+	private boolean rendered = true;
+	
 	
 	private List<LoanRequestDto> loansRequest;
 	private List<CopyDto> copies;
@@ -60,7 +62,7 @@ public class ManageLoanRequestBean {
 
 	//Se ejecuta al dar clic en el button Nuevo
 	public void openNew() {
-
+		setRendered(true);
         this.selectedLoanRequest = new LoanRequestDto();
         this.selectedClient = null;
         this.selectedCopy = null;
@@ -70,6 +72,7 @@ public class ManageLoanRequestBean {
 	
 	//Se ejecuta al dar clic en el button con el lapicito
 	public void openForEdit() {
+		setRendered(false);
 			ClientDto client = this.selectedLoanRequest.getClient();
 			CopyDto copy = this.selectedLoanRequest.getCopy();
 			
@@ -79,7 +82,7 @@ public class ManageLoanRequestBean {
 	}
 	
 	public void saveLoan() {
-		
+		System.out.println("estamos en saveLoan ::");
 		if (this.selectedLoanRequest.getId() == null) {
          
            this.selectedLoanRequest.setClient(this.clientService.getById(selectedClient));
@@ -200,6 +203,18 @@ public class ManageLoanRequestBean {
 
 	public void setClients(List<ClientDto> clients) {
 		this.clients = clients;
+	}
+
+
+
+	public boolean isRendered() {
+		return rendered;
+	}
+
+
+
+	public void setRendered(boolean rendered) {
+		this.rendered = rendered;
 	}
     
 }

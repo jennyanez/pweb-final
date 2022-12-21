@@ -11,7 +11,7 @@
         <p:panelGrid layout="grid" columns="1">
           <h:panelGroup>
 
-           					<h6>Loan Request</h6>
+           					<p:outputLabel for="@next" rendered="#{manageLoanBean.rendered}">Loan Request</p:outputLabel>
 					        <div class="col-12 md:col-6 lg:col-4 xl:col-3">
 					            <p:selectOneListbox 
 					            	id="loanId" 
@@ -24,7 +24,8 @@
                                     filter="true"
                                     filterMatchMode="startsWith" 
                                     panelStyle="width: 30rem"
-                                    scrollHeight="250">
+                                    scrollHeight="250"
+                                    rendered="#{manageLoanBean.rendered}">
                                  
                                 <f:selectItems value="#{manageLoanBean.loansRequest}" var="loan"
                                                    itemValue="#{loan.id}" itemLabel="#{loan.copy.book.bookTitle} "/> 					                

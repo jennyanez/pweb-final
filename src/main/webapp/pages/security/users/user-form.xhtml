@@ -78,23 +78,25 @@
 							<p:message for="multiple" id="msgRoles" ></p:message>
 						</div>
 						<div class="p-field">
-							<p:outputLabel for="@next">#{msgs.form_user_password}</p:outputLabel>
+							<p:outputLabel for="@next" rendered="#{manageUserBean.rendered}">#{msgs.form_user_password} </p:outputLabel>
 							<p:password id="password1" required="true"
 										requiredMessage="#{msgs.form_user_required_fields}"
 										validatorMessage="#{msgs.form_passwords_not_match}"
 										onclick="setTimeout(function() { $('[id$=msgpass1]').hide(1000); }, 2000);"
 										value="#{manageUserBean.selectedUser.password}"
-										match="password2">
+										match="password2"
+										rendered="#{manageUserBean.rendered}">
 							</p:password>
 							<p:message for="password1" id="msgpass1" ></p:message>
 						</div>
 						<div class="p-field">
-							<p:outputLabel for="@next">#{msgs.form_user_repeat_password}</p:outputLabel>
+							<p:outputLabel for="@next" rendered="#{manageUserBean.rendered}">>#{msgs.form_user_repeat_password}</p:outputLabel>
 							<p:password id="password2" required="true"
 										requiredMessage="#{msgs.form_user_required_fields}"
 										validatorMessage="#{msgs.form_passwords_not_match}"
 										onclick="setTimeout(function() { $('[id$=msgpass2]').hide(1000); }, 2000);"
-										value="#{manageUserBean.selectedUser.password}">
+										value="#{manageUserBean.selectedUser.password}"
+										rendered="#{manageUserBean.rendered}">
 							</p:password>
 							<p:message for="password2" id="msgpass2"></p:message>
 						</div>
@@ -107,7 +109,7 @@
 		<f:facet name="footer">
 			<p:commandButton value="#{msgs.btn_save}" icon="pi pi-check"
 							 actionListener="#{manageUserBean.saveUser}"
-							 update="manage-user-content" process="manage-user-content @this" />
+							 update="manage-user-content" process="manage-user-content @this"/>
 			<p:commandButton value="#{msgs.btn_cancel}" icon="pi pi-times"
 							 onclick="PF('manageUserDialog').hide()" class="ui-button-secondary"
 							 action="#{manageUserBean.onCancel()}" actionListener="#{manageUserBean.onCancel}" process="@this"/>

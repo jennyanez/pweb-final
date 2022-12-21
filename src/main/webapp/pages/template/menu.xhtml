@@ -22,7 +22,7 @@
 					</sec:authorize>
 						<sec:authorize access="hasAnyAuthority('admin','worker')">
 							<p:outputPanel>
-							<a tabindex="0" class="submenu-link"> Data</a>
+							<a tabindex="0" class="submenu-link">Data</a>
 							<div class="submenu">
 								<ul>
 									<li><h:link outcome="/pages/books/book-list.xhtml">#{msgs.link_manage_books}</h:link></li>
@@ -55,7 +55,7 @@
 				                    </li>
 				                    <li>
 										<h:link outcome="/pages/reports/report_loanByClientId.xhtml">
-				                        	#{msgs.report_bookByAuthor}
+				                        	#{msgs.report_LoanByClient}
 				                        </h:link>
 				                    </li>
 		                        </ul>
