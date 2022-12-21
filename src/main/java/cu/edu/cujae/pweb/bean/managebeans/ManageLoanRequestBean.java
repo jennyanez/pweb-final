@@ -80,19 +80,22 @@ public class ManageLoanRequestBean {
 		String msg = "";
 
 		if (this.selectedLoanRequest.getId() == null) {
-         
-           this.selectedLoanRequest.setClient(this.clientService.getById(selectedClient));
-		   this.selectedLoanRequest.setLoanRequestDate(new Date());
-           this.selectedLoanRequest.setCopy(this.copyService.getById(selectedCopy));
-           this.selectedLoanRequest.setBook(this.copyService.getById(selectedCopy).getBook());
-           msg = loanRequestService.create(selectedLoanRequest);
+			if (!clientService.clientSanctioned(this.selectedClient)) {
+				this.selectedLoanRequest.setClient(this.clientService.getById(selectedClient));
+				this.selectedLoanRequest.setLoanRequestDate(new Date());
+				this.selectedLoanRequest.setCopy(this.copyService.getById(selectedCopy));
+				this.selectedLoanRequest.setBook(this.copyService.getById(selectedCopy).getBook());
+				msg = loanRequestService.create(selectedLoanRequest);
 
-		   if(!msg.isEmpty()){
-			   JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loanRequest_already_exists");
-		   }else{
-			   JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loanRequest_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
-		   }
-         }
+				if (!msg.isEmpty()) {
+					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_loanRequest_already_exists");
+				} else {
+					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loanRequest_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
+				}
+			}else{
+				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_client_sanctioned");
+			}
+		}
         else {
         	
         	this.selectedLoanRequest.setClient(this.clientService.getById(selectedClient));
@@ -102,7 +105,7 @@ public class ManageLoanRequestBean {
             msg = loanRequestService.update(selectedLoanRequest);
 
 			if(!msg.isEmpty()){
-				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loanRequest_already_exists");
+				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_loanRequest_already_exists");
 			}else{
 				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loanRequest_edited");
 			}

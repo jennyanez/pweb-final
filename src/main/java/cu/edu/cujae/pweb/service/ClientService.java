@@ -87,4 +87,12 @@ public class ClientService implements ServiceImplementation {
         }
         return msg;
     }
+
+    public boolean clientSanctioned(Long id) {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        UriTemplate template = new UriTemplate("/api/v1/clients/isSanctioned/{id}");
+        String uri = template.expand(id).toString();
+        ResponseEntity response = restService.GET(uri, params, String.class,CurrentUserUtils.getTokenBearer());
+        return response.getBody().toString().equals("true");
+    }
 }

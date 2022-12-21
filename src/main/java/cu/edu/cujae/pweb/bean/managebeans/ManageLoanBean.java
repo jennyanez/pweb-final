@@ -8,6 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
+import cu.edu.cujae.pweb.service.ClientService;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -38,6 +39,9 @@ public class ManageLoanBean {
 	
 	@Autowired
 	private LoanRequestService loanRequestService;
+
+	@Autowired
+	private ClientService clientService;
 	
 	
 	public ManageLoanBean() {
@@ -68,17 +72,21 @@ public class ManageLoanBean {
 
 			if (loanService.amountLoan(loanRequest.getClient().getClientId()) < 3) {
 
-				this.selectedLoan.setClient(loanRequest.getClient());
-				this.selectedLoan.setCopy(loanRequest.getCopy());
-				this.selectedLoan.setLoanDate(new Date());
-				msg = loanService.create(selectedLoan);
-				loans = loanService.getAll();
-			//	System.out.println("anntes de entrar al delete");
-				msg = loanRequestService.delete(selectedLoanRequest);
+				if (!clientService.clientSanctioned(loanRequest.getClient().getClientId())) {
 
-				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loan_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
-			}
-			else{
+					this.selectedLoan.setClient(loanRequest.getClient());
+					this.selectedLoan.setCopy(loanRequest.getCopy());
+					this.selectedLoan.setLoanDate(new Date());
+					msg = loanService.create(selectedLoan);
+					loans = loanService.getAll();
+					//	System.out.println("anntes de entrar al delete");
+					msg = loanRequestService.delete(selectedLoanRequest);
+
+					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loan_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
+				} else {
+					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_client_sanctioned");
+				}
+			}else{
 				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_client_cannot_have_more_books");
 			}
 		}
