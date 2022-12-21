@@ -65,7 +65,7 @@ public class LoanService implements ServiceImplementation {
 		LoanDto loanDto = (LoanDto) dto;
         String response = (String) restService.POST("/api/v1/loanList/save",loanDto,String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
-		return response;
+		return "";
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class LoanService implements ServiceImplementation {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         String response = (String) restService.PUT("/api/v1/loanList/update", params, loanDto, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
-		return response;
+		return "";
 	}
 
 	@Override
@@ -84,7 +84,23 @@ public class LoanService implements ServiceImplementation {
         String uri = template.expand(id).toString();
         String response = (String) restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
-		return response;
+		return "";
+	}
+
+	public int amountLoan(Long id){
+		List<LoanDto> loanDtoList = new ArrayList<>();
+
+		try {
+			MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
+			ApiRestMapper<LoanDto> apiRestMapper = new ApiRestMapper<>();
+			UriTemplate template = new UriTemplate("/api/v1/loanList/client/{id}");
+			String uri = template.expand(id).toString();
+			String response = (String) restService.GET(uri, params , String.class,CurrentUserUtils.getTokenBearer()).getBody();
+			loanDtoList = apiRestMapper.mapList(response, LoanDto.class);
+		}catch (IOException e){
+			e.printStackTrace();
+		}
+		return loanDtoList.size();
 	}
 	
 	public List<Long> idCopies(){

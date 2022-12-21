@@ -78,7 +78,7 @@ public class CopyService implements ServiceImplementation, ICopyService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         String response = (String) restService.PUT("/api/v1/copies/update", params, copyDto, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
-        return response;
+        return "";
     }
 
     @Override

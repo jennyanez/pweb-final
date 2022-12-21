@@ -65,17 +65,23 @@ public class ManageLoanBean {
 		LoanRequestDto loanRequest = loanRequestService.getById(selectedLoanRequest);
 		
 		if (this.selectedLoan.getId() == null) {
-			
-			this.selectedLoan.setClient(loanRequest.getClient());
-			this.selectedLoan.setCopy(loanRequest.getCopy());
-			this.selectedLoan.setLoanDate(new Date());
-			msg = loanService.create(selectedLoan);
-			loans = loanService.getAll();
-			System.out.println("anntes de entrar al delete");
-			msg = loanRequestService.delete(selectedLoanRequest);
-			
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loan_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
-        }
+
+			if (loanService.amountLoan(loanRequest.getClient().getClientId()) < 3) {
+
+				this.selectedLoan.setClient(loanRequest.getClient());
+				this.selectedLoan.setCopy(loanRequest.getCopy());
+				this.selectedLoan.setLoanDate(new Date());
+				msg = loanService.create(selectedLoan);
+				loans = loanService.getAll();
+			//	System.out.println("anntes de entrar al delete");
+				msg = loanRequestService.delete(selectedLoanRequest);
+
+				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loan_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
+			}
+			else{
+				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_client_cannot_have_more_books");
+			}
+		}
         else {
         	
         	this.selectedLoan.setClient(loanRequest.getClient());

@@ -66,7 +66,7 @@ public class LoanRequestService implements ServiceImplementation {
     	LoanRequestDto loanRequestDto = (LoanRequestDto) dto;
     	String response = (String) restService.POST("/api/v1/loanRequestList/save",loanRequestDto,String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
-        return response;
+        return "";
     }
   
 
@@ -76,7 +76,7 @@ public class LoanRequestService implements ServiceImplementation {
     	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         String response = (String) restService.PUT("/api/v1/loanRequestList/update", params, loanRequestDto, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
-        return response;
+        return "";
     }
 
     @Override
@@ -87,6 +87,6 @@ public class LoanRequestService implements ServiceImplementation {
         String uri = template.expand(id).toString();
         String response = (String) restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
-        return response;
+        return "";
     }
 }
