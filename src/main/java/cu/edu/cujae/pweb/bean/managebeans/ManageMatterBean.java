@@ -50,12 +50,25 @@ public class ManageMatterBean {
 
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
 	public void saveMatter() {
+		String msg = "";
 		      if (this.selectedMatter.getMatterId() == null) {
-				  matterService.create(this.selectedMatter);
-				  JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_matter_added");
+				  msg = matterService.create(this.selectedMatter);
+
+				  if(!msg.isEmpty()){
+					  JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_matter_already_exists");
+				  }else{
+					  JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_matter_added");
+				  }
+
             }else {
-				  matterService.update(this.selectedMatter);
-            	  JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_matter_edited");
+				 msg = matterService.update(this.selectedMatter);
+
+				 if(!msg.isEmpty()){
+					  JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_matter_already_exists");
+				  }else{
+					  JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_matter_edited");
+				  }
+
         }
 		matters = matterService.getAll();
         PrimeFaces.current().executeScript("PF('manageMatterDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
@@ -66,7 +79,7 @@ public class ManageMatterBean {
 	//Permite eliminar un usuario
 	public void deleteMatter() {
 		 	try {
-    			matterService.delete(this.selectedMatter.getMatterId());
+    			String msg = matterService.delete(this.selectedMatter.getMatterId());
 				this.selectedMatter = null;
 				matters = matterService.getAll()
 ;            	JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_matter_removed");

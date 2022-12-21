@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import cu.edu.cujae.pweb.dto.CopyDto;
 import cu.edu.cujae.pweb.dto.LoanDto;
 import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
@@ -62,27 +61,30 @@ public class LoanService implements ServiceImplementation {
 	}
 
 	@Override
-	public void create(Object dto) {
+	public String create(Object dto) {
 		LoanDto loanDto = (LoanDto) dto;
         String response = (String) restService.POST("/api/v1/loanList/save",loanDto,String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
+		return response;
 	}
 
 	@Override
-	public void update(Object dto) {
+	public String update(Object dto) {
 		LoanDto loanDto = (LoanDto) dto;
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         String response = (String) restService.PUT("/api/v1/loanList/update", params, loanDto, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
+		return response;
 	}
 
 	@Override
-	public void delete(Long id) {
+	public String delete(Long id) {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/loanList/delete/{id}");
         String uri = template.expand(id).toString();
         String response = (String) restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
+		return response;
 	}
 	
 	public List<Long> idCopies(){

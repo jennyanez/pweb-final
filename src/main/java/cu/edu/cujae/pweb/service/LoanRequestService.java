@@ -62,28 +62,31 @@ public class LoanRequestService implements ServiceImplementation {
    
 
     @Override
-    public void create(Object dto) {
+    public String create(Object dto) {
     	LoanRequestDto loanRequestDto = (LoanRequestDto) dto;
     	String response = (String) restService.POST("/api/v1/loanRequestList/save",loanRequestDto,String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
+        return response;
     }
   
 
     @Override
-    public void update(Object dto) {
+    public String update(Object dto) {
     	LoanRequestDto loanRequestDto = (LoanRequestDto) dto;
     	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         String response = (String) restService.PUT("/api/v1/loanRequestList/update", params, loanRequestDto, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
+        return response;
     }
 
     @Override
-    public void delete(Long id) {
+    public String delete(Long id) {
     	System.out.println("ya entre en el delete");
     	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/loanRequestList/delete/{id}");
         String uri = template.expand(id).toString();
         String response = (String) restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
+        return response;
     }
 }

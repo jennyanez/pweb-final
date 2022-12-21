@@ -6,6 +6,7 @@ import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
 import cu.edu.cujae.pweb.utils.ServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -21,23 +22,29 @@ public class BreachService implements ServiceImplementation {
     private RestService restService;
 
     @Override
-    public void create(Object breach) {
+    public String create(Object breach) {
 
 
+        return null;
     }
 
     @Override
-    public void update(Object breach) {
+    public String update(Object breach) {
 
+        return null;
     }
 
     @Override
-    public void delete(Long id) {
+    public String delete(Long id) {
+        String msg = "";
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/breaches/delete/{id}");
         String uri = template.expand(id).toString();
-        String response = (String) restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
-        System.out.println(response);
+        ResponseEntity response = restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer());
+        if(response.getStatusCode().isError()){
+            return msg = (String) response.getBody();
+        }
+        return msg;
     }
 
     @Override

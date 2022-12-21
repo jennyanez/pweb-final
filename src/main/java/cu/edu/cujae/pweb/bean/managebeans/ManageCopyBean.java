@@ -56,9 +56,6 @@ public class ManageCopyBean {
 
 	//Se ejecuta al dar clic en el button con el lapicito
 	public void openForEdit() {
-		/*this.selectedCopy = copy;
-		this.selectedBook = copy.getBook();*/
-		
 		BookDto book = this.selectedCopy.getBook();
 		this.selectedBook = book.getBookId();
 	}
@@ -66,13 +63,14 @@ public class ManageCopyBean {
 	
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
 	public void saveCopy() {
+		String msg = "";
 		if (this.selectedCopy.getCopyId() == null){
 			this.selectedCopy.setBook(this.bookService.getById(selectedBook));
-			copyService.create(this.selectedCopy);
+			msg = copyService.create(this.selectedCopy);
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_copy_added");
 		}else{
 			this.selectedCopy.setBook(this.bookService.getById(selectedBook));
-			copyService.update(this.selectedCopy);
+			msg = copyService.update(this.selectedCopy);
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_copy_edited");
 		}
 		
@@ -85,7 +83,7 @@ public class ManageCopyBean {
 	//Permite eliminar un usuario
     public void deleteCopy() {
     	try {
-			copyService.delete(this.selectedCopy.getCopyId());
+			String msg = copyService.delete(this.selectedCopy.getCopyId());
 			this.selectedCopy = null;
 			copies = copyService.getAll();
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_copy_removed");

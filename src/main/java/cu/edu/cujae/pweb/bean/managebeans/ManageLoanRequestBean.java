@@ -46,9 +46,7 @@ public class ManageLoanRequestBean {
     
     @Autowired
     private ClientService clientService;
-    
 
-    
     @Autowired
     private LoanService loanService;
 	
@@ -79,30 +77,38 @@ public class ManageLoanRequestBean {
 	}
 	
 	public void saveLoan() {
-		
+		String msg = "";
+
 		if (this.selectedLoanRequest.getId() == null) {
          
            this.selectedLoanRequest.setClient(this.clientService.getById(selectedClient));
 		   this.selectedLoanRequest.setLoanRequestDate(new Date());
            this.selectedLoanRequest.setCopy(this.copyService.getById(selectedCopy));
            this.selectedLoanRequest.setBook(this.copyService.getById(selectedCopy).getBook());
-           loanRequestService.create(selectedLoanRequest);
-           loansRequest = loanRequestService.getAll();
-           
-            
-           JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loanRequest_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
-        }
+           msg = loanRequestService.create(selectedLoanRequest);
+
+		   if(!msg.isEmpty()){
+			   JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loanRequest_already_exists");
+		   }else{
+			   JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loanRequest_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
+		   }
+         }
         else {
         	
         	this.selectedLoanRequest.setClient(this.clientService.getById(selectedClient));
  		    this.selectedLoanRequest.setLoanRequestDate(new Date());
             this.selectedLoanRequest.setCopy(this.copyService.getById(selectedCopy));
             this.selectedLoanRequest.setBook(this.copyService.getById(selectedCopy).getBook());
-            loanRequestService.update(selectedLoanRequest);
-            loansRequest = loanRequestService.getAll();
-        	
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loanRequest_edited");
+            msg = loanRequestService.update(selectedLoanRequest);
+
+			if(!msg.isEmpty()){
+				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loanRequest_already_exists");
+			}else{
+				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loanRequest_edited");
+			}
+
         }
+		loansRequest = loanRequestService.getAll();
         PrimeFaces.current().executeScript("PF('manageLoanRequestDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
         PrimeFaces.current().ajax().update("form:dt-loanRequest");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form	
         
@@ -112,7 +118,7 @@ public class ManageLoanRequestBean {
     public void deleteLoan() {
     	
     	try {
-    		loanRequestService.delete(this.selectedLoanRequest.getId());
+    		String msg = loanRequestService.delete(this.selectedLoanRequest.getId());
             this.selectedLoanRequest = null;
             loansRequest = loanRequestService.getAll();
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loanRequest_removed");

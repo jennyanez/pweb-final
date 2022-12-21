@@ -39,7 +39,7 @@ public class ManageSanctionBean {
 
     public void deleteSanction(){
         try{
-            sanctionService.delete(this.selectedSanction.getSanctionId());
+            String msg = sanctionService.delete(this.selectedSanction.getSanctionId());
             this.selectedSanction = null;
             sanctions = sanctionService.getAll();
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_sanction_deleted");

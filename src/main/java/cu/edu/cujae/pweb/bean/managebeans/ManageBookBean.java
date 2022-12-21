@@ -75,6 +75,7 @@ public class ManageBookBean {
 	
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
 	public void saveBook() {
+		String msg = "";
 		if (this.selectedBook.getBookId() == null) {
             bookDto = selectedBook;
 
@@ -89,15 +90,20 @@ public class ManageBookBean {
 			bookDto.setAuthors(authorDtos);
 
 			//crea el libro
-			bookService.create(bookDto);
+			msg = bookService.create(bookDto);
 
-			//actualizo lista de libros
-			books = bookService.getAll();
+			if(!msg.isEmpty()) {
+				//actualizo lista de libros
+				books = bookService.getAll();
 
-			//crea las copias y las guarda
-			insertCopies(amountCopies);
+				//crea las copias y las guarda
+				insertCopies(amountCopies);
+				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_book_already_exists");
 
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_book_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
+			}else{
+				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_book_added");
+			}
+             //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         }
         else {
 			/////codigo para updatear
@@ -114,15 +120,20 @@ public class ManageBookBean {
 			this.selectedBook.setMatter(matterService.getById(selectedMatter));
 
 			// updatea el libro
-			bookService.update(this.selectedBook);
+			msg = bookService.update(this.selectedBook);
+
+				if(!msg.isEmpty()) {
+					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_book_already_exists");
+				}else{
+					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_book_edited");
+				}
+
+			//actualizo lista de libros
 			books = bookService.getAll();
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_book_edited");
         }
+		books = bookService.getAll();
         PrimeFaces.current().executeScript("PF('manageBookDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
         PrimeFaces.current().ajax().update("form:dt-book");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
-        
-//		ManageCopyBean manageCopyBean = new ManageCopyBean();
-//		manageCopyBean.updateAjax();
 
 	}
 
@@ -137,7 +148,7 @@ public class ManageBookBean {
 			}
 
 			////ahora si elimino el libro
-    		bookService.delete(this.selectedBook.getBookId());
+    		String msg = bookService.delete(this.selectedBook.getBookId());
             this.selectedBook = null;
 
 			//actualizo lista de libros

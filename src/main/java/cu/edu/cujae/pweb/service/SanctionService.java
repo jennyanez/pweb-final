@@ -6,6 +6,7 @@ import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
 import cu.edu.cujae.pweb.utils.ServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -51,21 +52,27 @@ public class SanctionService implements ServiceImplementation {
     }
 
     @Override
-    public void create(Object dto) {
+    public String create(Object dto) {
 
+        return null;
     }
 
     @Override
-    public void update(Object dto) {
+    public String update(Object dto) {
 
+        return null;
     }
 
     @Override
-    public void delete(Long id) {
+    public String delete(Long id) {
+        String msg = "";
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/sanctions/delete/{id}");
         String uri = template.expand(id).toString();
-        String response = (String) restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
-        System.out.println(response);
+        ResponseEntity response = restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer());
+        if(response.getStatusCode().isError()){
+            return msg = response.getBody().toString();
+        }
+        return msg;
     }
 }

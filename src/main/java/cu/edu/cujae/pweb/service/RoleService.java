@@ -54,29 +54,32 @@ public class RoleService implements ServiceImplementation {
 	}
 
 	@Override
-	public void create(Object dto) {
+	public String create(Object dto) {
 		RoleDto user = (RoleDto) dto;
 		String response = (String) restService.POST("/api/v1/roles/save", user, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 		System.out.println(response);
 
+		return response;
 	}
 
 	@Override
-	public void update(Object dto) {
+	public String update(Object dto) {
 		RoleDto user = (RoleDto) dto;
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		String response = (String) restService.PUT("/api/v1/roles/", params, user, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 		System.out.println(response);
 
+		return response;
 	}
 
 	@Override
-	public void delete(Long id) {
+	public String delete(Long id) {
 		int code = Math.toIntExact(id);
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		UriTemplate template = new UriTemplate("/api/v1/roles/delete/{code}");
 		String uri = template.expand(code).toString();
 		String response = (String) restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
 		System.out.println(response);
+		return response;
 	}
 }

@@ -1,7 +1,6 @@
 package cu.edu.cujae.pweb.service;
 
 
-import cu.edu.cujae.pweb.dto.BookDto;
 import cu.edu.cujae.pweb.dto.CopyDto;
 import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
@@ -9,6 +8,7 @@ import cu.edu.cujae.pweb.utils.ICopyService;
 import cu.edu.cujae.pweb.utils.RestService;
 import cu.edu.cujae.pweb.utils.ServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -61,28 +61,37 @@ public class CopyService implements ServiceImplementation, ICopyService {
     }
 
     @Override
-    public void create(Object copy) {
+    public String create(Object copy) {
+        String msg = "";
         CopyDto copyDto = (CopyDto) copy;
-        String response = (String) restService.POST("/api/v1/copies/save",copyDto,String.class,CurrentUserUtils.getTokenBearer()).getBody();
-        System.out.println(response);
+        ResponseEntity response = restService.POST("/api/v1/copies/save",copyDto,String.class,CurrentUserUtils.getTokenBearer());
+        if (response.getStatusCode().isError()){
+            return msg = (String) response.getBody();
+        }
+        return msg;
     }
 
 
     @Override
-    public void update(Object copy) {
+    public String update(Object copy) {
         CopyDto copyDto = (CopyDto) copy;
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         String response = (String) restService.PUT("/api/v1/copies/update", params, copyDto, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         System.out.println(response);
+        return response;
     }
 
     @Override
-    public void delete(Long id) {
+    public String delete(Long id) {
+        String msg = "";
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/copies/delete/{id}");
         String uri = template.expand(id).toString();
-        String response = (String) restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer()).getBody();
-        System.out.println(response);
+        ResponseEntity response = restService.DELETE(uri, params, String.class,CurrentUserUtils.getTokenBearer());
+        if (response.getStatusCode().isError()){
+            return msg = (String) response.getBody();
+        }
+        return msg;
     }
 
     @Override

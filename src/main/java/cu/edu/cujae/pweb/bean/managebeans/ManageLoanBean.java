@@ -61,7 +61,7 @@ public class ManageLoanBean {
 	
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
 	public void saveLoan() {
-		
+		String msg = "";
 		LoanRequestDto loanRequest = loanRequestService.getById(selectedLoanRequest);
 		
 		if (this.selectedLoan.getId() == null) {
@@ -69,10 +69,10 @@ public class ManageLoanBean {
 			this.selectedLoan.setClient(loanRequest.getClient());
 			this.selectedLoan.setCopy(loanRequest.getCopy());
 			this.selectedLoan.setLoanDate(new Date());
-			loanService.create(selectedLoan);
+			msg = loanService.create(selectedLoan);
 			loans = loanService.getAll();
 			System.out.println("anntes de entrar al delete");
-			loanRequestService.delete(selectedLoanRequest);
+			msg = loanRequestService.delete(selectedLoanRequest);
 			
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loan_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         }
@@ -81,7 +81,7 @@ public class ManageLoanBean {
         	this.selectedLoan.setClient(loanRequest.getClient());
 			this.selectedLoan.setCopy(loanRequest.getCopy());
 			this.selectedLoan.setLoanDate(new Date());
-			loanService.update(selectedLoan);
+			msg = loanService.update(selectedLoan);
 			loans = loanService.getAll();
 			
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loan_edited");
@@ -94,8 +94,9 @@ public class ManageLoanBean {
 
 	//Permite eliminar un usuario
     public void deleteLoan() {
+		String msg = "";
     	try {
-    		loanService.delete(this.selectedLoan.getId());
+    		msg = loanService.delete(this.selectedLoan.getId());
             this.selectedLoan = null;
             loans = loanService.getAll();
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loan_deleted");

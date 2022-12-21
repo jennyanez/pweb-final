@@ -1,5 +1,6 @@
 package cu.edu.cujae.pweb.bean.managebeans;
 
+import cu.edu.cujae.pweb.bean.UserBean;
 import cu.edu.cujae.pweb.dto.RoleDto;
 import cu.edu.cujae.pweb.dto.UserDto;
 import cu.edu.cujae.pweb.service.RoleService;
@@ -29,6 +30,8 @@ public class ManageUserBean {
 
 	private List<RoleDto> roles;
 
+	private UserBean currentUser;
+
 	/* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
 	 * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
 	 */
@@ -56,34 +59,67 @@ public class ManageUserBean {
 
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
 	public void saveUser() {
+		String msg = "";
 		if (this.selectedUser.getCode() == 0) {
 			List<RoleDto> rolesToAdd = new ArrayList<RoleDto>();
 			for (int i = 0; i < this.selectedRoles.length; i++) {
 				rolesToAdd.add(roleService.getById(Long.valueOf(selectedRoles[i])));
 			}
 			selectedUser.setRoles(rolesToAdd);
-			userService.create(selectedUser);
-			users = userService.getAll();
-			JsfUtils.addMessageFromBundle(
-					null,
-					FacesMessage.SEVERITY_INFO,
-					"message_user_added"
-			); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
+
+			// check if the email already exists
+			if(userService.getByEmail(selectedUser.getEmail()) != null) {
+				msg = "El usuario ya existe";
+				JsfUtils.addMessageFromBundle(
+						null,
+						FacesMessage.SEVERITY_INFO,
+						"message_user_email_exists"
+				);
+				return;
+			}
+
+			// check if the username already exists
+			if(userService.getByUsername(selectedUser.getUsername()) != null) {
+				msg = "El usuario ya existe";
+				JsfUtils.addMessageFromBundle(
+						null,
+						FacesMessage.SEVERITY_INFO,
+						"message_user_username_exists"
+				);
+				return;
+			}
+
+			//if not, save the user
+			if(msg.isEmpty()){
+				msg = userService.create(selectedUser);
+				users = userService.getAll();
+				JsfUtils.addMessageFromBundle(
+						null,
+						FacesMessage.SEVERITY_INFO,
+						"message_user_added"
+				);
+			}
+
 		} else {
+
 			List<RoleDto> rolesToAdd = new ArrayList<RoleDto>();
 			for (int i = 0; i < this.selectedRoles.length; i++) {
 				rolesToAdd.add(roleService.getById(Long.valueOf(selectedRoles[i])));
 			}
 			selectedUser.setRoles(rolesToAdd);
-			userService.update(selectedUser);
-			users = userService.getAll();
-			JsfUtils.addMessageFromBundle(
-					null,
-					FacesMessage.SEVERITY_INFO,
-					"message_user_edited"
-			);
-		}
 
+
+			if(msg.isEmpty()){
+				msg = userService.update(selectedUser);
+				users = userService.getAll();
+				JsfUtils.addMessageFromBundle(
+						null,
+						FacesMessage.SEVERITY_INFO,
+						"message_user_edited"
+				);
+			}
+		}
+		users = userService.getAll();
 		PrimeFaces.current().executeScript("PF('manageUserDialog').hide()"); //Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
 		PrimeFaces.current().ajax().update("form:dt-users"); // Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
 	}
@@ -94,24 +130,37 @@ public class ManageUserBean {
 	}
 
 	//Permite eliminar un usuario
-	public void deleteUser() {
-		try {
-			userService.delete((long) selectedUser.getCode());
-			this.selectedUser = null;
-			users = userService.getAll();
+	public void deleteUser(String currentUser) {
+		UserDto current = userService.getByUsername(currentUser);
+		if(current.getUsername().equals(this.selectedUser.getUsername())){
 			JsfUtils.addMessageFromBundle(
 					null,
 					FacesMessage.SEVERITY_INFO,
-					"message_user_deleted"
+					"message_user_you_cant_delete"
 			);
-			PrimeFaces.current().ajax().update("form:dt-users"); // Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
-		} catch (Exception e) {
-			JsfUtils.addMessageFromBundle(
-					null,
-					FacesMessage.SEVERITY_ERROR,
-					"message_error"
-			);
+			return;
 		}
+		else{
+			try {
+				userService.delete((long) selectedUser.getCode());
+				this.selectedUser = null;
+				users = userService.getAll();
+				JsfUtils.addMessageFromBundle(
+						null,
+						FacesMessage.SEVERITY_INFO,
+						"message_user_deleted"
+				);
+				PrimeFaces.current().ajax().update("form:dt-users"); // Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+			} catch (Exception e) {
+				JsfUtils.addMessageFromBundle(
+						null,
+						FacesMessage.SEVERITY_ERROR,
+						"message_error"
+				);
+			}
+		}
+
+		users = userService.getAll();
 	}
 
 	public UserDto getUserDto() {

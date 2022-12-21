@@ -46,7 +46,7 @@ public class ManageBreachBean {
 
     public void deleteBreach(){
         try{
-            breachService.delete(this.selectedBreach.getBreachId());
+            String msg = breachService.delete(this.selectedBreach.getBreachId());
             this.selectedBreach = null;
             breaches = breachService.getAll();
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_breach_deleted");

@@ -34,13 +34,25 @@ public class ManageClientBean {
     }
 
     public void saveClient() {
+        String msg = "";
         if (this.selectedClient.getClientId() == null) {
-            clientService.create(this.selectedClient);
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_client_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
+
+            msg = clientService.create(this.selectedClient);
+
+            if(!msg.isEmpty()){
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_client_already_exists");
+            }else{
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_client_added");
+            }
         }
         else {
-            clientService.update(this.selectedClient);
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_client_edited");
+            msg = clientService.update(this.selectedClient);
+            if(!msg.isEmpty()) {
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_client_already_exists");
+
+            }else{
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_client_edited");
+            }
         }
         clients = clientService.getAll();
         PrimeFaces.current().executeScript("PF('manageClientDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
@@ -49,7 +61,7 @@ public class ManageClientBean {
 
     public void deleteClient() {
         try {
-            clientService.delete(this.selectedClient.getClientId());
+            String msg = clientService.delete(this.selectedClient.getClientId());
             this.selectedClient = null;
             clients = clientService.getAll();
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_client_removed");

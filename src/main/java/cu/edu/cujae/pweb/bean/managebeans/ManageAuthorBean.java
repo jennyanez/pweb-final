@@ -48,9 +48,6 @@ public class ManageAuthorBean {
 		
 	}
 	
-	//Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase. 
-	
-	
 	//Se ejecuta al dar clic en el button Nuevo
 	public void openNew() {
         this.selectedAuthor = new AuthorDto();
@@ -64,12 +61,20 @@ public class ManageAuthorBean {
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
 	public void saveAuthor() {
 		if (this.selectedAuthor.getAuthorId() == null) {
-            authorService.create(this.selectedAuthor);
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_author_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
-        }
+            String msg = authorService.create(this.selectedAuthor);
+			if(!msg.isEmpty()){
+				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_author_already_exists");
+			}else{
+				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_author_added");
+			}
+		}
         else {
-			authorService.update(this.selectedAuthor);
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_author_edited");
+			String msg =authorService.update(this.selectedAuthor);
+			if(!msg.isEmpty()){
+				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_author_already_exists");
+			}else {
+				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_author_edited");
+			}
         }
 		authors = authorService.getAll();
         PrimeFaces.current().executeScript("PF('manageAuthorDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
@@ -80,7 +85,7 @@ public class ManageAuthorBean {
 	//Permite eliminar un usuario
     public void deleteAuthor() {
     	try {
-			authorService.delete(this.selectedAuthor.getAuthorId());
+			String msg = authorService.delete(this.selectedAuthor.getAuthorId());
             this.selectedAuthor = null;
 			authors = authorService.getAll();
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_author_removed");

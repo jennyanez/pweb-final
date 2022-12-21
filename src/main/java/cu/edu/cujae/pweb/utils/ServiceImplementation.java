@@ -15,11 +15,11 @@ public interface ServiceImplementation {
     Object getById(Long id);
 
     //Metodo para insertar un registro en la tabla
-    void create(Object dto);
+    String create(Object dto);
 
     //Metodo para actualizar un registro en la tabla
-    void update(Object dto);
+    String update(Object dto);
 
     //Metodo para eliminar un registro de la tabla
-    void delete(Long id);
+    String delete(Long id);
 }

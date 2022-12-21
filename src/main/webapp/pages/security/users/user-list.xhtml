@@ -96,7 +96,7 @@
 						</p:commandButton>
 						<p:commandButton class="ui-button-warning rounded-button"
 										 icon="pi pi-trash" process="@this"
-										 action="#{manageUserBean.deleteUser}" >
+										 action="#{manageUserBean.deleteUser(userBean.username)}" >
 							<f:setPropertyActionListener value="#{user}"
 														 target="#{manageUserBean.selectedUser}" />
 							<p:confirm header="#{msgs.message_confirm}" message="#{msgs.message_confirm_delete_user}" icon="pi pi-exclamation-triangle"/>
