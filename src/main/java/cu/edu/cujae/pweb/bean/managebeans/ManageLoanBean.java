@@ -29,6 +29,9 @@ public class ManageLoanBean {
 	private Long selectedLoanRequest;
 	private List<LoanDto> loans;
 	private List<LoanRequestDto> loansRequest;
+
+	private boolean rendered;
+
 	
 	private Integer sizeLoan;
 	
@@ -50,6 +53,7 @@ public class ManageLoanBean {
 	
 	//Se ejecuta al dar clic en el button Nuevo
 	public void openNew() {
+		setRendered(true);
         this.selectedLoan = new LoanDto();
         this.selectedLoanRequest = null;
     }
@@ -57,7 +61,8 @@ public class ManageLoanBean {
 	//Se ejecuta al dar clic en el button con el lapicito
 	
 	public void openForEdit() {
-	
+		setRendered(false);
+				
 	}
 	
 	//Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
@@ -78,10 +83,7 @@ public class ManageLoanBean {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loan_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
         }
         else {
-        	
-        	this.selectedLoan.setClient(loanRequest.getClient());
-			this.selectedLoan.setCopy(loanRequest.getCopy());
-			this.selectedLoan.setLoanDate(new Date());
+    
 			loanService.update(selectedLoan);
 			loans = loanService.getAll();
 			this.setSizeLoan(loans.size());
@@ -164,4 +166,11 @@ public class ManageLoanBean {
 		this.sizeLoan = sizeLoan;
 	}
 
+	public boolean isRendered() {
+		return rendered;
+	}
+
+	public void setRendered(boolean rendered) {
+		this.rendered = rendered;
+	}
 }

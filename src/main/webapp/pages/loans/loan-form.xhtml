@@ -27,9 +27,10 @@
                                     scrollHeight="250"
                                     rendered="#{manageLoanBean.rendered}">
                                  
-                                <f:selectItems value="#{manageLoanBean.loansRequest}" var="loan"
-                                                   itemValue="#{loan.id}" itemLabel="#{loan.copy.book.bookTitle} "/> 					                
+                                <f:selectItems value="#{manageLoanBean.loansRequest}" var="loanRequest"
+                                                   itemValue="#{loanRequest.id}" itemLabel="#{loanRequest.copy.book.bookTitle} "/>
 					            </p:selectOneListbox>
+
 					            <p:message for="loanId" id="msgLoanId"></p:message>
 					        </div>
 					        

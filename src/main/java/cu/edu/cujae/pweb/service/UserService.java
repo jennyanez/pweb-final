@@ -19,8 +19,6 @@ import org.springframework.web.util.UriTemplate;
 public class UserService implements ServiceImplementation {
 
 	@Autowired
-	private RoleService roleService;
-	@Autowired
 	private RestService restService;
 
 	@Override
