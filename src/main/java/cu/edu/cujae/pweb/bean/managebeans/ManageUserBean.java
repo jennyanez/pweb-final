@@ -29,6 +29,7 @@ public class ManageUserBean {
 	private List<RoleDto> roles;
 	
 	private boolean rendered = true;
+	private Integer userSize;
 
 	/* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
 	 * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
@@ -87,7 +88,7 @@ public class ManageUserBean {
 					"message_user_edited"
 			);
 		}
-
+		userSize = users.size();
 		PrimeFaces.current().executeScript("PF('manageUserDialog').hide()"); //Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
 		PrimeFaces.current().ajax().update("form:dt-users"); // Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
 	}
@@ -116,6 +117,7 @@ public class ManageUserBean {
 					"message_error"
 			);
 		}
+		userSize = users.size();
 	}
 
 	public UserDto getUserDto() {
@@ -168,5 +170,16 @@ public class ManageUserBean {
 
 	public void setRendered(boolean rendered) {
 		this.rendered = rendered;
+	}
+
+
+	public Integer getUserSize() {
+		userSize = userService.getAll().size();
+		return userSize;
+	}
+
+
+	public void setUserSize(Integer userSize) {
+		this.userSize = userSize;
 	}
 }

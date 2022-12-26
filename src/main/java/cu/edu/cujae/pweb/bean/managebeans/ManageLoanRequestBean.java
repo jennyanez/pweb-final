@@ -3,7 +3,6 @@ package cu.edu.cujae.pweb.bean.managebeans;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
@@ -33,6 +32,7 @@ public class ManageLoanRequestBean {
 	private Long selectedClient;
 	
 	private boolean rendered = true;
+	private Integer loanRequestSize;
 	
 	
 	private List<LoanRequestDto> loansRequest;
@@ -88,7 +88,6 @@ public class ManageLoanRequestBean {
            this.selectedLoanRequest.setClient(this.clientService.getById(selectedClient));
 		   this.selectedLoanRequest.setLoanRequestDate(new Date());
            this.selectedLoanRequest.setCopy(this.copyService.getById(selectedCopy));
-           this.selectedLoanRequest.setBook(this.copyService.getById(selectedCopy).getBook());
            loanRequestService.create(selectedLoanRequest);
            loansRequest = loanRequestService.getAll();
            
@@ -100,12 +99,12 @@ public class ManageLoanRequestBean {
         	this.selectedLoanRequest.setClient(this.clientService.getById(selectedClient));
  		    this.selectedLoanRequest.setLoanRequestDate(new Date());
             this.selectedLoanRequest.setCopy(this.copyService.getById(selectedCopy));
-            this.selectedLoanRequest.setBook(this.copyService.getById(selectedCopy).getBook());
             loanRequestService.update(selectedLoanRequest);
             loansRequest = loanRequestService.getAll();
         	
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_loanRequest_edited");
         }
+		loanRequestSize = loansRequest.size();
         PrimeFaces.current().executeScript("PF('manageLoanRequestDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
         PrimeFaces.current().ajax().update("form:dt-loanRequest");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form	
         
@@ -123,6 +122,7 @@ public class ManageLoanRequestBean {
 		} catch (Exception e) {
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "message_error");
 		}
+    	loanRequestSize = loansRequest.size();
     	
     }
 
@@ -215,6 +215,19 @@ public class ManageLoanRequestBean {
 
 	public void setRendered(boolean rendered) {
 		this.rendered = rendered;
+	}
+
+
+
+	public Integer getLoanRequestSize() {
+		loanRequestSize = loansRequest.size();
+		return loanRequestSize;
+	}
+
+
+
+	public void setLoanRequestSize(Integer loanRequestSize) {
+		this.loanRequestSize = loanRequestSize;
 	}
     
 }

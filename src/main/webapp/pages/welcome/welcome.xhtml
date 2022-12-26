@@ -1,25 +1,146 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
+<html 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
 
     <ui:composition template="/pages/template/layout.xhtml">
         <ui:define name="title">
-		    HOME
-		</ui:define>
-    	<ui:define name="layout">
-    		<h:form>
-		    	<p:card style="width: 100%; margin-bottom: 2em">
-				    <f:facet name="title">
-				    <ul>
-				    	<li>Manage your loans at just one place </li>
-				    	<li>Get notified when a loan's deadline arrived</li>
-				    	<li>Kept your thoughts in order </li>
-				    </ul>
-				    </f:facet>
-				</p:card>
-			</h:form>
-    	</ui:define>
+            <p:outputLabel
+                    style="padding-left:5px;size: A5"><h1>Welcome</h1></p:outputLabel>
+        </ui:define>
+        <ui:define name="layout">
+            <style>
+                .ui-panelgrid.showcase-text-align-center .ui-grid-responsive .ui-panelgrid-cell {
+                    text-align: center;
+                }
+
+                .customPanelGrid .ui-panelgrid-content {
+                    align-items: center;
+                }
+            </style>
+
+            <!--            cards-->
+            <div class="chart-cont">
+                <h:form style="display: flex;">
+                    <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+
+                    <!--                    Contract-->
+                    <p:card style="flex: content;justify-content: space-between; width: 25%; margin-bottom: 2em ; margin: 0 10px 0 0 ">
+                        <p:panelGrid styleClass="ui-panelgrid-blank ui-fluid"
+                                     style="border:0px none; background-color:transparent; border-collapse: collapse;  border-spacing: 0;">
+                            <p:row style=" padding:0px;">
+                                <p:column rowspan="2" style=" padding:0px;">
+                                    <p:outputPanel
+                                            style="display:flex;background: #BBDEFB;border-radius: 15px; font-size: 4rem; align-items: center ;justify-content: center; width: 3rem;height: 3rem;margin-right: 20px">
+                                        <i class="pi pi-briefcase"
+                                           style="font-size:2rem ;color: navy"></i>
+                                    </p:outputPanel>
+                                </p:column>
+
+                                <p:column style=" padding:0px;">
+                                    <h:outputLabel style="text-align: right  ">
+                                        <strong>#{manageLoanBean.sizeLoan}</strong>
+                                        <br></br>
+                                        <a>#{msgs.form_loan_title}</a></h:outputLabel>
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+                    </p:card>
+
+                    <!--                    Users-->
+                    <p:card style="flex: content;justify-content: space-between; width: 25%; margin-bottom: 2em ; margin: 0 10px 0 10px ">
+                        <p:panelGrid styleClass="ui-panelgrid-blank ui-fluid"
+                                     style="border:0px none; background-color:transparent; border-collapse: collapse;  border-spacing: 0;">
+                            <p:row style=" padding:0px;">
+                                <p:column rowspan="2" style=" padding:0px;">
+                                    <p:outputPanel
+                                            style="display:flex;background: #ECCFFF;border-radius: 15px; font-size: 4rem; align-items: center ;justify-content: center; width: 3rem;height: 3rem;margin-right: 20px">
+                                        <i class="pi pi-users"
+                                           style="font-size:2rem ;color: #c92c2c;"></i>
+                                    </p:outputPanel>
+                                </p:column>
+
+                                <p:column style=" padding:0px;">
+                                    <h:outputLabel style="text-align: right  ">
+                                        <strong>#{manageUserBean.userSize}</strong>
+                                        <br></br>
+                                        <a>#{msgs.form_user_title}</a></h:outputLabel>
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+                    </p:card>
+                   
+                    <div style="clear:both"/>
+                </h:form>
+            </div>
+
+            <!--			Chart Dashboard-->
+            <div class="chart-cont">
+                <h:form style="display: flex;">
+                    <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+
+                    <!--                    LineChart-->
+                    <div class="card" style="width: 80%; margin: 0 10px 0 0">
+                        <p:lineChart model="#{chartJsView.lineModel}"/>
+                    </div>
+                    
+
+                    <!--                Bar Chart-->
+                    <div class="card" style="width: 80%; margin: 0 0 0 10px">
+                        <p:barChart model="#{chartJsView.barModel}"/>
+                    </div>
+
+                    <div style="clear:both"/>
+                </h:form>
+            </div>
+
+            <!--            Imagen para el Welcome-->
+<!--            <p:card style="width: 100%; height: 200px; margin-bottom: 1.5em; overflow: hidden">-->
+<!--                <h:link styleClass="logo" outcome="/pages/welcome/welcome.xhtml">-->
+<!--                    <p:graphicImage name="Bus Transtur.jpg" library="images" width="700" height="400"-->
+<!--                                    style="width: 100%; position: relative;  bottom: 100px"/>-->
+<!--                </h:link>-->
+<!--            </p:card>-->
+
+            <!--        Carousel with info-->
+<!--            <h:form id="form">-->
+<!--                <div class="card">-->
+<!--                    <p:carousel value="#{carouselView.drivers}" var="driver" circular="true" autoplayInterval="3000"-->
+<!--                                numVisible="3" numScroll="1">-->
+<!--                        <f:facet name="header">-->
+<!--                            <h5>#{msgs.label_drivers}</h5>-->
+<!--                        </f:facet>-->
+
+<!--                        <div class="driver-item">-->
+<!--                            <div class="driver-item-content">-->
+<!--                                <div class="mb-3">-->
+<!--                                    <p:graphicImage name="driver.jpg" library="images" styleClass="driver-image"/>-->
+<!--                                </div>-->
+<!--                                <div>-->
+<!--                                    <h4 class="mb-1">#{driver.driver_name}</h4>-->
+<!--                                    <h6 class="mt-0 mb-3">-->
+<!--                                        <h:outputText value="#{driver.brand}">-->
+<!--                                            <f:convertNumber type="currency"/>-->
+<!--                                        </h:outputText>-->
+<!--                                    </h6>-->
+<!--                                    &lt;!&ndash;                                <span class="driver-badge status-#{product.inventoryStatus.name().toLowerCase()}">#{product.inventoryStatus.text}</span>&ndash;&gt;-->
+<!--                                    <div class="mt-5">-->
+<!--                                        <p:commandButton type="button" icon="pi pi-search"-->
+<!--                                                         styleClass="rounded-button mr-2"/>-->
+<!--                                        <p:commandButton type="button" icon="pi pi-star"-->
+<!--                                                         styleClass="ui-button-success rounded-button mr-2"/>-->
+<!--                                        <p:commandButton type="button" icon="pi pi-cog"-->
+<!--                                                         styleClass="ui-button-help rounded-button"/>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </p:carousel>-->
+<!--                </div>-->
+<!--            </h:form>-->
+        </ui:define>
     </ui:composition>
 </html>
